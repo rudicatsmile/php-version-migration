@@ -26,3 +26,12 @@ Folder ini berisi dokumentasi teknis, keputusan arsitektur, dan panduan pengemba
      - Konfigurasi mode `development` vs `production` (tampilan aman + Reference ID pelacakan).
      - Panduan CLI `scripts/view_log.php` dan cara memantau log error harian.
 
+4. **[`web-based-error-log-viewer.md`](./web-based-error-log-viewer.md)**
+   - **Judul**: *Panduan Web-Based Error Log Viewer (Panel Admin)*
+   - **Isi**:
+     - Arsitektur visual dashboard antarmuka log di `admin/Log_Viewer.php`.
+     - Aturan hak akses dan keamanan khusus Administrator (`$Lev <= 1`).
+     - Panduan penggunaan fitur: Statistik harian, filter tanggal & level, pencarian instan (Live Search), tema Dark/Light, unduh file `.log`, dan pengosongan log dengan modal konfirmasi.
+     - Diagram alur penanganan insiden error dari pengguna lapangan hingga debugging presisi menggunakan Reference ID.
+
+

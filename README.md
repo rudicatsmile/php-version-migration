@@ -28,12 +28,15 @@ Proses migrasi dilakukan dalam 6 tahap terstruktur dengan memindai dan merekayas
    - Polyfill tingkat engine yang mengemulasikan seluruh fungsi ekstensi legacy `ext/mysql` menggunakan PDO modern. Mendukung pencegatan query SQL error dan kompatibel penuh dengan skrip prosedural lama.
 3. **[`src/`](./src/) — Modul Modern (PHP 8.4)**
    - `App\Logging\Logger`: Logging engine otomatis dengan rotasi harian dan proteksi produksi.
+   - `App\Dev\DevBar`: Developer Mode File Inspector yang menampilkan nama file, path lengkap, dan included files di setiap frame secara dinamis.
    - `App\Database\Database`: Database service PDO murni dengan *prepared statements* dan *strict types*.
    - `App\Security\PasswordHasher`: Pengamanan autentikasi dengan `password_hash()` BCRYPT dan fallback backwards-compatible.
    - `App\Models\User`: Model DTO modern dengan Constructor Property Promotion dan `readonly`.
-4. **[`logs/`](./logs/)**
+4. **[`admin/Log_Viewer.php`](./admin/Log_Viewer.php)**
+   - Dashboard web interaktif di panel Admin untuk memantau, memfilter, mencari, dan mengunduh error log harian.
+5. **[`logs/`](./logs/)**
    - Folder penyimpanan log harian (`app-YYYY-MM-DD.log`) yang diamankan dengan `.htaccess` dan `web.config` agar tidak dapat diakses langsung oleh publik.
-5. **[`scripts/view_log.php`](./scripts/view_log.php)**
+6. **[`scripts/view_log.php`](./scripts/view_log.php)**
    - Alat bantu CLI untuk membaca dan memantau log error langsung dari terminal.
 
 ---
@@ -92,6 +95,8 @@ Dokumentasi arsitektural dan panduan teknis mendalam tersedia pada folder [`docs
 - **[`docs/database-architecture.md`](./docs/database-architecture.md)** — Keputusan arsitektur MySQL Compatibility Adapter di PHP 8.4.
 - **[`docs/panduan-file-kritis-dan-standar-coding.md`](./docs/panduan-file-kritis-dan-standar-coding.md)** — Pemetaan file kritis dan standar penulisan kode baru.
 - **[`docs/error-logging-system.md`](./docs/error-logging-system.md)** — Arsitektur dan panduan sistem pencatatan error log terpusat.
+- **[`docs/web-based-error-log-viewer.md`](./docs/web-based-error-log-viewer.md)** — Panduan Web-Based Error Log Viewer di panel Admin.
+- **[`docs/developer-mode-guide.md`](./docs/developer-mode-guide.md)** — Panduan fitur Developer Mode File Inspector (DevBar).
 - **[`php-migration-skills/`](./php-migration-skills/)** — Kumpulan reusable migration skills untuk AI agent.
 
 ---

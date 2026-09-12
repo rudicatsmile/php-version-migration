@@ -1,0 +1,49 @@
+<?
+require('Connection.php');
+require('FileFunction.php');
+extract($_GET);
+#echo $gTHN."-".$gPRO."-".$gUNT;
+$FnD = str_replace('**',' ',$gFnD);
+$CrT = "";
+if ($FnD)
+{
+	$CrT ="AND (Id_Referensi LIKE '%$gFnD%' OR Nm_Referensi LIKE '%$FnD%')";
+	$CrT ="AND (idKegiatan LIKE '%$gFnD%' OR nmKegiatan LIKE '%$FnD%')";
+
+}
+?>
+<table align="center" cellpadding="0" class="table-listpop" cellspacing="0" width="100%" height="240" border="0">
+	<?
+	$iG=1;
+	$nSQ = "SELECT Kd_UPB, Nm_UPB FROM ref_upb WHERE Kd_UPB LIKE '$gSUB.%' $CrT ORDER BY Kd_UPB";
+	$nSQ = "SELECT Id_Referensi, Nm_Referensi FROM ref_kegiatan WHERE Id_Referensi LIKE '".$gURU.".".substr($gPRO,8,2).".__' $CrT ORDER BY Id_Referensi";
+	$nSQ = "SELECT idKegiatan, nmKegiatan FROM ta_apbd_kegiatan_skpd WHERE kdUnit = '$gUNT' AND idKegiatan LIKE '$gPRO%' AND periode='$gTHN' $CrT ORDER BY idKegiatan";
+	#echo $nSQ;
+	$nRs = mysql_query($nSQ);
+	while ($mRo = mysql_fetch_array($nRs, MYSQL_BOTH))
+	{
+		$gKd = $mRo[0];
+		$gNm = strtoupper($mRo[1]);
+		?>
+		<tr height="18" onclick="showCLICK('kegi','<?=$gKd?>','<?=$gNm?>','<?=$IdL?>'); return false;">
+			<td valign="top" width="10" style="border-bottom:1px dotted #CCCCCC">&nbsp;</td>
+			<td valign="top" width="120" style="border-bottom:1px dotted #CCCCCC"><?=$gKd?></td>
+			<td valign="top" style="border-bottom:1px dotted #CCCCCC; padding-right:15px"><?=$gNm?></td>
+			<td valign="top" width="40" style="border-bottom:1px dotted #CCCCCC">&nbsp;</td>
+		</tr>
+		<?
+		$iG++;
+	}
+	?>
+	<? if ($iG==1) {?>
+	<tr height="20">
+		<td colspan="4" style="text-align:center; vertical-align:middle">Data tidak ditemukan..!!</td>
+	</tr>
+	<? } ?>
+	<tr height="100%">
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+</table>

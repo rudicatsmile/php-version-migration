@@ -1,0 +1,4 @@
+.pagging {height:0px; padding:0px 0px; line-height:18px; color:#000; }
+.pagging a{background:url(images/pagging.gif) repeat-x 0 0; height:18px; float:left; padding:0 4px; border:dotted 1px #000; border-radius:2px; text-decoration: none; color:#000; margin-left:2px; margin-top:2px;  }
+.pagging a:hover {border-color: #ff0000; background:url(images/pagging.gif) repeat-x 0 0; color:#ff0000; }
+.pagging span{ float:left; margin-left:2px; padding-top:2px; }

@@ -1,0 +1,28 @@
+# Dokumentasi Migrasi PHP 8.4 (Simbada BMD)
+
+Folder ini berisi dokumentasi teknis, keputusan arsitektur, dan panduan pengembang terkait proyek migrasi aplikasi Simbada BMD dari **PHP 5.6 ke PHP 8.4**.
+
+---
+
+## Daftar Dokumen:
+
+1. **[`database-architecture.md`](./database-architecture.md)**
+   - **Judul**: *Architectural Decision Record (ADR): Penggunaan MySQL Compatibility Adapter di PHP 8.4*
+   - **Isi**: Latar belakang 13.836 panggilan `mysql_*`, perbandingan risiko (Adapter vs direct rewrite `mysqli`/`PDO`), cara kerja internal [mysql_adapter.php](../mysql_adapter.php), dan roadmap refactoring bertahap.
+
+2. **[`panduan-file-kritis-dan-standar-coding.md`](./panduan-file-kritis-dan-standar-coding.md)**
+   - **Judul**: *Panduan File Kritis & Standar Coding PHP 8.4 (Simbada BMD)*
+   - **Isi**: 
+     - Pemetaan file-file paling kritis berdasarkan perannya (Koneksi Database, Helper/Function Umum, Core System, File Berisiko Tinggi, dan File Konfigurasi).
+     - Aturan pembuatan file baru / fitur baru.
+     - 4 Risiko fatal jika memaksakan gaya lama di file baru.
+     - 4 Standar coding modern yang diwajibkan untuk fitur baru (Strict types, PDO Prepared Statements, OOP di `src/`, dan fitur modern PHP 8).
+
+3. **[`error-logging-system.md`](./error-logging-system.md)**
+   - **Judul**: *Sistem Pencatatan Error Log Terpusat (PHP 8.2 - 8.4)*
+   - **Isi**:
+     - Arsitektur sistem error logging terpusat, pengamanan folder `logs/`.
+     - Mekanisme penangkapan PHP Errors, Uncaught Exceptions, Fatal Shutdowns, dan Database Query Errors.
+     - Konfigurasi mode `development` vs `production` (tampilan aman + Reference ID pelacakan).
+     - Panduan CLI `scripts/view_log.php` dan cara memantau log error harian.
+

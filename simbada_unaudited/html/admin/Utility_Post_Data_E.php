@@ -1,0 +1,106 @@
+<?php require "CheckSession.php"?>
+<?php require "Connection.php"?>
+<?php require "FileFunction.php"?>
+<?php require "CheckLogin.php"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<title>Simbada Kab. Hulu Sungai Tengah</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+</head>
+
+<body>
+<?php require "FileMenu.php"?>
+<table border="0" cellpadding="0" style="border-collapse: collapse; width:1200px">
+	<tr>
+		<td width="62">NO</td>
+		<td width="118">REFERENSI</td>
+		<td width="101">KODE</td>
+		<td width="54">REG.</td>
+		<td>NAMA</td>
+		<td width="120" align="right">HARGA</td>
+		<td width="120" align="right">NILAI AKHIR</td>
+		<td width="120" align="right">POSTING</td>
+	</tr>
+	<?
+	$iG=1;
+	$SQL= "SELECT * FROM ta_kib_e WHERE Kd_UPB LIKE '24.04.08.01%' AND Post='N' order by IDT limit 0,10000";
+	$nRs = mysql_query($SQL) or die(mysql_error());
+	$mRo = mysql_fetch_assoc($nRs);
+	$tRo = mysql_num_rows($nRs);
+	if ($tRo > 0)
+	{
+		do
+		{
+			$Post = $mRo['Harga'];
+			$RefR = $mRo['Referensi'];
+			$RefG = $mRo['Ref_Group'];
+			$gUPB = $mRo['Kd_UPB'];
+			$gAss = $mRo['Kd_Aset'];
+			$gReG = $mRo['No_Register'];
+			$gTGL = $mRo['Tgl_Perolehan'];
+			$gTGLm= $mRo['Tgl_Mutasi'];
+			$gNoM = $mRo['No_Pengadaan'];
+			$gTeM = $mRo['Ref_Temp'];
+			
+			$gKET = mysql_real_escape_string($mRo['Keterangan']);
+			
+			#$eINS = fGlobal("IDT","Ta_Kib_Post","Referensi",$RefR,"=","","");
+			#if ($eINS == "")
+			#	{
+				//INSERT
+				$SQ = "INSERT INTO ta_kib_post SET 
+				Referensi='$RefR',
+				Ref_Group='$RefG',
+				Kd_UPB='$gUPB',
+				Kd_Aset='$gAss',
+				No_Register='$gReG',
+				Crit='SLD',
+				Tanggal='$gTGL',
+				Tgl_Mutasi='$gTGLm',
+				Uraian='Saldo awal (nilai perolehan)',
+				DK='D',
+				Debet='$Post',
+				Kredit='0',
+				Keterangan='$gKET',
+				Recorded=now(),
+				Pencatat='PostRepair'";
+				$rs = mysql_query($SQ);
+				
+				//UPDATE
+				$SQ = "update ta_kib_e set Nilai_Akhir='".$Post."', Post='Y' where IDT='".$mRo['IDT']."'";
+				$rs = mysql_query($SQ);
+			#}
+			?>
+			<tr>
+				<td width="42"><? echo $iG?> : <? echo $mRo['IDT']?></td>
+				<td width="118"><? echo $mRo['Referensi']?></td>
+				<td width="101"><? echo $mRo['Kd_Aset']?></td>
+				<td width="54"><? echo $mRo['No_Register']?></td>
+				<td width="347"><? echo $mRo['Nm_Aset']?></td>
+				<td width="109" align="right"><? echo fConvertToRupiah($mRo['Harga'])?></td>
+				<td align="right"><? echo fConvertToRupiah($mRo['Nilai_Akhir'])?></td>
+				<td width="110" align="right"><? echo fConvertToRupiah($Post)?></td>
+			</tr>
+			<?
+			$iG++;
+		}
+		while ($mRo = mysql_fetch_assoc($nRs));	
+	}
+	?>
+	<tr>
+		<td width="42">&nbsp;</td>
+		<td width="118">&nbsp;</td>
+		<td width="101">&nbsp;</td>
+		<td width="54">&nbsp;</td>
+		<td width="347">&nbsp;</td>
+		<td width="109">&nbsp;</td>
+		<td>&nbsp;</td>
+		<td width="110">&nbsp;</td>
+	</tr>
+</table></body>
+</html>
+
+<?php require('Connection_Close.php');?>

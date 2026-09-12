@@ -1,0 +1,209 @@
+<?
+require('Connection.php');
+require('FileFunction.php');
+require("CheckLogin.php");
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<title>Simbada Kab. Hulu Sungai Tengah</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+</head>
+<?
+extract($_GET);
+echo $Frm;
+$gHR  = 1;     //fGetDate('mday');
+$gBL  = 1;     //fGetDate('mon');
+$gTH  = 2017;  //fGetDate('year');
+$gHRd = 31;    //fGetDate('mday');
+$gBLd = 12;    //fGetDate('mon');
+$gTHd = 2017;  //fGetDate('year');
+$gJNS = "AA";
+
+$gUNT = substr($SkP,0,11);
+$dUNT = strtoupper(fGlobal("Nm_Unit","ref_unit","Kd_Unit",$gUNT,"=","",""));
+
+?>
+<body onload="RefreshDATA('<?=$Frm?>','<?=$IdL?>')">
+<?php require "FileMenu.php";?>
+<form name="myfrm" method="POST" action="">
+<input type="hidden" name="fSave" style="width:50px" />
+<table border="0" class="table-link" cellspacing="0" cellpadding="0" align="center" style="width:99%">
+  <tr>
+    <td width="21">&nbsp;</td>
+    <td width="74">&nbsp;</td>
+    <td width="20">&nbsp;</td>
+    <td width="75">&nbsp;</td>
+    <td width="119">&nbsp;</td>
+    <td width="39">&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+  
+  <tr height="25">
+    <td>&nbsp;</td>
+    <td align="right"> UNIT KERJA </td>
+    <td align="center">&nbsp;</td>
+    <td colspan="4">
+	<select class="boxs" name="fUNT" id="fUNT" tabindex="0" style="width:496px" onchange="RefreshDATA('<?=$Frm?>','<?=$IdL?>')">
+	<option value="ALL">ALL</option>
+	  <?
+		$nSQ="SELECT kd_unit, nm_unit FROM ref_unit WHERE aktif='Y' ORDER BY kd_unit";
+		$nRs = mysql_query($nSQ);
+		while ($mRo = mysql_fetch_array($nRs, MYSQL_BOTH))
+		{
+			$sel ="";
+			if ($mRo[0]==$gUNT) {$sel ="selected";}
+			echo '<option '.$sel.' value="'.$mRo[0].'">'.$mRo[0]." : ".strtoupper($mRo[1]).'</option>';
+		}
+		?>
+	</select>
+    </td>
+    </tr>
+  <tr height="25">
+    <td>&nbsp;</td>
+    <td align="right">PERIODE</td>
+    <td align="center">&nbsp;</td>
+    <td>
+	
+	<select class="boxs" name="fTHN" id="fTHN" tabindex="0" style="width:60px" onchange="RefreshDATA('<?=$Frm?>','<?=$IdL?>')">
+	<?
+	$gTHN = fGetDate('year')+1;
+	for ($i=2019; $i<=2030; $i++)
+	{
+		$sel ="";
+		if ($i==$gTHN) {$sel ="selected";}
+		echo '<option '.$sel.' value="'.$i.'">'.$i.'</option>';
+	}
+	?>
+    </select>	</td>
+    <td><select class="boxs" name="fUBH" id="fUBH" tabindex="0" style="width:90px; background:#99FF00" onchange="RefreshDATA('<?=$Frm?>','<?=$IdL?>')">
+      <option value="0">Murni</option>
+      <option value="1">Perubahan</option>
+    </select></td>
+    <td>FIND</td>
+    <td style="padding-right:5px">
+	  <input name="fFnD" type="text" value="" onkeypress="if (event.keyCode==13) {RefreshDATA('<?=$Frm?>','<?=$IdL?>'); return false;}" style="padding-left:5px; width:200px; border: 1px solid #C0C0C0"/>
+      <input type="button" name="b1" value="GO" onclick="RefreshDATA('<?=$Frm?>','<?=$IdL?>')" style="width: 40px; height: 21px" />
+      <div style="float:right">
+	  <input type="hidden" name="B2" value="CETAK" onclick="showDOC('','800','400','<?=$_GET['IdL']?>')" style="width: 100px; height: 21px; color:#0000FF" />
+	  <input type="hidden" name="B3" value="EXPORT KE PERUBAHAN" onclick="exportFORM('<?=$_GET['IdL']?>')" style="width: 140px; height: 21px; color:#FF0000" />
+	  </div>	  </td>
+    </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>
+	<!--div id="imgMstCri" class="upload_a">
+		<div id="imgDiv1Cri" class="upload_b"></div>
+		<div id="imgDiv2Cri" class="upload_c"></div>
+	</div-->	</td>
+    <td align="center"><div id="loadingImg" style="width:40px; height:10px; display:none; text-align:center"><img src="Images/loading3.gif" alt="" width="30" height="30"></div></td>
+    <td align="center">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+</table>
+<table border="0" cellspacing="0" class="table-link" cellpadding="0" align="center" style="width:99%; height:20px; background: #C9DCD8; font-weight:bold">
+  <tr>
+    <td width="30" align="center">NO</td>
+    <td width="120">REFERENSI</td>
+    <td width="80">TAHUN</td>
+    <td width="80">KODE</td>
+    <td width="300">UNIT</td>
+    <td>DESKRIPSI</td>
+    <td width="80">USULAN BARU</td>
+    <td width="80">KEB. MAX</td>
+    <td width="80">OPTIMALISASI</td>
+    <td width="78">DISETUJUI</td>
+    <td width="160" align="center">ACTION</td>
+  </tr>
+</table>
+<table border="0" class="table-link" cellspacing="0" cellpadding="0" align="center" style="width:99%; height:390px">
+  <tr>
+    <td valign="top">
+	<div id="ViewDELL" style="height:0px; width:0px; overflow:auto"></div>
+	<div id="ViewDATA" style="height:390px; width:100%; overflow:auto; border:0px"></div>
+	</td>
+  </tr>
+</table>
+<table border="0" class="table-link" cellspacing="0" cellpadding="0" align="center" style="width:99%; height:20px; background-color:#D2DAC4">
+  <tr>
+    <td valign="top">
+	</td>
+  </tr>
+</table>
+</form>
+</body>
+</html>
+<script languange="javascript">
+	var objfrm=document.myfrm;
+	function ReplaceText(gFnD)
+	{
+		for (i=1; i<=100; i++)
+		{
+			gFnD = gFnD.replace(' ','**');
+		}
+		return gFnD;
+	}
+	
+	function closeCLICK(Frm,crt,IdL)
+	{
+		document.getElementById(crt+'MstVeri').style.display = "none";
+		if (crt=='form') {RefreshDATA(Frm,IdL);}
+	}
+	
+	function RefreshDATA(Frm,IdL)
+	{
+		gUnT = objfrm.fUNT.value;
+		gTHN = objfrm.fTHN.value;
+		gUBH= objfrm.fUBH.value;
+		
+		gFnD = ReplaceText(objfrm.fFnD.value);
+		
+		//$(document).ready(function()
+		//{
+		//	$("#ViewDATA").load('RKBMD_New_Data.php?Frm='+Frm+'&gUnT='+gUnT+'&gFnD='+gFnD+'&gTHN='+gTHN+'&gUBH='+gUBH+'&IdL='+IdL);
+		//});
+		
+		$(document).ready(function()
+		{
+			$.ajax({
+				url:"rkbmd_new_pmf_pmt_phs_telaah_data.php",
+				data: {Frm:Frm,gUnT:gUnT,gFnD:gFnD,gTHN:gTHN,gUBH:gUBH,IdL:IdL},
+				type:"get",
+				beforeSend:function()
+				{
+					$("#loadingImg").show();
+				},
+				success:function(data)
+				{
+					$("#loadingImg").hide();
+					$("#ViewDATA").html(data);
+					$("#ViewDATA").show("fast");
+				}
+			});
+		});
+	}
+	
+	function showEDIT(Frm,IdT,IdL)
+	{
+		if (Frm=='PMF'){xD="PEMINDAHTANGANAN";}
+		if (Frm=='PMT'){xD="PEMANFAATAN";}
+		if (Frm=='PHS'){xD="PENGHAPUSAN";}
+		window.open('rkbmd_new_pmf_pmt_phs_telaah_frm.php?FrmG=FORM TELAAH USULAN '+xD+'&Frm='+Frm+'&IdT='+IdT+'&IdL='+IdL,'_self');
+	}
+	
+	function P_Dokumen(IdT,w,h,IdL)
+	{
+		var win=null;
+		var txtHTML = "";
+		var iErrors=0;
+		LeftPosition=(screen.width)?(screen.width-w)/2:100; 
+		TopPosition=(screen.height)?(screen.height-h)/2:100;
+		URL='rkbmd_new_pmf_pmt_phs_telaah_dokumen.php?IdT='+IdT+'&IdL='+IdL;
+		settings='width='+w+',height='+h+',top='+TopPosition+',left='+LeftPosition+',location=no,directories=no,status=no,menubar=no,toolbar=no,resizable=no,maximize=no,scrollbars=yes,navigation=no';
+		window.open(URL,'',settings);
+	}
+</script>

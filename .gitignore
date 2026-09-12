@@ -1,0 +1,27 @@
+# Composer dependencies
+/vendor/
+
+# Application log files (keep directory structure via .gitkeep)
+/logs/*.log
+!/logs/.gitkeep
+!/logs/.htaccess
+!/logs/index.php
+!/logs/web.config
+
+# Environment and local server configs
+.env
+.env.local
+.env.*.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

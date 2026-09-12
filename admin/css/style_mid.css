@@ -1,0 +1,223 @@
+* { padding:0; margin:0; outline:0; }
+body {
+	background-color:#F4F1F1;
+	font-family: Calibri;
+	font-size:9pt;
+	line-height:14px;
+	color:#5e5e5e;
+}
+
+a { color:#000; text-decoration: none; cursor:pointer; }
+a:hover { color:#000; text-decoration: underline; font-weight:bold}
+
+a.ico { color:#dd9c9a; font-size:11px; font-family:calibri; font-weight: bold; color: #949494; text-decoration: none; padding:0 0 0 14px; background-repeat:no-repeat; background-position:0 0; }
+a.ico:hover { color:#333;}
+a.reff { background-image:url(images/reff.gif)}
+a.add  { background-image:url(images/item.gif)}
+a.save { background-image:url(images/save.gif)}
+a.del  { background-image:url(images/del.gif)}
+a.dell { background-image:url(images/dele.gif)}
+a.edit { background-image:url(images/edit.gif)}
+a.back { background-image:url(images/left.gif)}
+a.refs { background-image:url(images/reff.gif)}
+a.maps { background-image:url(images/maps.png)}
+
+#main {}
+#content { float:left; width:100%; }
+
+.table {}
+.table th{ background:#fffdfa url(images/th.gif) repeat-x 0 0; color:#818181; padding:0px 0px; border-bottom:solid 1px #d2d1cb;}
+.table td{ border-bottom:dotted 1px #e0e0e0; padding:0px 0px; }
+.table tr:hover td{ background:#fff993; }
+.table a.ico{ }
+
+/** Tables **/
+table {
+	border-right:0;
+	clear: both;
+	color: #333;
+	margin-bottom: 0px;
+	width: 100%;
+}
+th {
+	background:#fffdfa url(images/th.gif) repeat-x 0 0;
+	border:0px;
+	border-bottom:2px solid #555;
+	text-align: default;
+	padding:4px;
+	color:#818181;
+}
+th a {
+	display: block;
+	padding: 2px 4px;
+	text-decoration: none;
+}
+th a.asc:after {
+	content: ' ⇣';
+}
+th a.desc:after {
+	content: ' ⇡';
+}
+table tr td {
+	padding: 0px;
+	vertical-align: top;
+}
+td.actions {
+	text-align: center;
+	white-space: nowrap;
+}
+table td.actions a {
+	text-align: default;
+	margin: 0px 0px;
+	padding:0px 0px;
+}
+
+select {
+	background-image: -moz-linear-gradient(left, #f2f2f2, #fff);
+	font-family: Calibri;
+	font-size: 10pt;
+	border: 1px solid #C0C0C0;
+	cursor:pointer;
+	padding: 1px 2px;
+	border-radius: 4px;
+}
+
+select:hover 
+{
+	background-color: #F2F2F2;
+	border: 1px solid #C0C0C0;
+	-moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+	cursor:pointer;	
+}
+
+select:focus
+{
+	background-image: -moz-linear-gradient(left, #fff, #fff);
+	border: 1px solid #C0C0C0;
+	-moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);	
+}
+
+input[type=button] {
+	display: inline;
+	font-size: 8pt;
+	width: auto;
+	font-weight:bold;
+	padding: 3px 4px;
+	background: #dcdcdc;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fefefe), to(#dcdcdc));
+	background-image: -webkit-linear-gradient(top, #fefefe, #dcdcdc);
+	background-image: -moz-linear-gradient(top, #fefefe, #dcdcdc);
+	background-image: -ms-linear-gradient(top, #fefefe, #dcdcdc);
+	background-image: -o-linear-gradient(top, #fefefe, #dcdcdc);
+	background-image: linear-gradient(top, #fefefe, #dcdcdc);
+	color:#333;
+	border:1px solid #bbb;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	text-decoration: none;
+	text-shadow: #fff 0px 1px 0px;
+	min-width: 0;
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.2);
+	-webkit-user-select: none;
+	user-select: none;
+}
+input[type=button]:hover {
+	background: #c0c0c0;
+	border-color: #fff;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);	
+	text-decoration: none;
+}
+input[type=button]:active {
+	background: #eee;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#dfdfdf), to(#eee));
+	background-image: -webkit-linear-gradient(top, #dfdfdf, #eee);
+	background-image: -moz-linear-gradient(top, #dfdfdf, #eee);
+	background-image: -ms-linear-gradient(top, #dfdfdf, #eee);
+	background-image: -o-linear-gradient(top, #dfdfdf, #eee);
+	background-image: linear-gradient(top, #dfdfdf, #eee);
+	text-shadow: #eee 0px 1px 0px;
+	-moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3);
+	border-color: #aaa;
+	text-decoration: none;
+}
+input[type=text] 
+{
+	background-image: -moz-linear-gradient(left, #f2f2f2, #fff);
+	font-family: calibri;
+	font-size:10pt;
+	border: 1px solid #C0C0C0;
+	border-radius: 4px;
+	padding: 2px 2px 2px 2px;
+}
+
+input[type=text]:hover 
+{
+	background-color: #F2F2F2;
+	border: 1px solid #C0C0C0;
+	-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
+	-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+	cursor:pointer;	
+}
+
+input[type=text]:focus
+{
+	background-image: -moz-linear-gradient(left, #fff, #fff);
+	border: 1px solid #C0C0C0;
+	-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);	
+	cursor:text;
+}
+
+input 
+{
+	clear: both;
+	font-size: 8pt;
+	font-family: Calibri;
+	padding: 2px;
+	width:98%;
+}
+
+textarea {
+	background: -moz-linear-gradient(left, #f2f2f2, #fff);
+	font-size: 10pt;
+	font-family: calibri, sans-serif;
+	vertical-align: text-top;
+	cursor:pointer;
+	border: 1px solid #C0C0C0;
+	border-radius: 4px 4px;
+}
+
+textarea:hover 
+{
+	background-color: #F2F2F2;
+	border: 1px solid #C0C0C0;
+	-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
+	-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+	cursor:pointer;	
+}
+
+textarea:focus
+{
+	background-image: -moz-linear-gradient(left, #fff, #fff);
+	border: 1px solid #C0C0C0;
+	-moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);	
+	cursor:text;
+}
+
+
+
+

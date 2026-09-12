@@ -1,0 +1,271 @@
+<?
+require('Connection.php');
+require('FileFunction.php');
+extract($_GET);
+?>
+<table align="center" border="0" width="100%" class="table-list" cellspacing="0" cellpadding="0" height="100%" style="border:0px">
+<?
+$iG=$PgE+1;
+$tJmL=0;
+
+$nSQ = "SELECT IDT, Referensi, Kd_Program, Nm_Program, LinkMurni  
+FROM ta_rkpbmd_new_program WHERE Referensi='$gREF' AND Tahun='$gTHN' AND Apbd='$gUBH' ORDER BY IDT";
+$nRs = mysql_query($nSQ);
+while ($mRo = mysql_fetch_array($nRs, MYSQL_BOTH))
+{
+	$xB   = "<b>";
+	$pad  = 5;
+	$CrT  = "prog";
+	$gBG  = fBackCLR($iG);
+	$rIdT = $mRo[0];
+	$mRo1 = $mRo[1];
+	$mRo2 = $mRo[2];
+	$mRo3 = $mRo[3];
+	$Link = $mRo[4];
+	#echo $rIdT;
+	$eCeK = "";
+	if ($gUBH=='0'){
+		$eCeK = fGlobal("IDT","ta_rkpbmd_new","referensi:tahun:apbd",$mRo1.":".$gTHN.":1","=:=:=","","");
+	}
+	
+	RowList($stLOCK,$CrT,$iG,$mRo1,$mRo2,$mRo3,$rIdT,$gTHN,$gUBH,$IdL,$pad,DatabaseSB,$ConSB,$xB,$Link,$eCeK);
+	viewKEG($stLOCK,$gREF,$gTHN,$gUBH,$mRo2,$eCeK,$IdL,DatabaseSB,$ConSB);
+	AddKEG($stLOCK,$rIdT,$IdL);
+	$iG++;
+}
+
+function viewKEG($stLOCK,$gREF,$gTHN,$gUBH,$mRo2,$eCeK,$IdL,$DatabaseSB,$ConSB){
+	$mSQ = "SELECT IDT, Referensi, Kd_Kegiatan, Nm_Kegiatan, LinkMurni  
+	FROM ta_rkpbmd_new_kegiatan WHERE Referensi='$gREF' AND Kd_Kegiatan LIKE '$mRo2%' AND Tahun='$gTHN' AND Apbd='$gUBH' ORDER BY IDT";
+	$nR = mysql_query($mSQ);
+	while ($mR = mysql_fetch_array($nR, MYSQL_BOTH))
+	{
+		$xB   = "<b>";
+		$pad  = 5;
+		$CrT  = "kegi";
+		$gBG  = fBackCLR($iG);
+		$rIdT = $mR[0];
+		$mRo1 = $mR[1];
+		$mRo2 = $mR[2];
+		$mRo3 = $mR[3];
+		$Link = $mR[4];
+	
+		RowList($stLOCK,$CrT,'',$mRo1,$mRo2,$mRo3,$rIdT,$gTHN,$gUBH,$IdL,$pad,$DatabaseSB,$ConSB,$xB,$Link,$eCeK);
+		viewSUB($stLOCK,$gREF,$gTHN,$gUBH,$mRo2,$eCeK,$IdL,$DatabaseSB,$ConSB);
+		AddSUB($stLOCK,$rIdT,$IdL);
+	}
+}
+
+function viewSUB($stLOCK,$gREF,$gTHN,$gUBH,$mRo2,$eCeK,$IdL,$DatabaseSB,$ConSB){
+	$mSK = "SELECT IDT, Referensi, Kd_Sub_Kegiatan, Nm_Sub_Kegiatan, LinkMurni  
+	FROM ta_rkpbmd_new_kegiatan_sub WHERE Referensi='$gREF' AND Kd_Sub_Kegiatan LIKE '$mRo2%' AND Tahun='$gTHN' AND Apbd='$gUBH' ORDER BY IDT";
+	$nK = mysql_query($mSK);
+	while ($mK = mysql_fetch_array($nK, MYSQL_BOTH))
+	{
+		$xB   = "<b>";
+		$pad  = 5;
+		$CrT  = "subk";
+		$gBG  = fBackCLR($iG);
+		$rIdT = $mK[0];
+		$mRo1 = $mK[1];
+		$mRo2 = $mK[2];
+		$mRo3 = $mK[3];
+		$Link = $mK[4];
+	
+		RowList($stLOCK,$CrT,'',$mRo1,$mRo2,$mRo3,$rIdT,$gTHN,$gUBH,$IdL,$pad,$DatabaseSB,$ConSB,$xB,$Link,$eCeK);
+		viewREK($stLOCK,$gREF,$gTHN,$gUBH,$mRo2,$eCeK,$IdL,$DatabaseSB,$ConSB);
+		AddREK($stLOCK,$rIdT,$IdL);
+	}
+}
+
+function viewREK($stLOCK,$gREF,$gTHN,$gUBH,$mRo2,$eCeK,$IdL,$DatabaseSB,$ConSB){
+	$mSW = "SELECT IDT, Referensi, Kd_Rekening, Nm_Rekening, LinkMurni  
+	FROM ta_rkpbmd_new_rekening WHERE Referensi='$gREF' AND Kd_Sub_Kegiatan = '$mRo2' AND Tahun='$gTHN' AND Apbd='$gUBH' ORDER BY IDT";
+	#echo $mSQ."<br>";
+	$nW = mysql_query($mSW);
+	while ($mW = mysql_fetch_array($nW, MYSQL_BOTH))
+	{
+		$xB   = "";
+		$pad  = 5;
+		$CrT  = "rekn";
+		$gBG  = fBackCLR($iG);
+		$rIdT = $mW[0];
+		$mRo1 = $mW[1];
+		$mRo2 = $mW[2];
+		$mRo3 = $mW[3];
+		$Link = $mW[4];
+		RowList($stLOCK,$CrT,'',$mRo1,$mRo2,$mRo3,$rIdT,$gTHN,$gUBH,$IdL,$pad,$DatabaseSB,$ConSB,$xB,$Link,$eCeK);
+	}
+}
+
+function RowList($stLOCK,$CrT,$iG,$mRo1,$mRo2,$mRo3,$rIdT,$gTHN,$gUBH,$IdL,$pad,$DatabaseSB,$ConSB,$xB,$Link,$eCeK)
+{
+	$gJnSR = "";
+	if ($CrT=='rekn'){
+		
+		$gUsuL = fGlobalNEW("usulan_jumlah","ta_rkpbmd_new_rekening","IDT",$rIdT,"=","",$DatabaseSB,$ConSB,"");
+		$gUsuT = fGlobalNEW("usulan_satuan","ta_rkpbmd_new_rekening","IDT",$rIdT,"=","",$DatabaseSB,$ConSB,"");
+
+		$gKebU = fGlobalNEW("usulankebthan_jumlah","ta_rkpbmd_new_rekening","IDT",$rIdT,"=","",$DatabaseSB,$ConSB,"");
+		$gKebT = fGlobalNEW("usulankebthan_satuan","ta_rkpbmd_new_rekening","IDT",$rIdT,"=","",$DatabaseSB,$ConSB,"");
+
+		$gStaT = fGlobalNEW("status_barang","ta_rkpbmd_new_rekening","IDT",$rIdT,"=","",$DatabaseSB,$ConSB,"");
+		$gKonD = fGlobalNEW("kondisi_barang","ta_rkpbmd_new_rekening","IDT",$rIdT,"=","",$DatabaseSB,$ConSB,"");
+		
+		$gPenU = fGlobalNEW("nama_pemeliharaan","ta_rkpbmd_new_rekening","IDT",$rIdT,"=","",$DatabaseSB,$ConSB,"");
+		$gKetR = fGlobalNEW("keterangan","ta_rkpbmd_new_rekening","IDT",$rIdT,"=","",$DatabaseSB,$ConSB,"");
+		
+		$gLokR = fGlobalNEW("LockRecord","ta_rkpbmd_new_rekening","IDT",$rIdT,"=","",$DatabaseSB,$ConSB,"");
+		
+		$gJnSR = "<br><i>Jenis : ".fGlobalNEW("nm_aset","ref_rek_aset108_4","kd_aset",substr($mRo2,0,8),"=","",$DatabaseSB,$ConSB,"");
+		$gJnSR.= "<br><i>Objek : ".fGlobalNEW("nm_aset","ref_rek_aset108_5","kd_aset",substr($mRo2,0,11),"=","",$DatabaseSB,$ConSB,"");
+		
+		$gHrgT = fGlobalNEW("Usulan_Harga","ta_rkpbmd_new_rekening","IDT",$rIdT,"=","",$DatabaseSB,$ConSB,"");
+		
+		$span  = 1;
+	}
+	else{
+		$gOutP = fGlobalNEW("output","ta_rkpbmd_new_kegiatan_sub","IDT",$rIdT,"=","",$DatabaseSB,$ConSB,"");
+		$span  = 1;
+	}
+	?>
+	<tr height="25"> 
+	  <td width="29" rowspan="<?=$span?>" style="border-bottom:1px #999999 dotted; text-align:center" <?=$gBG?>><? if ($iG){echo $iG.".";}?></td>
+	  <td width="103" rowspan="<?=$span?>" style="border-bottom:1px #999999 dotted; border-left:1px #ccc solid; text-align:left; padding-left:2px" <?=$gBG?>><?=$xB.$mRo2?></td>
+	  <td width="400" rowspan="<?=$span?>" style="border-bottom:1px #999999 dotted; padding-left:<?=$pad?>px; border-left:1px #ccc solid" <?=$gBG?>><? if ($CrT=='rekn') {echo $xB."<b>".$mRo3."</b>".$gJnSR;} else {echo strtoupper($xB.$mRo3);}?></td>
+	  <td width="650" style="border-bottom:1px #999999 dotted; padding-left:3px; border-left:1px #ccc solid" <?=$gBG?>>
+	  <?
+	   if ($CrT=='subk'){
+	   		echo "OUTPUT&nbsp;&nbsp;==>&nbsp;&nbsp;";
+			?>
+			<input name="fOutP" id="fOutP" type="text" value="<?=$gOutP?>" onkeypress="if (event.keyCode==13) {saveRECO('<?=$stLOCK?>','','output',this,'<?=$rIdT?>','<?=$_GET['IdL']?>'); return false;}" style="height:15px; border-radius:0px; padding-left:5px; width:542px; border: 1px solid #C0C0C0; background:#FFFF99"/>
+			<?
+	   }
+		$eReD="";
+		$eDis="";
+		$delt="dele";
+		if ($stLOCK=='1' || $gLokR=='Y'){
+			$delt="delt";
+			$eReD="readonly";
+			$eDis="disabled";
+		}
+		if ($Link=='Ya'){
+			$delt="delt";
+		}
+		if ($eCeK!='' || $gLokR=='Y'){
+			$delt="delt";
+			$eReD="readonly";
+			$eDis="disabled";
+		}
+	   if ($CrT=='rekn'){
+			?>
+			<table width="100%" cellpadding="0" cellspacing="1">
+			<tr>
+			  <td width="94" align="right">Jumlah Barang</td>
+			  <td width="4">&nbsp;</td>
+			  <td width="122">
+			  <input name="fUsuL" id="fUsuL" type="text" <?=$eReD?> value="<?=$gUsuL?>" readonly onkeypress="if (event.keyCode==13) {saveRECO('<?=$stLOCK?>','','usulan_jumlah',this,'<?=$rIdT?>','<?=$_GET['IdL']?>'); return false;}" onkeyup="NumValidate(this)" style="height:15px; border-radius:0px; text-align:center; width:40px; border: 1px solid #C0C0C0"/>
+			  <input name="fUsuT" id="fUsuT" type="text" <?=$eReD?> value="<?=$gUsuT?>" onkeypress="if (event.keyCode==13) {saveRECO('<?=$stLOCK?>','','usulan_satuan',this,'<?=$rIdT?>','<?=$_GET['IdL']?>'); return false;}" style="height:15px; border-radius:0px; text-align:left; width:65px; border: 1px solid #C0C0C0; background:#CCFF99"/>			</td>
+			  <td width="111" align="right">Nama Pemeliharaan</td>
+			  <td width="12">&nbsp;</td>
+			  <td colspan="2"><input name="fPenU" id="fPenU" type="text" <?=$eReD?> value="<?=$gPenU?>" onkeypress="if (event.keyCode==13) {saveRECO('<?=$stLOCK?>','','nama_pemeliharaan',this,'<?=$rIdT?>','<?=$_GET['IdL']?>'); return false;}" style="height:15px; border-radius:0px; text-align:left; width:268px; border: 1px solid #C0C0C0; background:#CCFF99"/></td>
+			</tr>
+			<tr>
+			  <td align="right">Status Barang</td>
+			  <td>&nbsp;</td>
+			  <td><input name="fStaT" id="fStaT" type="text" <?=$eReD?> value="<?=$gStaT?>" onkeypress="if (event.keyCode==13) {saveRECO('<?=$stLOCK?>','','status_barang',this,'<?=$rIdT?>','<?=$_GET['IdL']?>'); return false;}" style="height:15px; border-radius:0px; text-align:left; width:114px; border: 1px solid #C0C0C0; background:#CCFF99"/>			  </td>
+			  <td align="right">RKPBMD</td>
+			  <td>&nbsp;</td>
+			  <td width="137"><input name="fKebU" id="fKebU" type="text" <?=$eReD?> readonly value="<?=$gKebU?>" onkeypress="if (event.keyCode==13) {saveRECOxxxx('<?=$stLOCK?>','','usulankebthan_jumlah',this,'<?=$rIdT?>','<?=$_GET['IdL']?>'); return false;}" onkeyup="NumValidate(this)" style="height:15px; border-radius:0px; text-align:center; width:40px; border: 1px solid #C0C0C0"/>
+		      <input name="fKebT" id="fKebT" type="text" <?=$eReD?> value="<?=$gKebT?>" onkeypress="if (event.keyCode==13) {saveRECO('<?=$stLOCK?>','','usulankebthan_satuan',this,'<?=$rIdT?>','<?=$_GET['IdL']?>'); return false;}" style="height:15px; border-radius:0px; text-align:left; width:80px; border: 1px solid #C0C0C0; background:#CCFF99"/></td>
+			  <td width="160"><input type="button" name="B39" <?=$DisA?> value="..." onclick="formDetail('','<?=$stLOCK?>','<?=$rIdT?>','<?=$_GET['IdL']?>')" style="width:24px; height:21px; color:#FF0000" /></td>
+			</tr>
+			<tr>
+			  <td align="right">Kondisi Barang</td>
+			  <td>&nbsp;</td>
+			  <td>
+			  <label><input name="fRadio<?=$rIdT?>" <?=$eDis?> type="radio" onclick="saveRECO('<?=$stLOCK?>','rb','kondisi_barang','B','<?=$rIdT?>','<?=$_GET['IdL']?>'); return false;" value="B" <? if ($gKonD=='B'){echo "checked";}?> />B</label>
+			  <label><input name="fRadio<?=$rIdT?>" <?=$eDis?> type="radio" onclick="saveRECO('<?=$stLOCK?>','rb','kondisi_barang','RR','<?=$rIdT?>','<?=$_GET['IdL']?>'); return false;" value="RR" <? if ($gKonD=='RR'){echo "checked";}?> />RR</label>
+			  <label><input name="fRadio<?=$rIdT?>" <?=$eDis?> type="radio" onclick="saveRECO('<?=$stLOCK?>','rb','kondisi_barang','RB','<?=$rIdT?>','<?=$_GET['IdL']?>'); return false;" value="RB" <? if ($gKonD=='RB'){echo "checked";}?> />RB</label>
+			  </td>
+			  <td align="right">Keterangan</td>
+			  <td>&nbsp;</td>
+			  <td colspan="2"><input name="fKetR" id="fKetR" type="text" <?=$eReD?> value="<?=$gKetR?>" onkeypress="if (event.keyCode==13) {saveRECO('<?=$stLOCK?>','','keterangan',this,'<?=$rIdT?>','<?=$_GET['IdL']?>'); return false;}" style="height:15px; border-radius:0px; text-align:left; width:268px; border: 1px solid #C0C0C0; background:#CCFF99"/></td>
+			</tr>
+			</table>
+	  <? }
+	  ?>
+	  </td>
+	  <td rowspan="<?=$span?>" style="border-bottom:1px #999999 dotted; border-left:1px #ccc solid; padding-right:3px; text-align:center" <?=$gBG?>>
+	  <a href="#" onClick="remoPKRK('<?=$stLOCK?>','<?=$CrT?>','<?=$rIdT?>','<?=$IdL?>'); return false" class="ico <?=$delt?>">&nbsp;&nbsp;Remove</a>	  </td>
+	</tr>
+<? } ?>
+
+<?
+function AddKEG($stLOCK,$rIdT,$IdL)
+{
+	?>
+	<tr height="30">
+	 <td style="border-left:0px #ccc solid; border-bottom:1px #ccc solid">&nbsp;</td>
+	 <td style="border-left:1px #ccc solid; border-bottom:1px #ccc solid">&nbsp;</td>
+	 <td colspan="2" style="border-left:1px #ccc solid; border-bottom:1px #ccc solid; padding-left:5px">
+	 <a href="#" onClick="showKEGI('<?=$stLOCK?>','','<?=$rIdT?>','<?=$IdL?>'); return false" class="ico add">&nbsp;&nbsp;Add KEGIATAN</a>	 </td>
+	 <td style="border-left:0px #ccc solid; border-bottom:1px #ccc solid">&nbsp;</td>
+	</tr>
+	<?
+}
+?>
+<?
+function AddSUB($stLOCK,$kIdT,$IdL)
+{
+	?>
+	<tr height="20">
+	 <td style="border-left:0px #ccc solid; border-bottom:1px #ccc solid">&nbsp;</td>
+	 <td style="border-left:1px #ccc solid; border-bottom:1px #ccc solid">&nbsp;</td>
+	 <td colspan="2" style="border-left:1px #ccc solid; border-bottom:1px #ccc solid; padding-left:5px">
+	 <a href="#" onClick="showSUBK('<?=$stLOCK?>','','<?=$kIdT?>','<?=$IdL?>'); return false" class="ico add">&nbsp;&nbsp;Add SUB KEGIATAN</a>	 
+	 <!--ngdep ke aset : a href="#" onClick="showASET('','<?=$kIdT?>','<?=$IdL?>'); return false" class="ico add">&nbsp;&nbsp;Add ASET</a-->
+	 </td>
+	 <td style="border-left:0px #ccc solid; border-bottom:1px #ccc solid">&nbsp;</td>
+	</tr>
+	<?
+}
+?>
+<?
+function AddREK($stLOCK,$kIdT,$IdL)
+{
+	?>
+	<tr height="20">
+	 <td style="border-left:0px #ccc solid; border-bottom:1px #ccc solid">&nbsp;</td>
+	 <td style="border-left:1px #ccc solid; border-bottom:1px #ccc solid">&nbsp;</td>
+	 <td colspan="2" style="border-left:1px #ccc solid; border-bottom:1px #ccc solid; padding-left:5px">
+	 <a href="#" onClick="showREKN('<?=$stLOCK?>','','<?=$kIdT?>','<?=$IdL?>'); return false" class="ico add">&nbsp;&nbsp;Add REKENING</a>	 
+	 <!--ngdep ke aset : a href="#" onClick="showASET('','<?=$kIdT?>','<?=$IdL?>'); return false" class="ico add">&nbsp;&nbsp;Add ASET</a-->
+	 </td>
+	 <td style="border-left:0px #ccc solid; border-bottom:1px #ccc solid">&nbsp;</td>
+	</tr>
+	<?
+}
+?>
+<? if ($iG>1) {?>
+<tr height="100%">
+ <td style="border-left:0px #ccc solid; border-bottom:0px #ccc double">&nbsp;</td>
+ <td style="border-left:1px #ccc solid; border-bottom:0px #ccc double">&nbsp;</td>
+ <td colspan="2" style="border-left:1px #ccc solid; border-bottom:0px #ccc double; vertical-align:top; text-align:center; color:#fff; font-size:10pt; font-style:italic"><font style="background:#000000">&nbsp;&nbsp;** Tekan <b>ENTER</b> untuk menyimpan data **&nbsp;&nbsp;</font></td>
+ <td style="border-left:0px #ccc solid; border-bottom:0px #ccc double">&nbsp;</td>
+</tr>
+<!--tr height="20">
+  <td style="text-align:right; font-weight:bold; padding-right:10px" colspan="7"><div style="float:left; font-weight:normal; font-style:italic"><font style="color:#FF0000">&nbsp;**</font> &lt;-- Aset sudah tidak ada pada skpd bersangkuatn.</div>
+    T O T A L</td>
+  <td style="text-align:right; font-weight:bold; padding-right:3px; border-left:1px #ccc solid"><?=fConvertToRupiah($tJmL)?></td>
+  <td style="text-align:right; font-weight:bold; padding-right:3px; border-left:1px #ccc solid"><?=fConvertToRupiah($tJmA)?></td>
+  <td style="text-align:right; font-weight:bold; padding-right:3px; border-left:1px #ccc solid">&nbsp;</td>
+  <td style="border-left:1px #ccc solid"></td>
+  <td colspan="3"></td>
+</tr-->
+<? }else{ ?>
+<tr height="100%">
+ <td colspan="6" align="center">Data tidak ditemukan..!!</td>
+</tr>
+<? } ?>
+</table>

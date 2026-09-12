@@ -20,3 +20,13 @@ if (class_exists('App\Logging\Logger')) {
 
 // 4. Load MySQL PDO Compatibility Adapter
 require_once __DIR__ . '/mysql_adapter.php';
+
+// 5. Inisialisasi Developer Mode File Inspector (DevBar)
+// Hanya aktif pada lingkungan development. Dapat dinonaktifkan dengan define('DEV_MODE', false);
+if (!defined('DEV_MODE')) {
+    define('DEV_MODE', APP_ENV === 'development');
+}
+
+if (class_exists('App\Dev\DevBar')) {
+    \App\Dev\DevBar::init(APP_ENV, DEV_MODE);
+}

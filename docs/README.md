@@ -34,4 +34,14 @@ Folder ini berisi dokumentasi teknis, keputusan arsitektur, dan panduan pengemba
      - Panduan penggunaan fitur: Statistik harian, filter tanggal & level, pencarian instan (Live Search), tema Dark/Light, unduh file `.log`, dan pengosongan log dengan modal konfirmasi.
      - Diagram alur penanganan insiden error dari pengguna lapangan hingga debugging presisi menggunakan Reference ID.
 
+5. **[`developer-mode-guide.md`](./developer-mode-guide.md)**
+   - **Judul**: *Panduan Fitur Developer Mode File Inspector (DevBar)*
+   - **Isi**:
+     - Solusi pelacakan file PHP aktif pada arsitektur frame dan popup Simbada BMD.
+     - Mekanisme otomatis penempelan badge floating via output buffering handler.
+     - Penjelasan informasi: Nama skrip, path relatif & absolut, deteksi konteks frame, daftar included files, metrik waktu/memori, dan parameter request.
+     - 3 Metode aktivasi/deaktivasi mudah (parameter URL `?dev_mode=1`, tombol DevBar, atau konfigurasi `bootstrap.php`).
+     - Jaminan keamanan di lingkungan produksi (*Zero Leak*).
+
+
 

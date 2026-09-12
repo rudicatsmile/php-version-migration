@@ -40,6 +40,7 @@ if (!file_exists($todayFile)) {
     exit(1);
 }
 
+clearstatcache(true, $todayFile);
 $newSize = filesize($todayFile);
 if ($newSize <= $initialSize) {
     echo "GAGAL: Tidak ada entri baru yang ditulis ke file log!\n";

@@ -290,6 +290,7 @@
 						<li class="has-sub"><a href="#">Tools</a>
 							<ul>
 								<!--li class="last"><a href="<?="Home.php?IdL=".$_GET['IdL']?>" onClick="WinDumpDB('400','500','center')" title="Dokumen KIB">Backup Database</a></li-->
+								<li class="last"><a href="<?="Log_Viewer.php?FrmG=LOG ERROR SISTEM&IdL=".$_GET['IdL']?>" title="Log Error Sistem">Log Error Sistem</a></li>
 								<li class="last"><a href="#" onClick="WinMoveDataUPB('700','350','center','<?=$_GET['IdL']?>')" title="Pindah Data KIB (UPB->UPB)">Pindah Data KIB (UPB->UPB) *</a></li>
 								<li class="last"><a href="#" onClick="WinMoveDataUNT('700','350','center','<?=$_GET['IdL']?>')" title="Pindah Data KIB (SKPD->SKPD)">Pindah Data KIB (SKPD->SKPD) *</a></li>
 								<li class="last"><a href="#" onClick="WinKunciData('650','450','center','<?=$_GET['IdL']?>')" title="Kunci data aset">Kunci Data Aset</a></li>					

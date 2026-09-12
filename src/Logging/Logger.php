@@ -273,7 +273,7 @@ class Logger
     public static function getLatestLogs(int $maxLines = 50, ?string $date = null): array
     {
         $dateStr = $date !== null ? $date : date('Y-m-d');
-        $logFile = (empty(self::$logDir) ? dirname(__DIR__, 2) . '/logs' : self::$logDir) . '/app-' . $dateStr . '.log';
+        $logFile = self::getLogDirectory() . '/app-' . $dateStr . '.log';
 
         if (!file_exists($logFile)) {
             return [];
@@ -286,4 +286,221 @@ class Logger
 
         return array_slice($lines, -$maxLines);
     }
+
+    /**
+     * Mendapatkan direktori log saat ini.
+     */
+    public static function getLogDirectory(): string
+    {
+        if (empty(self::$logDir)) {
+            self::$logDir = dirname(__DIR__, 2) . '/logs';
+        }
+        return self::$logDir;
+    }
+
+    /**
+     * Mendapatkan daftar tanggal file log yang tersedia (diurutkan dari yang terbaru).
+     *
+     * @return array<int, string>
+     */
+    public static function getAvailableLogDates(): array
+    {
+        $dir = self::getLogDirectory();
+        if (!is_dir($dir)) {
+            return [];
+        }
+
+        $files = glob($dir . '/app-*.log');
+        if ($files === false || empty($files)) {
+            return [];
+        }
+
+        $dates = [];
+        foreach ($files as $file) {
+            $base = basename($file);
+            if (preg_match('/^app-(\d{4}-\d{2}-\d{2})\.log$/', $base, $m)) {
+                $dates[] = $m[1];
+            }
+        }
+
+        rsort($dates);
+        return $dates;
+    }
+
+    /**
+     * Mengambil path file log berdasarkan tanggal yang divalidasi.
+     */
+    public static function getLogFilePath(string $date): ?string
+    {
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
+            return null;
+        }
+
+        $file = self::getLogDirectory() . "/app-{$date}.log";
+        return file_exists($file) ? $file : null;
+    }
+
+    /**
+     * Mem-parse isi file log tanggal tertentu menjadi daftar entri terstruktur.
+     *
+     * @return array{entries: array<int, array<string, mixed>>, stats: array<string, int>, total: int}
+     */
+    public static function parseLogFile(string $date, ?string $levelFilter = null, ?string $search = null, int $limit = 100): array
+    {
+        $stats = [
+            'ALL' => 0,
+            'DATABASE_ERROR' => 0,
+            'FATAL' => 0,
+            'EXCEPTION' => 0,
+            'WARNING' => 0,
+            'INFO' => 0,
+        ];
+
+        $filePath = self::getLogFilePath($date);
+        if ($filePath === null) {
+            return ['entries' => [], 'stats' => $stats, 'total' => 0];
+        }
+
+        $raw = @file_get_contents($filePath);
+        if ($raw === false || trim($raw) === '') {
+            return ['entries' => [], 'stats' => $stats, 'total' => 0];
+        }
+
+        // Pecah berdasarkan pembatas blok log
+        $rawBlocks = explode("================================================================================", $raw);
+        $allEntries = [];
+
+        foreach ($rawBlocks as $block) {
+            $block = trim($block);
+            if (empty($block)) {
+                continue;
+            }
+
+            $entry = [
+                'timestamp'   => '',
+                'level'       => 'INFO',
+                'context'     => '',
+                'ip'          => '',
+                'ref_id'      => '',
+                'message'     => '',
+                'location'    => '',
+                'sql_query'   => '',
+                'stack_trace' => '',
+                'raw'         => $block,
+            ];
+
+            $lines = explode("\n", $block);
+            $readingTrace = false;
+            $traceLines = [];
+
+            foreach ($lines as $line) {
+                $trimmed = trim($line);
+
+                if ($readingTrace) {
+                    $traceLines[] = $line;
+                    continue;
+                }
+
+                // Header line format: [2026-09-12 18:42:53] [LEVEL] [METHOD URI] [IP: 127.0.0.1]
+                if (preg_match('/^\[(.*?)\]\s+\[(.*?)\]\s+\[(.*?)\](?:\s+\[IP:\s+(.*?)\])?/', $trimmed, $m)) {
+                    $entry['timestamp'] = $m[1];
+                    $entry['level']     = strtoupper($m[2]);
+                    $entry['context']   = $m[3];
+                    $entry['ip']        = isset($m[4]) ? $m[4] : '';
+                    continue;
+                }
+
+                if (preg_match('/^Ref ID\s*:\s*#(.*)$/i', $trimmed, $m)) {
+                    $entry['ref_id'] = trim($m[1]);
+                } elseif (preg_match('/^Message\s*:\s*(.*)$/i', $trimmed, $m)) {
+                    $entry['message'] = trim($m[1]);
+                } elseif (preg_match('/^Location\s*:\s*(.*)$/i', $trimmed, $m)) {
+                    $entry['location'] = trim($m[1]);
+                } elseif (preg_match('/^SQL Query\s*:\s*(.*)$/i', $trimmed, $m)) {
+                    $entry['sql_query'] = trim($m[1]);
+                } elseif (stripos($trimmed, 'Stack Trace:') === 0) {
+                    $readingTrace = true;
+                }
+            }
+
+            if (!empty($traceLines)) {
+                $entry['stack_trace'] = trim(implode("\n", $traceLines));
+            }
+
+            // Normalisasi level ke grup statistik
+            $normLevel = $entry['level'];
+            if (strpos($normLevel, 'FATAL') !== false) {
+                $normLevel = 'FATAL';
+            } elseif ($normLevel === 'NOTICE' || $normLevel === 'DEPRECATED') {
+                $normLevel = 'WARNING';
+            }
+
+            $stats['ALL']++;
+            if (isset($stats[$normLevel])) {
+                $stats[$normLevel]++;
+            }
+
+            $allEntries[] = $entry;
+        }
+
+        // Urutkan dari yang terbaru (reverse chronological)
+        $allEntries = array_reverse($allEntries);
+
+        // Filter Level
+        $filtered = [];
+        $levelFilter = $levelFilter !== null ? strtoupper(trim($levelFilter)) : 'ALL';
+        $search = $search !== null ? trim($search) : '';
+
+        foreach ($allEntries as $item) {
+            if ($levelFilter !== 'ALL') {
+                $itemLevel = $item['level'];
+                if ($levelFilter === 'FATAL' && strpos($itemLevel, 'FATAL') === false) {
+                    continue;
+                } elseif ($levelFilter === 'WARNING' && $itemLevel !== 'WARNING' && $itemLevel !== 'NOTICE' && $itemLevel !== 'DEPRECATED') {
+                    continue;
+                } elseif ($levelFilter !== 'FATAL' && $levelFilter !== 'WARNING' && $itemLevel !== $levelFilter) {
+                    continue;
+                }
+            }
+
+            if ($search !== '') {
+                $searchContent = $item['message'] . ' ' . $item['location'] . ' ' . $item['ref_id'] . ' ' . $item['sql_query'] . ' ' . $item['context'] . ' ' . $item['ip'];
+                if (stripos($searchContent, $search) === false) {
+                    continue;
+                }
+            }
+
+            $filtered[] = $item;
+        }
+
+        $totalFiltered = count($filtered);
+        if ($limit > 0 && $totalFiltered > $limit) {
+            $filtered = array_slice($filtered, 0, $limit);
+        }
+
+        return [
+            'entries' => $filtered,
+            'stats'   => $stats,
+            'total'   => $totalFiltered,
+        ];
+    }
+
+    /**
+     * Mengosongkan file log tertentu secara aman.
+     */
+    public static function clearLog(string $date): bool
+    {
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
+            return false;
+        }
+
+        $file = self::getLogDirectory() . "/app-{$date}.log";
+        if (!file_exists($file)) {
+            return true;
+        }
+
+        $res = @file_put_contents($file, '', LOCK_EX);
+        return $res !== false;
+    }
 }
+

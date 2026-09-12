@@ -163,7 +163,20 @@ Sistem membaca mode lingkungan dari konstanta `APP_ENV`.
 
 ## 7. Cara Melihat dan Memeriksa Log Error
 
-### Cara 1: Menggunakan Perintah CLI (Sangat Cepat & Praktis)
+### Cara 1: Menggunakan Web Log Viewer di Panel Admin (Direkomendasikan)
+Administrator dapat membuka langsung dashboard interaktif dari menu panel Admin:
+- **Menu Navigasi**: **Tools $\rightarrow$ Log Error Sistem**
+- **File**: [`admin/Log_Viewer.php`](../admin/Log_Viewer.php)
+- **Fitur Dashboard**:
+  - **Statistik Error Harian**: Total log, Database Error, Fatal, Exception, Warning, Info.
+  - **Filter Tanggal**: Memilih tanggal arsip log yang tersedia.
+  - **Filter Level**: Tombol pill untuk memfilter spesifik level error.
+  - **Live Search**: Pencarian kata kunci, nama file, SQL query, atau **Reference ID** (`#ERR-...`).
+  - **Dark / Light Mode**: Tampilan responsif modern yang nyaman untuk membaca kode/trace.
+  - **Unduh Log**: Tombol download file `.log` mentah langsung dari browser.
+  - **Bersihkan Log**: Mengosongkan file log tanggal terpilih dengan konfirmasi keamanan.
+
+### Cara 2: Menggunakan Perintah CLI Terminal
 Tersedia tool pembaca log di `scripts/view_log.php`. Jalankan perintah berikut di PowerShell atau Command Prompt:
 
 ```powershell
@@ -177,13 +190,13 @@ Tersedia tool pembaca log di `scripts/view_log.php`. Jalankan perintah berikut d
 & "D:\xampp\php\php.exe" scripts/view_log.php 50 2026-09-12
 ```
 
-### Cara 2: Membuka Langsung File Log
+### Cara 3: Membuka Langsung File Log
 Buka file log harian yang diinginkan menggunakan text editor (VS Code, Notepad++, Sublime):
 ```
 d:\project\web\migration-php\logs\app-2026-09-12.log
 ```
 
-### Cara 3: Menggunakan Method PHP di Kode Aplikasi
+### Cara 4: Menggunakan Method PHP di Kode Aplikasi
 Jika Anda ingin menampilkan log di panel dashboard admin:
 ```php
 use App\Logging\Logger;

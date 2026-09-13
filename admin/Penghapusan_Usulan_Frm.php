@@ -13,14 +13,21 @@ require("CheckLogin.php");
 <script type="text/javascript" src="global.js"></script>
 </head>
 <?php
+$IdT  = $_GET['IdT'] ?? '';
+$IdL  = $_GET['IdL'] ?? '';
+$FrmG = $_GET['FrmG'] ?? '';
 extract($_GET);
-$gREF= "PHM.".fGetDate('year').".XXXXXXXX";
-$gHR = fGetDate('mday');
-$gBL = fGetDate('mon');
-$gTH = fGetDate('year');
-$gHRd  = "00";
-$gBLd  = "00";
-$gTHd  = "0000";
+$IdT  = $IdT ?? ($_GET['IdT'] ?? '');
+$IdL  = $IdL ?? ($_GET['IdL'] ?? '');
+$FrmG = $FrmG ?? ($_GET['FrmG'] ?? '');
+
+$gREF = "PHM.".fGetDate('year').".XXXXXXXX";
+$gHR  = fGetDate('mday');
+$gBL  = fGetDate('mon');
+$gTH  = fGetDate('year');
+$gHRd = "00";
+$gBLd = "00";
+$gTHd = "0000";
 $gNO  = "XXXXXXXX/PHM/".fGetDate('year');
 $gNOd = "";
 
@@ -34,53 +41,65 @@ $dSUB = fGlobal("Nm_Sub","ref_sub_unit","Kd_Sub",$gSUB,"=","","");
 $gUPB = substr($SkP,0,18);
 $dUPB = fGlobal("Nm_UPB","ref_upb","Kd_UPB",$gUPB,"=","","");
 $gURA = "";
+
+$gDES = "";
+$dDES = "";
+$gP47 = "";
+$dP47 = "";
+$gTL  = "ALASAN";
+
 if ($IdT)
 {
 	$nSQL= "SELECT Referensi,Kd_UPB,Nomor,Tanggal,Nma_Pengguna,Jab_Pengguna,Nip_Pengguna,Jenis,Dokumen_Nom,Dokumen_Tgl,Uraian,Jenis_Rinci,Jenis_P47 
 	FROM ta_usulan_108 WHERE IDT='$IdT'";
 	$nRs = mysql_query($nSQL) or die(mysql_error());
 	$mRo = mysql_fetch_array($nRs);
-	$gREF = $mRo[0];
-	$gUNT = substr($mRo[1],0,11);
-	$dUNT = fGlobal("Nm_Unit","ref_unit","Kd_Unit",$gUNT,"=","","");
-	$gSUB = substr($mRo[1],0,14);
-	$dSUB = fGlobal("Nm_Sub","ref_sub_unit","Kd_Sub",$gSUB,"=","","");
-	$gUPB = substr($mRo[1],0,18);
-	$dUPB = fGlobal("Nm_UPB","ref_upb","Kd_UPB",$gUPB,"=","","");
-	
-	$gNO  = $mRo[2];
-	
-	$gTG  = $mRo[3];
-	$gTG  = explode("-",$gTG);
-	$gTH  = $gTG[0];
-	$gBL  = $gTG[1];
-	$gHR  = $gTG[2];
-	
-	$gJNS = $mRo[7];
-	$dJNS = fGlobal("Deskripsi","ref_usulan_jenis","Kode",$gJNS,"=","","");
-	$gNOd = $mRo[8];
-	
-	$gTGd = $mRo[9];
-	$gTGd = explode("-",$gTGd);
-	$gTHd = $gTGd[0];
-	$gBLd = $gTGd[1];
-	$gHRd = $gTGd[2];
-	
-	$gURA = $mRo[10];
-	
-	$gDES = $mRo[11];
-	$dDES = fGlobal("Deskripsi","ref_usulan_jenis_desk","Kode",$gDES,"=","","");
-	
-	$gP47 = $mRo[12];
-	if ($gP47=='')
+	if ($mRo)
 	{
-		$gP47=fGlobal("KdP47","ref_usulan_jenis_desk","Kode",$gDES,"=","","");
+		$gREF = $mRo[0];
+		$gUNT = substr($mRo[1],0,11);
+		$dUNT = fGlobal("Nm_Unit","ref_unit","Kd_Unit",$gUNT,"=","","");
+		$gSUB = substr($mRo[1],0,14);
+		$dSUB = fGlobal("Nm_Sub","ref_sub_unit","Kd_Sub",$gSUB,"=","","");
+		$gUPB = substr($mRo[1],0,18);
+		$dUPB = fGlobal("Nm_UPB","ref_upb","Kd_UPB",$gUPB,"=","","");
+		
+		$gNO  = $mRo[2];
+		
+		$gTG  = $mRo[3];
+		$gTG  = explode("-",$gTG);
+		$gTH  = $gTG[0];
+		$gBL  = $gTG[1];
+		$gHR  = $gTG[2];
+		
+		$gJNS = $mRo[7];
+		$dJNS = fGlobal("Deskripsi","ref_usulan_jenis","Kode",$gJNS,"=","","");
+		$gNOd = $mRo[8];
+		
+		$gTGd = $mRo[9];
+		$gTGd = explode("-",$gTGd);
+		$gTHd = $gTGd[0];
+		$gBLd = $gTGd[1];
+		$gHRd = $gTGd[2];
+		
+		$gURA = $mRo[10];
+		
+		$gDES = $mRo[11];
+		$dDES = fGlobal("Deskripsi","ref_usulan_jenis_desk","Kode",$gDES,"=","","");
+		
+		$gP47 = $mRo[12];
+		if ($gP47=='')
+		{
+			$gP47=fGlobal("KdP47","ref_usulan_jenis_desk","Kode",$gDES,"=","","");
+		}
+		$dP47 = fGlobal("Deskripsi","ref_usulan_jenis_47","Kode",$gP47,"=","","");
 	}
-	$dP47 = fGlobal("Deskripsi","ref_usulan_jenis_47","Kode",$gP47,"=","","");
 }
 
-$ColB="0000ff";
-$CeK = fGlobal("IDT","ta_usulan_verifikasi_108","Ref_Usulan",$gREF,"=","","");
+$DisA = "";
+$DisB = "";
+$ColB = "0000ff";
+$CeK  = fGlobal("IDT","ta_usulan_verifikasi_108","Ref_Usulan",$gREF,"=","","");
 if ($CeK){
 	#$DisA="disabled";
 	$DisA="";
@@ -103,7 +122,7 @@ if ($gJNS=='PH') {$gTL="ALASAN";}
 ?>
 <body onload="RefreshDATA('<?=$IdL?>','0')">
 <?php require "FileMenu.php";?>
-<form name="myfrm" method="POST" action="<?="Penghapusan_Usulan_Frm_.php?IdT=".$IdT."&FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>" enctype="multipart/form-data">
+<form name="myfrm" method="POST" action="<?="Penghapusan_Usulan_Frm_.php?IdT=".$IdT."&FrmG=".$FrmG."&IdL=".$IdL?>" enctype="multipart/form-data">
 <input type="hidden" name="fSave" style="width:20px" />
 <input type="hidden" name="fCrT" style="width:20px" />
 <input type="hidden" name="fIdT" style="width:20px" />

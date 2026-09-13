@@ -79,21 +79,77 @@ class DevBar
             return $buffer;
         }
 
+        // Jangan suntikkan jika request adalah AJAX (misal: jQuery .load, $.ajax, fetch, XHR)
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+            return $buffer;
+        }
+
         // Jangan suntikkan jika response bukan HTML (misal: JSON, PDF, Gambar, Unduhan)
         if (!self::isHtmlResponse($buffer)) {
             return $buffer;
         }
 
-        $barHtml = self::renderBarHtml();
-
-        // Cari posisi penyisipan terbaik: tepat sebelum </body> atau </html>
-        if (stripos($buffer, '</body>') !== false) {
-            return preg_replace('/<\/body>/i', $barHtml . '</body>', $buffer, 1);
-        } elseif (stripos($buffer, '</html>') !== false) {
-            return preg_replace('/<\/html>/i', $barHtml . '</html>', $buffer, 1);
-        } else {
-            return $buffer . $barHtml;
+        // Hanya suntikkan jika dokumen memiliki penutup </body> atau </html> (dokumen HTML lengkap, bukan partial/fragment)
+        if (stripos($buffer, '</body>') === false && stripos($buffer, '</html>') === false) {
+            return $buffer;
         }
+
+        try {
+            $barHtml = self::renderBarHtml();
+        } catch (\Throwable $e) {
+            return $buffer;
+        }
+
+        // Cari posisi penyisipan terbaik: tepat sebelum kemunculan TERAKHIR </body> atau </html>
+        // yang TIDAK berada di dalam blok <script> atau <style> (menghindari string JS/template)
+        $bodyPos = self::findLastValidTagPosition($buffer, '</body>');
+        if ($bodyPos !== false) {
+            return substr_replace($buffer, $barHtml . '</body>', $bodyPos, strlen('</body>'));
+        }
+
+        $htmlPos = self::findLastValidTagPosition($buffer, '</html>');
+        if ($htmlPos !== false) {
+            return substr_replace($buffer, $barHtml . '</html>', $htmlPos, strlen('</html>'));
+        }
+
+        return $buffer;
+    }
+
+    /**
+     * Mencari posisi kemunculan tag penutup terakhir yang valid (di luar blok <script> dan <style>).
+     */
+    private static function findLastValidTagPosition(string $buffer, string $tag): int|false
+    {
+        $offset = strlen($buffer);
+
+        while (($pos = strripos(substr($buffer, 0, $offset), $tag)) !== false) {
+            if (!self::isInsideScriptOrStyle($buffer, $pos)) {
+                return $pos;
+            }
+            $offset = $pos;
+            if ($offset <= 0) {
+                break;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Memeriksa apakah posisi tertentu ($pos) berada di dalam blok <script>...</script> atau <style>...</style>.
+     */
+    private static function isInsideScriptOrStyle(string $buffer, int $pos): bool
+    {
+        if (preg_match_all('/<(script|style)\b[^>]*>.*?<\/\1>/is', $buffer, $matches, PREG_OFFSET_CAPTURE)) {
+            foreach ($matches[0] as $match) {
+                $start = (int)$match[1];
+                $end = $start + strlen($match[0]);
+                if ($pos >= $start && $pos < $end) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -121,11 +177,9 @@ class DevBar
             }
         }
 
-        // Cek indikator struktur tag HTML
+        // Cek indikator struktur tag HTML dokumen
         return stripos($buffer, '<html') !== false ||
                stripos($buffer, '<body') !== false ||
-               stripos($buffer, '<table') !== false ||
-               stripos($buffer, '<div') !== false ||
                stripos($buffer, '<!doctype') !== false;
     }
 
@@ -177,13 +231,36 @@ class DevBar
 
         $getJson = htmlspecialchars(json_encode($getParams, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         $postJson = htmlspecialchars(json_encode($postParams, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-        $incListJson = htmlspecialchars(json_encode($cleanIncludes, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
-        ob_start();
-        ?>
+        $safeFileName = htmlspecialchars($fileName);
+        $slashFileName = addslashes($fileName);
+        $safeRelPath = htmlspecialchars($relPath);
+        $slashRelPath = addslashes($relPath);
+        $safeScriptPath = htmlspecialchars($scriptPath);
+        $slashScriptPath = addslashes($scriptPath);
+        $safeMethod = htmlspecialchars($getMethod);
+        $safeUri = htmlspecialchars($_SERVER['REQUEST_URI'] ?? '');
+        $safeAppEnv = htmlspecialchars(defined('APP_ENV') ? APP_ENV : 'development');
+        $phpVersion = PHP_VERSION;
+        $phpSapi = php_sapi_name();
+        $logViewerUrl = htmlspecialchars(strpos($_SERVER['REQUEST_URI'] ?? '', 'admin/') !== false ? 'Log_Viewer.php' : 'admin/Log_Viewer.php');
+        $reqCount = count($getParams) + count($postParams);
+        $getCount = count($getParams);
+        $postCount = count($postParams);
+
+        $includesHtml = '';
+        foreach ($cleanIncludes as $idx => $incFile) {
+            $itemNum = $idx + 1;
+            $safeInc = htmlspecialchars($incFile);
+            $includesHtml .= "                                <div class=\"devbar-list-item\">\n";
+            $includesHtml .= "                                    <span>{$itemNum}. {$safeInc}</span>\n";
+            $includesHtml .= "                                </div>\n";
+        }
+
+        return <<<HTML
         <!-- SIMBADA DEVELOPER MODE FILE INSPECTOR -->
         <style>
-            #<?= $uniqueId ?>_root {
+            #{$uniqueId}_root {
                 all: initial;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-size: 11px;
@@ -197,10 +274,10 @@ class DevBar
                 direction: ltr;
                 text-align: left;
             }
-            #<?= $uniqueId ?>_root * {
+            #{$uniqueId}_root * {
                 box-sizing: border-box;
             }
-            #<?= $uniqueId ?>_pill {
+            #{$uniqueId}_pill {
                 display: inline-flex;
                 align-items: center;
                 gap: 6px;
@@ -215,18 +292,18 @@ class DevBar
                 user-select: none;
                 transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             }
-            #<?= $uniqueId ?>_pill:hover {
+            #{$uniqueId}_pill:hover {
                 background: rgba(30, 41, 59, 0.98);
                 border-color: #3b82f6;
                 transform: translateY(-2px);
                 box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
             }
-            #<?= $uniqueId ?>_pill .devbar-icon {
+            #{$uniqueId}_pill .devbar-icon {
                 color: #38bdf8;
                 font-weight: bold;
                 font-size: 12px;
             }
-            #<?= $uniqueId ?>_pill .devbar-name {
+            #{$uniqueId}_pill .devbar-name {
                 font-weight: 700;
                 color: #ffffff;
                 max-width: 220px;
@@ -234,12 +311,12 @@ class DevBar
                 text-overflow: ellipsis;
                 white-space: nowrap;
             }
-            #<?= $uniqueId ?>_pill .devbar-meta {
+            #{$uniqueId}_pill .devbar-meta {
                 color: #94a3b8;
                 font-size: 10px;
                 font-family: monospace;
             }
-            #<?= $uniqueId ?>_drawer {
+            #{$uniqueId}_drawer {
                 display: none;
                 position: fixed;
                 bottom: 40px;
@@ -255,7 +332,7 @@ class DevBar
                 overflow: hidden;
                 color: #f1f5f9;
             }
-            #<?= $uniqueId ?>_drawer.show {
+            #{$uniqueId}_drawer.show {
                 display: flex;
             }
             .devbar-header {
@@ -398,75 +475,75 @@ class DevBar
 
             /* Penyesuaian khusus untuk Frame Kecil (misal frame Top 45px / Bot 30px) */
             @media (max-height: 65px) {
-                #<?= $uniqueId ?>_root {
+                #{$uniqueId}_root {
                     bottom: 2px;
                     right: 4px;
                 }
-                #<?= $uniqueId ?>_pill {
+                #{$uniqueId}_pill {
                     padding: 2px 6px;
                     font-size: 9px;
                 }
-                #<?= $uniqueId ?>_pill .devbar-meta {
+                #{$uniqueId}_pill .devbar-meta {
                     display: none;
                 }
-                #<?= $uniqueId ?>_pill .devbar-name {
+                #{$uniqueId}_pill .devbar-name {
                     max-width: 140px;
                 }
             }
         </style>
 
-        <div id="<?= $uniqueId ?>_root">
+        <div id="{$uniqueId}_root">
             <!-- Collapsed Pill Badge -->
-            <div id="<?= $uniqueId ?>_pill" title="Developer Mode: Klik untuk rincian file & lingkungan" onclick="devbarToggleDrawer_<?= $uniqueId ?>()">
+            <div id="{$uniqueId}_pill" title="Developer Mode: Klik untuk rincian file & lingkungan" onclick="devbarToggleDrawer_{$uniqueId}()">
                 <span class="devbar-icon">⚡</span>
-                <span class="devbar-name"><?= htmlspecialchars($relPath) ?></span>
-                <span class="devbar-meta"><?= $execTime ?>ms</span>
+                <span class="devbar-name">{$safeRelPath}</span>
+                <span class="devbar-meta">{$execTime}ms</span>
             </div>
 
             <!-- Expanded Drawer Panel -->
-            <div id="<?= $uniqueId ?>_drawer">
+            <div id="{$uniqueId}_drawer">
                 <div class="devbar-header">
                     <h4><span>⚡</span> Simbada Developer Inspector</h4>
-                    <button class="devbar-header-close" onclick="devbarToggleDrawer_<?= $uniqueId ?>()">&times;</button>
+                    <button class="devbar-header-close" onclick="devbarToggleDrawer_{$uniqueId}()">&times;</button>
                 </div>
 
                 <div class="devbar-tabs">
-                    <button class="devbar-tab active" onclick="devbarSwitchTab_<?= $uniqueId ?>('overview')">File & Path</button>
-                    <button class="devbar-tab" onclick="devbarSwitchTab_<?= $uniqueId ?>('includes')">Includes (<?= $incCount ?>)</button>
-                    <button class="devbar-tab" onclick="devbarSwitchTab_<?= $uniqueId ?>('request')">Request (<?= count($getParams) + count($postParams) ?>)</button>
-                    <button class="devbar-tab" onclick="devbarSwitchTab_<?= $uniqueId ?>('system')">Sistem</button>
+                    <button class="devbar-tab active" onclick="devbarSwitchTab_{$uniqueId}('overview')">File & Path</button>
+                    <button class="devbar-tab" onclick="devbarSwitchTab_{$uniqueId}('includes')">Includes ({$incCount})</button>
+                    <button class="devbar-tab" onclick="devbarSwitchTab_{$uniqueId}('request')">Request ({$reqCount})</button>
+                    <button class="devbar-tab" onclick="devbarSwitchTab_{$uniqueId}('system')">Sistem</button>
                 </div>
 
                 <div class="devbar-content">
                     <!-- Tab 1: Overview File & Path -->
-                    <div id="<?= $uniqueId ?>_tab_overview" class="devbar-tab-panel active">
+                    <div id="{$uniqueId}_tab_overview" class="devbar-tab-panel active">
                         <div class="devbar-prop">
                             <div class="devbar-prop-label">File Script Utama</div>
                             <div class="devbar-prop-val">
-                                <span style="font-weight:bold; color:#38bdf8;"><?= htmlspecialchars($fileName) ?></span>
-                                <button class="devbar-btn-copy" onclick="devbarCopy_<?= $uniqueId ?>('<?= addslashes($fileName) ?>')">Salin</button>
+                                <span style="font-weight:bold; color:#38bdf8;">{$safeFileName}</span>
+                                <button class="devbar-btn-copy" onclick="devbarCopy_{$uniqueId}('{$slashFileName}')">Salin</button>
                             </div>
                         </div>
 
                         <div class="devbar-prop">
                             <div class="devbar-prop-label">Path Relatif Workspace</div>
                             <div class="devbar-prop-val">
-                                <span><?= htmlspecialchars($relPath) ?></span>
-                                <button class="devbar-btn-copy" onclick="devbarCopy_<?= $uniqueId ?>('<?= addslashes($relPath) ?>')">Salin</button>
+                                <span>{$safeRelPath}</span>
+                                <button class="devbar-btn-copy" onclick="devbarCopy_{$uniqueId}('{$slashRelPath}')">Salin</button>
                             </div>
                         </div>
 
                         <div class="devbar-prop">
                             <div class="devbar-prop-label">Path Lengkap di Server</div>
                             <div class="devbar-prop-val">
-                                <span style="font-size:10px;"><?= htmlspecialchars($scriptPath) ?></span>
-                                <button class="devbar-btn-copy" onclick="devbarCopy_<?= $uniqueId ?>('<?= addslashes($scriptPath) ?>')">Salin</button>
+                                <span style="font-size:10px;">{$safeScriptPath}</span>
+                                <button class="devbar-btn-copy" onclick="devbarCopy_{$uniqueId}('{$slashScriptPath}')">Salin</button>
                             </div>
                         </div>
 
                         <div class="devbar-prop">
                             <div class="devbar-prop-label">Konteks Tampilan (Frame Detector)</div>
-                            <div class="devbar-prop-val" id="<?= $uniqueId ?>_frame_status">
+                            <div class="devbar-prop-val" id="{$uniqueId}_frame_status">
                                 Mendeteksi konteks frame...
                             </div>
                         </div>
@@ -474,52 +551,48 @@ class DevBar
                         <div class="devbar-prop" style="display:flex; gap:10px;">
                             <div style="flex:1;">
                                 <div class="devbar-prop-label">Waktu Eksekusi</div>
-                                <div class="devbar-prop-val" style="color:#4ade80;"><?= $execTime ?> ms</div>
+                                <div class="devbar-prop-val" style="color:#4ade80;">{$execTime} ms</div>
                             </div>
                             <div style="flex:1;">
                                 <div class="devbar-prop-label">Penggunaan Memori</div>
-                                <div class="devbar-prop-val" style="color:#facc15;"><?= $peakMem ?> MB</div>
+                                <div class="devbar-prop-val" style="color:#facc15;">{$peakMem} MB</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Tab 2: Included Files -->
-                    <div id="<?= $uniqueId ?>_tab_includes" class="devbar-tab-panel">
-                        <div class="devbar-prop-label" style="margin-bottom:6px;">Daftar File yang Di-include (<?= $incCount ?> File):</div>
+                    <div id="{$uniqueId}_tab_includes" class="devbar-tab-panel">
+                        <div class="devbar-prop-label" style="margin-bottom:6px;">Daftar File yang Di-include ({$incCount} File):</div>
                         <div class="devbar-code" style="max-height:240px;">
-                            <?php foreach ($cleanIncludes as $idx => $incFile): ?>
-                                <div class="devbar-list-item">
-                                    <span><?= ($idx + 1) ?>. <?= htmlspecialchars($incFile) ?></span>
-                                </div>
-                            <?php endforeach; ?>
+{$includesHtml}
                         </div>
                     </div>
 
                     <!-- Tab 3: Request Params -->
-                    <div id="<?= $uniqueId ?>_tab_request" class="devbar-tab-panel">
+                    <div id="{$uniqueId}_tab_request" class="devbar-tab-panel">
                         <div class="devbar-prop">
                             <div class="devbar-prop-label">Method & URI</div>
-                            <div class="devbar-prop-val"><?= htmlspecialchars($getMethod) ?> <?= htmlspecialchars($_SERVER['REQUEST_URI'] ?? '') ?></div>
+                            <div class="devbar-prop-val">{$safeMethod} {$safeUri}</div>
                         </div>
                         <div class="devbar-prop">
-                            <div class="devbar-prop-label">GET Parameters (<?= count($getParams) ?>)</div>
-                            <pre class="devbar-code"><?= $getJson ?></pre>
+                            <div class="devbar-prop-label">GET Parameters ({$getCount})</div>
+                            <pre class="devbar-code">{$getJson}</pre>
                         </div>
                         <div class="devbar-prop">
-                            <div class="devbar-prop-label">POST Parameters (<?= count($postParams) ?>)</div>
-                            <pre class="devbar-code"><?= $postJson ?></pre>
+                            <div class="devbar-prop-label">POST Parameters ({$postCount})</div>
+                            <pre class="devbar-code">{$postJson}</pre>
                         </div>
                     </div>
 
                     <!-- Tab 4: System Info -->
-                    <div id="<?= $uniqueId ?>_tab_system" class="devbar-tab-panel">
+                    <div id="{$uniqueId}_tab_system" class="devbar-tab-panel">
                         <div class="devbar-prop">
                             <div class="devbar-prop-label">Versi PHP & SAPI</div>
-                            <div class="devbar-prop-val">PHP <?= PHP_VERSION ?> (<?= php_sapi_name() ?>)</div>
+                            <div class="devbar-prop-val">PHP {$phpVersion} ({$phpSapi})</div>
                         </div>
                         <div class="devbar-prop">
                             <div class="devbar-prop-label">Mode Lingkungan</div>
-                            <div class="devbar-prop-val">APP_ENV = <?= htmlspecialchars(defined('APP_ENV') ? APP_ENV : 'development') ?></div>
+                            <div class="devbar-prop-val">APP_ENV = {$safeAppEnv}</div>
                         </div>
                         <div class="devbar-prop">
                             <div class="devbar-prop-label">Pencegat Database (mysql_adapter)</div>
@@ -527,10 +600,10 @@ class DevBar
                         </div>
 
                         <div class="devbar-actions-row">
-                            <a href="<?= htmlspecialchars(strpos($_SERVER['REQUEST_URI'] ?? '', 'admin/') !== false ? 'Log_Viewer.php' : 'admin/Log_Viewer.php') ?>" class="devbar-btn-action" target="_blank">
+                            <a href="{$logViewerUrl}" class="devbar-btn-action" target="_blank">
                                 🛡️ Buka Log Error
                             </a>
-                            <button class="devbar-btn-action danger" onclick="devbarDisableMode_<?= $uniqueId ?>()">
+                            <button class="devbar-btn-action danger" onclick="devbarDisableMode_{$uniqueId}()">
                                 🛑 Matikan DevBar
                             </button>
                         </div>
@@ -542,26 +615,26 @@ class DevBar
         <script>
             (function() {
                 var isInsideFrame = (window !== window.top);
-                var frameEl = document.getElementById('<?= $uniqueId ?>_frame_status');
+                var frameEl = document.getElementById('{$uniqueId}_frame_status');
                 if (frameEl) {
                     if (isInsideFrame) {
-                        var frameName = window.name ? ` (name="${window.name}")` : '';
-                        frameEl.innerHTML = `<span style="color:#38bdf8;">🖼️ Di dalam HTML Frame${frameName}</span>`;
+                        var frameName = window.name ? ' (name="' + window.name + '")' : '';
+                        frameEl.innerHTML = '<span style="color:#38bdf8;">🖼️ Di dalam HTML Frame' + frameName + '</span>';
                     } else {
-                        frameEl.innerHTML = `<span style="color:#4ade80;">🖥️ Jendela Utama (Top Window)</span>`;
+                        frameEl.innerHTML = '<span style="color:#4ade80;">🖥️ Jendela Utama (Top Window)</span>';
                     }
                 }
             })();
 
-            function devbarToggleDrawer_<?= $uniqueId ?>() {
-                var drawer = document.getElementById('<?= $uniqueId ?>_drawer');
+            function devbarToggleDrawer_{$uniqueId}() {
+                var drawer = document.getElementById('{$uniqueId}_drawer');
                 if (drawer) {
                     drawer.classList.toggle('show');
                 }
             }
 
-            function devbarSwitchTab_<?= $uniqueId ?>(tabName) {
-                var root = document.getElementById('<?= $uniqueId ?>_root');
+            function devbarSwitchTab_{$uniqueId}(tabName) {
+                var root = document.getElementById('{$uniqueId}_root');
                 if (!root) return;
                 root.querySelectorAll('.devbar-tab').forEach(function(el) {
                     el.classList.remove('active');
@@ -571,11 +644,11 @@ class DevBar
                 });
                 var activeTabBtn = event.target;
                 if (activeTabBtn) activeTabBtn.classList.add('active');
-                var panel = document.getElementById('<?= $uniqueId ?>_tab_' + tabName);
+                var panel = document.getElementById('{$uniqueId}_tab_' + tabName);
                 if (panel) panel.classList.add('active');
             }
 
-            function devbarCopy_<?= $uniqueId ?>(text) {
+            function devbarCopy_{$uniqueId}(text) {
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(text).then(function() {
                         alert('Tersalin ke clipboard: ' + text);
@@ -591,7 +664,7 @@ class DevBar
                 }
             }
 
-            function devbarDisableMode_<?= $uniqueId ?>() {
+            function devbarDisableMode_{$uniqueId}() {
                 if (confirm('Matikan Developer Mode? DevBar tidak akan ditampilkan lagi sampai Anda mengaktifkannya kembali via ?dev_mode=1.')) {
                     document.cookie = 'simbada_dev_mode=0; path=/; max-age=0';
                     window.location.href = window.location.pathname + (window.location.search ? window.location.search + '&dev_mode=0' : '?dev_mode=0');
@@ -599,7 +672,6 @@ class DevBar
             }
         </script>
         <!-- END SIMBADA DEVELOPER MODE FILE INSPECTOR -->
-        <?php
-        return (string)ob_get_clean();
+HTML;
     }
 }

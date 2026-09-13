@@ -53,4 +53,13 @@ assert(!empty($rendered), "Output renderBarHtml tidak boleh kosong");
 assert(strpos($rendered, 'devbar_') !== false, "Elemen harus memiliki unique identifier yang terisolasi");
 echo "[PASS] Test 6: renderBarHtml menghasilkan markup CSS & JS yang terisolasi.\n";
 
-echo "\n>>> SELURUH 6 PENGUJIAN DEVBAR BERHASIL 100% <<<\n";
+// 7. Uji Anti-Leak: JS String Literal yang memuat </body> atau </html>
+$jsHtml = "<html><head><script>var txt = '<html><body>popup</body></html>'; function test() { alert('ok'); }</script></head><body><h1>Main Page</h1></body></html>";
+$resJsHtml = DevBar::handleBuffer($jsHtml);
+assert(strpos($resJsHtml, "function test() { alert('ok'); }</script>") !== false, "Script tag tidak boleh terputus oleh DevBar!");
+$scriptEndPos = strpos($resJsHtml, '</script>');
+$devBarPos = strpos($resJsHtml, 'SIMBADA DEVELOPER MODE FILE INSPECTOR');
+assert($devBarPos > $scriptEndPos, "DevBar HARUS disuntikkan setelah penutup </script>, bukan di dalam string script!");
+echo "[PASS] Test 7: Anti-Leak berhasil, tag </body> di dalam script/style diabaikan.\n";
+
+echo "\n>>> SELURUH 7 PENGUJIAN DEVBAR BERHASIL 100% <<<\n";

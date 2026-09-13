@@ -28,6 +28,7 @@ if (isset($_GET['gFin'])) {$gFin  = $_GET['gFin'];} else {$gFin  ="";}
 
 if (isset($_GET['gExt'])) {$gExt  = $_GET['gExt'];} else {$gExt  ="N";}
 if (isset($_GET['eMuT'])) {$eMuT  = $_GET['eMuT'];} else {$eMuT  ="";}
+if (isset($_GET['gMuT'])) {$gMuT  = $_GET['gMuT'];} else {$gMuT  ="";}
 
 if ($gMuT!=""){$tMuT="AND Ref_Mutasi<>''";} else {$tMuT="";}
 

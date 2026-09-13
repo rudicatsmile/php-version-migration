@@ -70,6 +70,11 @@ if (isset($_GET['gExt'])) {
 } else {
 	$gExt  = "N";
 }
+if (isset($_GET['gKdBar'])) {
+	$gKdBar = $_GET['gKdBar'];
+} else {
+	$gKdBar = "";
+}
 if ($gKdBar != "") {
 	if ($gKdBar == "All") {
 		$tKdBar = "";

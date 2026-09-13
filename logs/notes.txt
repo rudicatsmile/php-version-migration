@@ -1,0 +1,12 @@
+1. Field ta_user.User_Sekolah
+2. Warning tidak  Boleh Dilewatkan atau Wajib Diperbaiki
+    Alasan teknis:
+
+        1. Perubahan Semantik di PHP 8.x / 8.4:
+            - Pada PHP 5.6 dan 7.x, pemanggilan variabel yang belum dideklarasikan hanya memicu E_NOTICE.
+            - Di PHP 8.0 ke atas hingga PHP 8.4, tingkat keparahannya dinaikkan menjadi E_WARNING.
+        2. Potensi Kerusakan UI dan HTTP Header:
+            - Jika display_errors = On (atau diaktifkan saat debugging), teks peringatan PHP akan langsung tercetak ke output HTML. Hal ini merusak tata letak tag <input>/<form>, bahkan menyebabkan error fatal Cannot modify header information - headers already sent pada proses redirect.
+        3. Pencemaran File Log (Log Pollution)
+        4. Kepastian Logika Kontrol Tombol
+3. 

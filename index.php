@@ -14,7 +14,6 @@ date_default_timezone_set('Asia/Jakarta');
 <link rel="stylesheet" type="text/css" href="css/style.css" >
 <link rel="stylesheet" type="text/css" href="css/dropdown.css">
 <link rel="stylesheet" type="text/css" href="css/display.css">
-<script type="text/javascript" src="js/jquery-1.3.2.min"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/dropdown.js"></script>
 <script type="text/javascript" src="js/slideshow.js"></script>

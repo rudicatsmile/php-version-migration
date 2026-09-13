@@ -85,6 +85,18 @@ if (isset($_GET['eMuT'])) {
 	$eMuT = "";
 }
 
+if (isset($_GET['gMuT'])) {
+	$gMuT = $_GET['gMuT'];
+} else {
+	$gMuT = "";
+}
+
+if (isset($_GET['gKdBar'])) {
+	$gKdBar = $_GET['gKdBar'];
+} else {
+	$gKdBar = "";
+}
+
 if ($gMuT != "") {
 	$tMuT = "AND Ref_Mutasi<>''";
 } else {
@@ -547,7 +559,7 @@ $gRf = "ALT";
 			if ($gSub == "All") {
 				$zUpb = $zUnt . ".%.%";
 			}
-			if ($gRua == "All") {
+			if ($gRua == "All" || $gRua == "" || !isset($zRua)) {
 				$zRua = "%";
 			}
 			if ($gExt == "All") {

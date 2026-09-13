@@ -5,40 +5,50 @@ $data = array();
 extract($_GET);
 extract($_POST);
 
-if ($CrT=='Img'){
-	$file_name = $_FILES['imgfile']['name']; 		//nama file (tanpa path)
-	$tmp_name  = $_FILES['imgfile']['tmp_name']; 	//nama local temp file di server
-	$file_size = $_FILES['imgfile']['size']; 		//ukuran file (dalam bytes)
-	$file_type = $_FILES['imgfile']['type']; 		//tipe filenya (langsung detect MIMEnya)
-	$TbL='tb_lembar_kerja_foto_denah';
+$CrT = $CrT ?? ($_GET['CrT'] ?? ($_POST['CrT'] ?? ''));
+$IdT = $IdT ?? ($_GET['IdT'] ?? ($_POST['IdT'] ?? ''));
+$ReO = $ReO ?? ($_GET['ReO'] ?? ($_POST['ReO'] ?? ''));
+$IdL = $IdL ?? ($_GET['IdL'] ?? ($_POST['IdL'] ?? ''));
+
+if ($CrT == 'Img') {
+	$fileInput = $_FILES['imgfile'] ?? null;
+	$TbL = 'tb_lembar_kerja_foto_denah';
+	$targetDir = "../simandor/lki_foto/";
+} else {
+	$fileInput = $_FILES['imgfile2'] ?? null;
+	$TbL = 'tb_lembar_kerja_dokumen';
+	$targetDir = "../simandor/lki_dokumen/";
 }
-else{
-	$file_name = $_FILES['imgfile2']['name']; 		//nama file (tanpa path)
-	$tmp_name  = $_FILES['imgfile2']['tmp_name']; 	//nama local temp file di server
-	$file_size = $_FILES['imgfile2']['size']; 		//ukuran file (dalam bytes)
-	$file_type = $_FILES['imgfile2']['type']; 		//tipe filenya (langsung detect MIMEnya)
-	$TbL='tb_lembar_kerja_dokumen';
+
+if ($fileInput && isset($fileInput['error']) && $fileInput['error'] === UPLOAD_ERR_OK) {
+	if (!is_dir($targetDir)) {
+		@mkdir($targetDir, 0755, true);
+	}
+
+	$orig_name  = basename($fileInput['name']);
+	$clean_name = preg_replace('/[^a-zA-Z0-9_.-]/', '_', $orig_name);
+	$tmp_name   = $fileInput['tmp_name'];
+	$file_size  = (int)$fileInput['size'];
+	$file_type  = $fileInput['type'] ?? 'application/octet-stream';
+
+	$eRf = fGlobal("Referensi", "tb_lembar_kerja_belum_tercatat", "IDT", $IdT, "=", "", "");
+	$eRg = '';
+	$eUp = fGlobal("KdUPB", "tb_lembar_kerja_belum_tercatat", "IDT", $IdT, "=", "", "");
+
+	$SQ = "INSERT INTO $TbL SET 
+	Referensi='".$eRf."',
+	RefGroup='".$eRg."',
+	KdUPB='".$eUp."',
+	file_content='', 
+	file_name='".$clean_name."', 
+	file_type='".$file_type."', 
+	file_size='".$file_size."'";
+	$rs = mysql_query($SQ);
+	$newIDT = mysql_insert_id();
+
+	$destFile = $targetDir . $newIDT . "xyz" . $clean_name;
+	move_uploaded_file($tmp_name, $destFile);
 }
-
-$fp = fopen($tmp_name, 'r'); 					//open file (read-only, binary)
-$file_content = fread($fp, $file_size) or die("Tidak dapat membaca source file..!!"); // read file
-$file_content = mysql_real_escape_string($file_content) or die("Tidak dapat membaca source file..!!"); // parse image ke string
-fclose($fp);
-
-$eRf = fGlobal("Referensi","tb_lembar_kerja_belum_tercatat","IDT",$IdT,"=","","");
-$eRg = '';
-$eUp = fGlobal("KdUPB","tb_lembar_kerja_belum_tercatat","IDT",$IdT,"=","","");
-
-$SQ = "INSERT INTO $TbL SET 
-Referensi='".$eRf."',
-RefGroup='".$eRg."',
-KdUPB='".$eUp."',
-file_content='".$file_content."', 
-file_name='".$file_name."', 
-file_type='".$file_type."', 
-file_size='".$file_size."'";
-$rs = mysql_query($SQ);
-
 ?>
 <script languange="javascript">
 NewAset('refr','<?=$ReO?>','<?=$IdT?>','<?=$IdL?>');

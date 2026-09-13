@@ -1,16 +1,33 @@
 <?php
 require('Connection.php');
 require('FileFunction.php');
-extract($_GET);
+$CrT  = $CrT ?? ($_GET['CrT'] ?? '');
+$rIdT = $rIdT ?? ($_GET['rIdT'] ?? '');
+$AsT  = $AsT ?? ($_GET['AsT'] ?? '');
+$ReO  = $ReO ?? ($_GET['ReO'] ?? '');
+$IdT  = $IdT ?? ($_GET['IdT'] ?? '');
+$IdL  = $IdL ?? ($_GET['IdL'] ?? '');
 
-if ($CrT=='Img')
+if ($CrT == 'Img')
 {
-	$SQ = "DELETE FROM tb_lembar_kerja_foto_denah WHERE IDT='".$rIdT."'";
-	$rs = mysql_query($SQ);
+	$TbL = "tb_lembar_kerja_foto_denah";
+	$targetDir = "../simandor/lki_foto/";
 }
 else
 {
-	$SQ = "DELETE FROM tb_lembar_kerja_dokumen WHERE IDT='".$rIdT."'";
+	$TbL = "tb_lembar_kerja_dokumen";
+	$targetDir = "../simandor/lki_dokumen/";
+}
+
+if (!empty($rIdT)) {
+	$oldFile = fGlobal("file_name", $TbL, "IDT", $rIdT, "=", "", "");
+	if ($oldFile) {
+		$f1 = $targetDir . $rIdT . "xyz" . $oldFile;
+		$f2 = $targetDir . $oldFile;
+		if (file_exists($f1)) { @unlink($f1); }
+		if (file_exists($f2)) { @unlink($f2); }
+	}
+	$SQ = "DELETE FROM $TbL WHERE IDT='".$rIdT."'";
 	$rs = mysql_query($SQ);
 }
 ?>

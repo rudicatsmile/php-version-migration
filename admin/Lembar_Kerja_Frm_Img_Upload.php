@@ -26,11 +26,6 @@ else
 	$FbR='upload_pdf';
 }
 
-$fp = fopen($tmp_name, 'r'); 					//open file (read-only, binary)
-$file_content = fread($fp, $file_size) or die("Tidak dapat membaca source file..!!"); // read file
-$file_content = mysql_real_escape_string($file_content) or die("Tidak dapat membaca source file..!!"); // parse image ke string
-fclose($fp);
-
 $arr = array('png','jpg','pdf');
 $fel = explode('.', $file_name); 
 $eks = strtolower(end($fel));

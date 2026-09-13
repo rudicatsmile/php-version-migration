@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Simbada HST</title>
+
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
+
 <LINK REL="SHORTCUT ICON" HREF="../css/icon/icon.ico">
 </head>
 <?php

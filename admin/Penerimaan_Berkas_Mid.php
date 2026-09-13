@@ -70,6 +70,12 @@ $mSKD = "";
 $nSKD = "";
 $nTHN = $tTbl ?? date('Y');
 $nAGG = $uTbl ?? '0';
+
+$gIdTX = '';
+$xIdT  = '';
+$gRf30 = '';
+$gCrP  = '';
+$gTRM  = '';
 if ($gIdT)
 {
 	$nSQ = "SELECT * FROM ta_penerimaan_berkas WHERE IDT='$gIdT'";
@@ -236,13 +242,13 @@ if ($gPOS=="KDP") {
     <tr height="20">
       <td>&nbsp;</td>
       <td>UNIT KERJA</td>
-      <td colspan="2"><input name="f01" type="text" readonly value="<?=$gUnt." : ".strtoupper($mUnt)?>" style="width:600px; border: 1px solid #C0C0C0; padding-left: 1px; padding-right: 1px; padding-top: 1px; padding-bottom: 1px" /></td>
+      <td colspan="2"><input name="f01" type="text" readonly value="<?=$gUnt." : ".strtoupper((string)$mUnt)?>" style="width:600px; border: 1px solid #C0C0C0; padding-left: 1px; padding-right: 1px; padding-top: 1px; padding-bottom: 1px" /></td>
     </tr>
     <tr height="20">
       <td>&nbsp;</td>
       <td>PERUNTUKAN</td>
       <td colspan="2">
-	  <?php if ($gIdTX=='') {?>
+	  <?php if (($gIdTX ?? '') == '') {?>
 	  <select name="fUT" id="fUT" style="width:605px; border: 1px solid #C0C0C0; padding-left: 1px; padding-right: 1px; padding-top: 1px; padding-bottom: 1px">
         <option value="">None</option>
         <?php
@@ -257,7 +263,7 @@ if ($gPOS=="KDP") {
 				$sel ="selected";
 				$zPB = $mRo[0];
 			}
-			echo '<option '.$sel.' value="'.$mRo[0].'">'.$mRo[0]." : ".strtoupper(fViewLimit($mRo[1],50)).'</option>';
+			echo '<option '.$sel.' value="'.$mRo[0].'">'.$mRo[0]." : ".strtoupper((string)fViewLimit($mRo[1],50)).'</option>';
 		}
 	  ?>
       </select>
@@ -278,7 +284,7 @@ if ($gPOS=="KDP") {
     <!--tr height="25">
       <td>&nbsp;</td>
       <td>UNIT KERJA</td>
-      <td colspan="2"><input name="f01" type="text" readonly value="<?=$gUnt." : ".strtoupper($mUnt)?>" style="width:600px; border: 1px solid #C0C0C0; padding-left: 1px; padding-right: 1px; padding-top: 1px; padding-bottom: 1px" /></td>
+      <td colspan="2"><input name="f01" type="text" readonly value="<?=$gUnt." : ".strtoupper((string)$mUnt)?>" style="width:600px; border: 1px solid #C0C0C0; padding-left: 1px; padding-right: 1px; padding-top: 1px; padding-bottom: 1px" /></td>
     </tr-->
     <tr height="25">
       <td>&nbsp;</td>
@@ -433,7 +439,7 @@ if ($gPOS=="KDP") {
       <td>&nbsp;</td>
       <td>SUMBER DANA</td>
       <td colspan="2">
-	  <?php if ($xIdT!='') {?>
+	  <?php if (($xIdT ?? '') != '') {?>
 	  <input name="fDND" type="text" readonly value="<?=$gDN." : ".strtoupper($mDN)?>" style="width:600px; border: 1px solid #C0C0C0; padding-left: 1px; padding-right: 1px; padding-top: 1px; padding-bottom: 1px" />
 	  <input name="fDN" type="hidden" value="<?=$gDN?>" style="width:600px; border: 1px solid #C0C0C0; padding-left: 1px; padding-right: 1px; padding-top: 1px; padding-bottom: 1px" />
 	  <?php } else {?>
@@ -741,8 +747,9 @@ if ($gPOS=="KDP") {
 		  <td style="font-weight:bold; color:#0066CC"><label><input name="fPOS" type="radio" value="KDP" <?=$gA2?> />&nbsp;KDP</label></td>
         </tr>
 	  </table>	  </td>
-    </tr-->
-    <!--tr height="25">
+    </tr>
+    <?php /*
+    <tr height="25">
       <td>&nbsp;</td>
       <td>LINK DATA (REFERENSI)</td>
       <td>
@@ -752,12 +759,13 @@ if ($gPOS=="KDP") {
 	      <input name="fRf30" type="text" value="<?=$gRf30?>" readonly="readonly" style="width:170px; border: 1px solid #C0C0C0; padding-left: 1px; padding-right: 1px; padding-top: 1px; padding-bottom: 1px" />
 	      <input name="fRf30" type="text" value="<?=$gCrP?>" readonly="readonly" style="width:170px; border: 1px solid #C0C0C0; padding-left: 1px; padding-right: 1px; padding-top: 1px; padding-bottom: 1px" />		  </td>
 		<td width="46">
-		<input type="button" name="B392" value="..." onclick="FinddATA30('800','400','<?=$gIdT?>',<?=$gTRM?>','<?=$_GET['IdL']?>')" style="width: 30px; height: 19px; padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px" />
-		<input type="button" name="B392" disabled value="..." onclick="FinddATAUM('800','400','<?=$gIdT?>','<?=$gCrB?>','<?=$_GET['IdL']?>')" style="width: 30px; height: 19px; padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px" />		</td>
+		<input type="button" name="B392" value="..." onclick="FinddATA30('800','400','<?=$gIdT?>','<?=$gTRM?>','<?=($_GET['IdL'] ?? '')?>')" style="width: 30px; height: 19px; padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px" />
+		<input type="button" name="B392" disabled value="..." onclick="FinddATAUM('800','400','<?=$gIdT?>','<?=$gCrB?>','<?=($_GET['IdL'] ?? '')?>')" style="width: 30px; height: 19px; padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px" />		</td>
 	    <td width="489">(<i>Ex: <b>Uang Muka</b> Link data ke <b>Perencanaan</b></i>)</td>
 	  </tr>
 	  </table>      </td>
-    </tr-->
+    </tr>
+    */ ?>
     <tr height="25">
       <td>&nbsp;</td>
       <td>URAIAN</td>

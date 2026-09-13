@@ -52,3 +52,11 @@ Folder ini berisi dokumentasi teknis, keputusan arsitektur, dan panduan pengemba
      - Diagram alur upload baru, penayangan gambar dengan fallback otomatis data legacy, dan proses hapus (unlink).
      - Pengamanan folder `.htaccess` (nonaktifkan script PHP/CGI dan directory listing).
      - Panduan CLI migrasi data lama: `scripts/migrate_kib_blob_to_files.php`.
+
+7. **[`panduan-migrasi-gambar-blob-ke-file.md`](./panduan-migrasi-gambar-blob-ke-file.md)**
+   - **Judul**: *Panduan Eksekusi Migrasi Gambar BLOB ke File Fisik Server*
+   - **Isi**:
+     - Panduan operasional langkah-demi-langkah mengeksekusi `scripts/migrate_kib_blob_to_files.php`.
+     - Daftar lengkap opsi perintah (`--dry-run`, `--limit=N`, `--clear-blob`, `--overwrite`, `--help`).
+     - Skenario eksekusi teruji (dry run -> sampel 50 record -> migrasi penuh -> pengosongan BLOB DB).
+     - FAQ & Penanganan masalah (resiliensi proses terhenti, duplikasi nama file, dan izin folder).

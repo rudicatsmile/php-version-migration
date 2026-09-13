@@ -78,10 +78,10 @@ Pada tabel `ta_kib_108`, field terkait file dikelola sebagai berikut:
 
 | Field | Tipe Data | Peran pada Alur Baru |
 |---|---|---|
-| `file_name` | `varchar(100)` | Menyimpan nama file unik (tanpa prefix `{IDT}xyz`). |
+| `file_name` | `varchar(100)` | Menyimpan nama file fisik unik di server (tanpa prefix `{IDT}xyz`). |
 | `file_type` | `varchar(100)` | Menyimpan MIME Type (contoh: `image/jpeg`, `image/png`, `image/gif`). |
 | `file_size` | `int(11)` | Menyimpan ukuran byte file fisik di server. |
-| `file_content` | `longblob` | **Dikosongkan (`''`) untuk upload baru**. Nilai lama tetap dibiarkan sampai admin menjalankan script migrasi. |
+| `file_content` | `longblob` | **Menyimpan nama/path file fisik**. Field ini **tidak lagi dibaca sebagai binary BLOB** oleh sistem. |
 
 ---
 
@@ -95,26 +95,25 @@ flowchart TD
         C -->|Tidak Valid| D[Tolak Upload & Tampilkan Peringatan]
         C -->|Valid| E[Cari & Hapus File Fisik Lama jika ada]
         E --> F[Pindahkan File ke simandor/images/IDTxyzNamaFile]
-        F --> G["UPDATE ta_kib_108 SET file_name=..., file_type=..., file_size=..., file_content=''"]
+        F --> G["UPDATE ta_kib_108 SET file_name=NamaFile, file_content=NamaFile, file_type=..., file_size=..."]
         G --> H[Tutup Popup & Refresh Window Induk]
     end
 
     subgraph VIEW_FLOW["2. Alur Penayangan (SourceIMG / PreviewIMG)"]
-        I[Permintaan Gambar: rIDT=...] --> J[Cari Data di ta_kib_108]
-        J --> K{File Fisik Ada di simandor/images/?}
+        I[Permintaan Gambar: rIDT=...] --> J[Cari Data di ta_kib_108: file_name & file_content]
+        J --> K{File Fisik Ditemukan di simandor/images/?}
         K -->|Ya| L["readfile() Langsung dari Disk Server"]
-        K -->|Tidak| M{Field file_content Berisi BLOB?}
-        M -->|Ya (Legacy Data)| N["Output BLOB dari Database"]
-        M -->|Tidak| O["Tampilkan Placeholder Gambar Default"]
+        K -->|Tidak| M["Tampilkan Placeholder Gambar Default (TIDAK membaca BLOB)"]
     end
 
     subgraph DELETE_FLOW["3. Alur Penghapusan Gambar"]
-        P[Pengguna Klik Tombol 'Hapus Gambar'] --> Q[Kirim Request Simpan=Delete]
-        Q --> R["Hapus (unlink) File Fisik di simandor/images/"]
-        R --> S["UPDATE ta_kib_108 SET file_name='', file_type='', file_size=0, file_content=''"]
-        S --> T[Tutup Popup & Refresh Window Induk]
+        N[Pengguna Klik Tombol 'Hapus Gambar'] --> O[Kirim Request Simpan=Delete]
+        O --> P["Hapus (unlink) File Fisik di simandor/images/"]
+        P --> Q["UPDATE ta_kib_108 SET file_name='', file_content='', file_type='', file_size=0"]
+        Q --> R[Tutup Popup & Refresh Window Induk]
     end
 ```
+
 
 ---
 

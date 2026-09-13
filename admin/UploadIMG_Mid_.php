@@ -71,17 +71,18 @@ if ($Simpan == "Upload")
 		exit;
 	}
 
-	// Update database: kosongkan file_content (LONGBLOB), simpan nama, type, dan size
+	// Update database: simpan nama/path file fisik ke file_name dan file_content
 	$cleanDbName = mysql_real_escape_string($storedNameToDB);
 	$cleanType   = mysql_real_escape_string($fileType);
 	$cleanSize   = (int)$fileSize;
 
 	$nSQL = "UPDATE ta_kib_108 SET 
-	file_content='', 
+	file_content='$cleanDbName', 
 	file_name='$cleanDbName', 
 	file_type='$cleanType', 
 	file_size='$cleanSize' WHERE IDT='".$rIDT."'";
 	$nRs = mysql_query($nSQL) or die(mysql_error());
+
 
 	echo CloseWin($rIDT, $rCRT, $IdL);
 }

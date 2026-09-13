@@ -158,12 +158,14 @@ $where = "IDT='$idtEsc'";
 
 $updatePairs = [
     'file_name' => $storedNameToDB,
+    'file_content' => $storedNameToDB,
     'file_type' => $mime,
     'file_size' => (string) $fileSize,
     'lat' => $lat,
     'lng' => $lng,
     'lat_lng' => $latLng,
 ];
+
 
 $updateSql = buildUpdateQuery($conn, $table, $updatePairs, $where);
 if ($updateSql === '') {

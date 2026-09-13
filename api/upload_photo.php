@@ -44,29 +44,16 @@
 		//$sql = "insert into aa_upload_image set image='".$filename.".".$ext."', date='".$date."'";
     	//$result = mysqli_query($conn, $sql);
 
-    	//Update tabel ta_kib_108
-    	$file_name = $_FILES['image']['name'];       //nama file (tanpa path)
-	    $tmp_name  = $_FILES['image']['tmp_name'];   //nama local temp file di server
-	    $file_size = $_FILES['image']['size'];       //ukuran file (dalam bytes)
-	    $file_type = $_FILES['image']['type'];       //tipe filenya (langsung detect MIMEnya)
-
-
-	   /*
-	    $fp = fopen($tmp_name, 'r');                // open file (read-only, binary)
-            $file_content = fread($fp, $file_size) or die("Tidak dapat membaca source file X"); // read file
-            $file_content = mysql_real_escape_string($file_content) or die("Tidak dapat membaca source file XX"); // parse image ke string
-            fclose($fp);
-    	   */
-
-	    // field ini lewat dulu :  file_content='$file_content',
+    	// Update tabel ta_kib_108: simpan nama file ke file_name dan file_content
     	$nSQL = "UPDATE ta_kib_108 SET 
 				    file_name='$file_name', 
 				    file_type='$file_type', 
 				    lat='$lat', 
 				    lng='$lng', 
-                                    file_content='$file_content',
+				    file_content='$file_name',
 				    lat_lng='$lat_lng', 
 				    file_size='$file_size' WHERE IDT='".$idt."'";
+
 		$result = mysqli_query($conn, $nSQL);
 
 		if($result){

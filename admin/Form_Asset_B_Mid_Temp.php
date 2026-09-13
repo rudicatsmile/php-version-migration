@@ -11,7 +11,7 @@ extract($_GET);
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/style_popup.css" type="text/css" media="all" />
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>

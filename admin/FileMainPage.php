@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <link rel="stylesheet" href="css/mainpage.css" type="text/css" media="all" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>

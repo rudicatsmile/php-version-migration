@@ -14,7 +14,7 @@ if (isset($_POST['fThn'])) {$gThn   = $_POST['fThn'];} else {$gThn;}
 if ($gThn=="") {$gThn=fGetDate('year')-1;}
 ?>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <link rel="stylesheet" href="css/style_upload_top.css" type="text/css" media="all" />
 </head>
 <body topmargin="0">

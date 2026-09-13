@@ -9,7 +9,7 @@ require "CheckLogin.php";
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 </head>
 <?php
@@ -767,7 +767,7 @@ if ($gPOS=="KDP") {
 			URL_Top = 'Penerimaan_Berkas_Mid_30_Top.php?gIdT='+gIdT+'&IdL='+IdL;
 			URL_Mid = 'Penerimaan_Berkas_Mid_30_Mid.php?gIdT='+gIdT+'&IdL='+IdL;
 			URL_Bot = 'Penerimaan_Berkas_Mid_30_Bot.php';
-			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFind30_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFind30_Mid' src='"+URL_Mid+"' scrolling='auto'><frame name='WinFindAcc_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"
+			txtHTML="<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFind30_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFind30_Mid' src='"+URL_Mid+"' scrolling='auto'><frame name='WinFindAcc_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"
 			win.focus()
 			win.window.document.clear()
 			win.window.document.write(txtHTML)
@@ -804,7 +804,7 @@ if ($gPOS=="KDP") {
 			URL_Top = 'Penerimaan_Berkas_Mid_UM_Top.php?gIdT='+gIdT+'&IdL='+IdL;
 			URL_Mid = 'Penerimaan_Berkas_Mid_UM_Mid.php?gIdT='+gIdT+'&IdL='+IdL;
 			URL_Bot = 'Penerimaan_Berkas_Mid_UM_Bot.php';
-			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFind30_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFind30_Mid' src='"+URL_Mid+"' scrolling='auto'><frame name='WinFindAcc_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"
+			txtHTML="<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFind30_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFind30_Mid' src='"+URL_Mid+"' scrolling='auto'><frame name='WinFindAcc_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"
 			win.focus()
 			win.window.document.clear()
 			win.window.document.write(txtHTML)
@@ -829,7 +829,7 @@ if ($gPOS=="KDP") {
 				URL_Top = 'Penerimaan_Berkas_Mid_Kontrak_Top.php?gKG='+gKG+'&gRK='+gRK+'&IdL='+IdL;
 				URL_Mid = 'Penerimaan_Berkas_Mid_Kontrak_Mid.php?gKG='+gKG+'&gRK='+gRK+'&IdL='+IdL;
 				URL_Bot = 'Penerimaan_Berkas_Mid_Kontrak_Bot.php';
-       			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='95,*,30' frameborder='0'><frame name='WinFindBRK_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFindBRK_Mid' src='"+URL_Mid+"' scrolling='auto'><frame name='WinFindBRK_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
+       			txtHTML="<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title></head><frameset framespacing='0' border='0' rows='95,*,30' frameborder='0'><frame name='WinFindBRK_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFindBRK_Mid' src='"+URL_Mid+"' scrolling='auto'><frame name='WinFindBRK_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
        			win.focus()
       			win.window.document.clear()
       			win.window.document.write(txtHTML)

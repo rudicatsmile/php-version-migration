@@ -10,7 +10,7 @@ echo "<html xml:lang='en'>";
 echo "<head>";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=windows-1252'>";
 ?>
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <link rel="stylesheet" href="css/style_popup.css" type="text/css" media="all" />
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>

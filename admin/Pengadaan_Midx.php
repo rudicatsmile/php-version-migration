@@ -9,7 +9,7 @@ require "CheckLogin.php";
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
@@ -712,7 +712,7 @@ $mUnt = fGlobalNEW("Nm_Unit","ref_unit","Kd_Unit",$gUnt,"=","",DatabaseSB,$ConSB
 						$URL_Mid = "Pengadaan_Mid_Mid.php?gUnt=".$gUnt."&IdL=".$_GET['IdL'];
 						$URL_Bot = "Pengadaan_Mid_Bot.php";
 					?>       			
-       			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='122,*,30' frameborder='0'><frame name='WinFindBRK_Top' noresize src='<?php echo $URL_Top?>' scrolling='no'><frame name='WinFindBRK_Mid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='WinFindBRK_Bot' src= '<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
+       			txtHTML="<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title></head><frameset framespacing='0' border='0' rows='122,*,30' frameborder='0'><frame name='WinFindBRK_Top' noresize src='<?php echo $URL_Top?>' scrolling='no'><frame name='WinFindBRK_Mid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='WinFindBRK_Bot' src= '<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
        			win.focus()
       			win.window.document.clear()
       			win.window.document.write(txtHTML)
@@ -736,7 +736,7 @@ $mUnt = fGlobalNEW("Nm_Unit","ref_unit","Kd_Unit",$gUnt,"=","",DatabaseSB,$ConSB
 						$URL_Mid = "Pengadaan_Mid_Aset_Mid.php?gNOM=".$gNOM."&gUnt=".$gUnt."&IdL=".$_GET['IdL'];
 						$URL_Bot = "Pengadaan_Mid_Aset_Bot.php";
 					?>       			
-       			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFindAcc_Top' noresize src='<?php echo $URL_Top?>' scrolling='no'><frame name='WinFindAcc_Mid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='WinFindAcc_Bot' src= '<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
+       			txtHTML="<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFindAcc_Top' noresize src='<?php echo $URL_Top?>' scrolling='no'><frame name='WinFindAcc_Mid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='WinFindAcc_Bot' src= '<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
        			win.focus()
       			win.window.document.clear()
       			win.window.document.write(txtHTML)
@@ -780,7 +780,7 @@ $mUnt = fGlobalNEW("Nm_Unit","ref_unit","Kd_Unit",$gUnt,"=","",DatabaseSB,$ConSB
 						$URL_Mid = "Pengadaan_Mid_Dana_Mid.php?gNOR=".$gNOR."&IdL=".$_GET['IdL'];
 						$URL_Bot = "Pengadaan_Mid_Dana_Bot.php";
 					?>       			
-       			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFindAcc_Top' noresize src='<?php echo $URL_Top?>' scrolling='no'><frame name='WinFindAcc_Mid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='WinFindAcc_Bot' src= '<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
+       			txtHTML="<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFindAcc_Top' noresize src='<?php echo $URL_Top?>' scrolling='no'><frame name='WinFindAcc_Mid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='WinFindAcc_Bot' src= '<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
        			win.focus()
       			win.window.document.clear()
       			win.window.document.write(txtHTML)

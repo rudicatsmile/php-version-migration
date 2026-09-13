@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <link rel="stylesheet" href="css/style_bot.css" type="text/css" media="all" />
 </head>
 <?php require('Connection.php'); ?>
@@ -69,7 +69,7 @@ $IdL = $_REQUEST['IdL'];
 						$URL_Mid = "Reg_User_Mid_Add.php?IdL=".$IdL;
 						$URL_Bot = "Reg_User_Bot.php?IdL=".$IdL;
 					?>       			
-				txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormUser_Top' noresize src='<?php echo $URL_Top?>' scrolling='no'><frame name='WinFormUser_Mid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='WinFormUser_Bot' src= '<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
+				txtHTML="<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormUser_Top' noresize src='<?php echo $URL_Top?>' scrolling='no'><frame name='WinFormUser_Mid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='WinFormUser_Bot' src= '<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
 				win.focus()
 				win.window.document.clear()
 				win.window.document.write(txtHTML)

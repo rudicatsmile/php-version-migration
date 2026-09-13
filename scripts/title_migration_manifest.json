@@ -1,0 +1,2147 @@
+{
+    "date": "2026-09-13 10:26:28",
+    "total_files": 535,
+    "total_replaced": 803,
+    "files": [
+        {
+            "path": "admin\/Backup_Dump_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Backup_Dump_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Backup_Dump_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Clean_Data_Aset_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Clean_Data_Aset_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Clean_Data_Aset_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ctc_Admin_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ctc_Admin_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ctc_Admin_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/FileHeader.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/FileMainPage.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/FilePageError.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/FindMAP_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Find_AccRKB_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Find_AccRKB_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Find_AccRKB_Top.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Find_AccRKPB_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Find_AccRKPB_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Find_AccRKPB_Top.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Find_Acc_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Find_Acc_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Find_Acc_Top.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Find_AssRKPB_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Find_AssRKPB_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Find_AssRKPB_Top.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Find_Item_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Find_Item_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Find_Item_Top.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Form_Asset_A_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_A_Mid.php",
+            "count": 8
+        },
+        {
+            "path": "admin\/Form_Asset_A_Mid_Temp.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_A_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_B_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_B_Mid.php",
+            "count": 7
+        },
+        {
+            "path": "admin\/Form_Asset_B_Mid_Temp.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_B_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_C_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_C_Mid.php",
+            "count": 8
+        },
+        {
+            "path": "admin\/Form_Asset_C_Mid_Temp.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_C_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_D_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_D_Mid.php",
+            "count": 8
+        },
+        {
+            "path": "admin\/Form_Asset_D_Mid_Temp.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_D_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_E_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_E_Mid.php",
+            "count": 7
+        },
+        {
+            "path": "admin\/Form_Asset_E_Mid_Temp.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_E_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_F_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_F_KdpToKib_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_F_KdpToKib_Find_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_F_KdpToKib_Find_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_F_KdpToKib_Find_Top.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Form_Asset_F_KdpToKib_Mid.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Form_Asset_F_KdpToKib_Top.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Form_Asset_F_Mid.php",
+            "count": 7
+        },
+        {
+            "path": "admin\/Form_Asset_F_Midx.php",
+            "count": 5
+        },
+        {
+            "path": "admin\/Form_Asset_F_Mid_Temp.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_F_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_GA_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_GA_Mid.php",
+            "count": 6
+        },
+        {
+            "path": "admin\/Form_Asset_GA_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_GB_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_GB_Mid.php",
+            "count": 7
+        },
+        {
+            "path": "admin\/Form_Asset_GB_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_GC_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_GC_Mid.php",
+            "count": 6
+        },
+        {
+            "path": "admin\/Form_Asset_GC_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_GD_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_GD_Mid.php",
+            "count": 7
+        },
+        {
+            "path": "admin\/Form_Asset_GD_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_GE_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_GE_Mid.php",
+            "count": 7
+        },
+        {
+            "path": "admin\/Form_Asset_GE_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_Global_Mid_Temp.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Form_Asset_Global_Mid_Temp_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_Global_Mid_Temp_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_Global_Mid_Temp_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_G_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_G_Mid.php",
+            "count": 7
+        },
+        {
+            "path": "admin\/Form_Asset_G_Midx.php",
+            "count": 5
+        },
+        {
+            "path": "admin\/Form_Asset_G_Mid_Temp.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_G_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_J_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_J_Mid.php",
+            "count": 7
+        },
+        {
+            "path": "admin\/Form_Asset_J_Mid_Temp.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Asset_J_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Bidang_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Bidang_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Bidang_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Edit_Usulan_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Edit_Usulan_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Edit_Usulan_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Execute_Usulan_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Execute_Usulan_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Execute_Usulan_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Info_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Info_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Info_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Invent_Asset_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Invent_Asset_Opt.php",
+            "count": 6
+        },
+        {
+            "path": "admin\/Form_Invent_Asset_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Invent_Asset_Ubh.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Form_Invent_Asset_Ubh_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Invent_Asset_Ubh_Mid.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Form_Invent_Asset_Ubh_Mid_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Invent_Asset_Ubh_Mid_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Invent_Asset_Ubh_Mid_Top.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Form_Invent_Asset_Ubh_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset1_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset1_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset1_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset2_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset2_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset2_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset3_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset3_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset3_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset4_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset4_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset4_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset5_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset5_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Aset5_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn1_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn1_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn1_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn2_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn2_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn2_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn3_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn3_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn3_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn4_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn4_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn4_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn5_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn5_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kode_Rekn5_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kritik_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kritik_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Kritik_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_ProKeg1_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_ProKeg1_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_ProKeg1_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_ProKeg2_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_ProKeg2_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_ProKeg2_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_ProKeg3_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_ProKeg3_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_ProKeg3_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Status_Usulan_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Status_Usulan_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Status_Usulan_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Sub_Unit_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Sub_Unit_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Sub_Unit_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Unit_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Unit_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_Unit_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_UPB_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_UPB_Edit_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_UPB_Edit_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_UPB_Edit_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_UPB_Mid.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Form_UPB_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Form_View_Verifikasi.php",
+            "count": 7
+        },
+        {
+            "path": "admin\/Import_KIB_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Import_KIB_Mid.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Import_KIB_Source.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Import_KIB_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Information_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Information_Mid.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Information_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Inventarisasi_KIB-A.php",
+            "count": 4
+        },
+        {
+            "path": "admin\/Inventarisasi_KIB-B.php",
+            "count": 4
+        },
+        {
+            "path": "admin\/Inventarisasi_KIB-C.php",
+            "count": 4
+        },
+        {
+            "path": "admin\/Inventarisasi_KIB-D.php",
+            "count": 4
+        },
+        {
+            "path": "admin\/Inventarisasi_KIB-E.php",
+            "count": 4
+        },
+        {
+            "path": "admin\/Invent_Usulan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Invent_Usulan_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Invent_Usulan_Frm_Data_Edit_Upl_Mid_Bro.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Invent_Usulan_Frm_Img_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Invent_Usulan_Frm_Img_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Invent_Usulan_Veri_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/kdp_toset_print_doc.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/kdp_toset_print_mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB-A.php",
+            "count": 7
+        },
+        {
+            "path": "admin\/KIB-A_x.php",
+            "count": 5
+        },
+        {
+            "path": "admin\/KIB-BM.php",
+            "count": 5
+        },
+        {
+            "path": "admin\/KIB-Bx.php",
+            "count": 5
+        },
+        {
+            "path": "admin\/KIB-B__.php",
+            "count": 6
+        },
+        {
+            "path": "admin\/KIB-C.php",
+            "count": 7
+        },
+        {
+            "path": "admin\/KIB-D.php",
+            "count": 7
+        },
+        {
+            "path": "admin\/KIB-E.php",
+            "count": 5
+        },
+        {
+            "path": "admin\/KIB-F.php",
+            "count": 6
+        },
+        {
+            "path": "admin\/KIB-G.php",
+            "count": 5
+        },
+        {
+            "path": "admin\/KIB-Gx.php",
+            "count": 5
+        },
+        {
+            "path": "admin\/KIB-I.php",
+            "count": 5
+        },
+        {
+            "path": "admin\/KIB-J.php",
+            "count": 6
+        },
+        {
+            "path": "admin\/KIB_A_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_A_History.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_B_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_B_Dokumen_KIR.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_B_History.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_B_KK_Penyusutan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_C_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_C_History.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_C_KK_Penyusutan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_D_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_D_History.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_D_KK_Penyusutan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_E_Count.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_E_Count_Choise.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_E_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_E_Dokumen_KIR.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_E_History.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_E_KK_Penyusutan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_F_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_G_Count.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_G_Count_Choise.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_G_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_G_History.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_G_KK_Penyusutan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_I_Count_Choise.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_I_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_J_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_Tahun_N.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIB_X_Dokumen_KIR.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/KIR.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Kritik_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Kritik_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Kunci_Data_Aset_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Kunci_Data_Aset_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Kunci_Data_Aset_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Buku_Inventaris.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Buku_Inventaris_Rekap.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Daftar_Mutasi.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Daftar_Mutasi_Rekap_.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Daftar_Mutasi_Rekap_New_Ext.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Daftar_Mutasi_Rekap_Old.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Daftar_Mutasi_Rekap_RciMutasi.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Daftar_Mutasi_Rekap_RciMutasi_New_Ext.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Daftar_Mutasi_Rekap_Rinci.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Daftar_Mutasi_Rekap__.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Rekapitulasi_PerSKPD_1.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Rekapitulasi_PerSKPD_2.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Rekap_Kelompok.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Lap_Rekap_Per_Rekening.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Merger_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Merger_Mid.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Merger_Mid_Find_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Merger_Mid_Find_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Merger_Mid_Find_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Merger_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Move_Account_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Move_Account_Mid.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Move_Account_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Move_Data_Unit_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Move_Data_Unit_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Move_Data_Unit_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Move_Data_UPB_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Move_Data_UPB_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Move_Data_UPB_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Move_Upb_Kib_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Move_Upb_Kib_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Move_Upb_Kib_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/My_Account_Bot.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/My_Account_Mid.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/My_Account_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KAB_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KAB_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KAB_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KIB_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KIB_Choise_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KIB_Choise_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KIB_Choise_N_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KIB_Choise_N_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KIB_Choise_N_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KIB_Choise_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KIB_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KIB_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KKB_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KKB_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KKB_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KKM_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KKM_Bot_108.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KKM_Mid_108.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KKM_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KKM_Top_108.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KKR_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KKR_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_KKR_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_NRC_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_NRC_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_NRC_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_PNY_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_PNY_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_PNY_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_Rekap_AllSKPD_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_Rekap_AllSKPD_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_Rekap_AllSKPD_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_Rekap_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_Rekap_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_Rekap_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_Report_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_Report_Mid_.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_Report_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_RKBMD_Report_1.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_RKBMD_Report_2.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_RKBMD_Report_3.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Open_RKBMD_Report_4.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/P47_Pemanfaatan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/P47_Pengamanan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/P47_Penggunaan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/P47_Rekonsiliasi.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penerimaan_Berkasx.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Midx.php",
+            "count": 4
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Mid_30_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Mid_30_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Mid_30_Top.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Mid_Kontrak_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Mid_Kontrak_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Mid_Kontrak_Mid_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Mid_Kontrak_Top.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Mid_UM_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Mid_UM_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Mid_UM_Top.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Open_Report_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Open_Report_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Open_Report_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penerimaan_Berkas_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaanx.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Pengadaan_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Midx.php",
+            "count": 4
+        },
+        {
+            "path": "admin\/Pengadaan_Mid_Aset_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Mid_Aset_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Mid_Aset_Top.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Pengadaan_Mid_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Mid_Dana_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Mid_Dana_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Mid_Dana_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Mid_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Mid_Top.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/Pengadaan_Open_Rekon_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Open_Rekon_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Open_Report_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Open_Report_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Open_Report_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Rekon.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Rekon_Rinci.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Pengadaan_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penghapusan_Usulan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penghapusan_Usulan_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penghapusan_Usulan_Frm_Data_Edit_Upl_Mid_Bro.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penghapusan_Usulan_Frm_Img_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penghapusan_Usulan_Frm_Img_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Penghapusan_Usulan_Veri_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Bidang.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_KegiatanSKPD.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset108_1.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset108_2.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset108_3.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset108_4.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset108_5.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset108_6.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset108_Doc.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset_1.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset_2.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset_3.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset_4.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset_5.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset_Doc.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset_Maping.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/ref_kode_aset_maping_108.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/ref_kode_aset_maping_108_doc.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset_Maping_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset_Maping_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Aset_Maping_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_1.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_108_1.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_108_2.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_108_3.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_108_4.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_108_5.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_108_6.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_13_1.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_13_2.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_13_3.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_13_4.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_13_5.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_2.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_3.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_4.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_5.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_90_1.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_90_2.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_90_3.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_90_4.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_90_5.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Kode_Rekn_90_6.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Petugas_Sensus.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_ProgramSKPD.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_ProKeg_1.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_ProKeg_2.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_ProKeg_3.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_ProKeg_90_1.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_ProKeg_90_2.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_ProKeg_90_3.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_ProKeg_90_4.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_ProKeg_90_5.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_RekeningSKPD.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Ruangan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_SubKegiatanSKPD.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Sub_Unit.php",
+            "count": 4
+        },
+        {
+            "path": "admin\/Ref_Unit.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_UPB.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Ref_Usulan_Ketera.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Ref_Usulan_Syarat.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Reg_User_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Reg_User_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Reg_User_Mid_Add.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Reg_User_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Rekn108_Usulan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Rekn108_Usulan_Exec_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Rekn108_Usulan_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Rekon_Pengadaan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/report\/P47_Kibar_A.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/report\/P47_Kibar_B.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/report\/P47_Kibar_C.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/report\/P47_Kibar_D.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/report\/P47_Kibar_E.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/report\/P47_Kibar_F.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKBMD_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKBMD_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKBMD_Mid.php",
+            "count": 2
+        },
+        {
+            "path": "admin\/RKBMD_New.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKBMD_New_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKBMD_New_Dokumen_Abt.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKBMD_New_Dokumen_ii.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKBMD_New_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKBMD_New_Security.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKBMD_New_Telaah.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKBMD_New_Telaah_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKBMD_New_Telaah_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKBMD_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKPBMD_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKPBMD_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKPBMD_Mid.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/RKPBMD_New.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKPBMD_New_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKPBMD_New_Dokumen_Abt.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKPBMD_New_Dokumen_ii.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKPBMD_New_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKPBMD_New_Telaah.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKPBMD_New_Telaah_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKPBMD_New_Telaah_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RKPBMD_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RPBMD_New.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RPBMD_New_Dokumen.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/RPBMD_New_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_Lock.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_Open_Bandingkan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_Open_Pembelian.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_Open_Pernyataan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_Open_Realisasi.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_Open_Wilayah_Administrasi_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_Pelatihan.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_Pelatihan_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_Saldo_Awal_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_SPJ.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_SPJ_Data_Mid_Upl_Mid_Bro.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_SPJ_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/SP3D_SPJ_Frm_Spjaset_Mid_Upl_Mid_Bro.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Surat_permohonan_mutasi_frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Surat_permohonan_penghentian_frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Tabel_Masa_Manfaat_Choise.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Tabulasi_Data_Choice.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/TarikDataAsetKe108_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/TarikDataAsetKe108_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/TarikDataAsetKe108_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/UploadIMG_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/UploadIMG_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/UploadIMG_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/UploadMAP_Mid_backup.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/UploadPDF_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/UploadPDF_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/UploadPDF_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Upload_Xls_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Upload_Xls_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Usulan_Penghapusan.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Usulan_Penghapusan_List.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Usulan_Penghapusan_Status.php",
+            "count": 3
+        },
+        {
+            "path": "admin\/Usulan_Penghaspusan_Doc.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Cek_UPB.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_CopyData.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Creat_Table.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Extracom_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_FindData_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_ImportPostgreSQL.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Import_Data_A.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Import_Data_B.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Import_Data_BE.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Import_SQL_A.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Import_SQL_B.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Import_SQL_BFN.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Import_SQL_C.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Import_SQL_CFN.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Import_SQL_D.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Import_SQL_E.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Import_SQL_EFN.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Import_SQL_FFN.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_KdpToAset.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Missing_Post_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Mutasi_NonProcedural.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Post_Data_A.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Post_Data_B.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Post_Data_C.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Post_Data_D.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Post_Data_E.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Post_Data_F.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_QueryData_Frm.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Rekap_Mutasi.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Repair_Blob.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Tarik_Data_Simda.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/Utility_Tarik_KIB.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/WinExportRek_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/WinExportRek_Mid.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/WinExportRek_Top.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/zForm_Asset_GA_Mid_Temp.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/zImport_Bot.php",
+            "count": 1
+        },
+        {
+            "path": "admin\/zImport_Top.php",
+            "count": 1
+        }
+    ]
+}

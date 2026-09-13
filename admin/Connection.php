@@ -1,5 +1,6 @@
 <?php
 require_once dirname(__DIR__) . '/bootstrap.php';
+require_once __DIR__ . '/AppTitle.php';
 
 date_default_timezone_set('Asia/Jakarta');
 define('TxReadOnly','Mohon maaf, akses data hanya readonly..!!');

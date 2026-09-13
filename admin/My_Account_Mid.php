@@ -4,7 +4,7 @@
 <?php require "CheckLogin.php"?>
 <html>
 <head>
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <link rel="stylesheet" href="css/style_popup.css" type="text/css" media="all" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
@@ -96,7 +96,7 @@ if ($gFin!="") {$tFin="AND (User_ID LIKE '%".$gFin."%' OR Full_Name LIKE '%".$gF
 									$URL_Mid = "Reg_User_Mid.php?eIdT=".$mRo['IDT']."&IdL=".$IdL;
 									$URL_Bot = "Reg_User_Bot.php?eIdT=".$mRo['IDT']."&IdL=".$IdL;
 								?>       			
-							txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormUser_Top' noresize src='<?php echo $URL_Top?>' scrolling='no'><frame name='WinFormUser_Mid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='WinFormUser_Bot' src= '<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
+							txtHTML="<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormUser_Top' noresize src='<?php echo $URL_Top?>' scrolling='no'><frame name='WinFormUser_Mid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='WinFormUser_Bot' src= '<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
 							win.focus()
 							win.window.document.clear()
 							win.window.document.write(txtHTML)

@@ -14,7 +14,7 @@ extract($_GET);
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
   <table border="0" align="center" style="width:400px">
     <tr>
       <td>&nbsp;</td>

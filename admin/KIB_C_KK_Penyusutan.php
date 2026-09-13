@@ -7,7 +7,7 @@ require "CheckLogin.php";
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
 <?php
@@ -230,7 +230,7 @@ else
 						if ((int)$Col[6]>0 && (int)$Col[10]>0) {
 							$Col[12] = $Col[6] / $Col[10];}
 						else {
-							$Col[12] = 09;}
+							$Col[12] = 9;}
 						
 						if ($Col[8] < 0) {
 							$Col[13] = 0;

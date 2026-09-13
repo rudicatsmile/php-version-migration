@@ -60,7 +60,7 @@ $TgB = $ThB."-".substr('0'.$BnB,-2,2)."-".substr('0'.$HrB,-2,2);
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <table border="0" align="center" cellpadding="0" cellspacing="0" style="width:1000px; border-collapse:collapse">
 <tr style=" font-weight:bold">
  <td style="font-size:13pt">LAPORAN KDP TO ASET</td>

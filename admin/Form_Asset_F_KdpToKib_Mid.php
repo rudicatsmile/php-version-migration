@@ -10,7 +10,7 @@ extract($_GET);
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <link rel="stylesheet" href="css/style_mid.css" type="text/css" media="all" />
 </head>
 <?php
@@ -127,7 +127,7 @@ if ($gDL)
 			URL_Top = 'Form_Asset_F_KdpToKib_Find_Top.php?IDT='+IDT+'&IdL='+IdL;
 			URL_Mid = 'Form_Asset_F_KdpToKib_Find_Mid.php?IDT='+IDT+'&IdL='+IdL;
 			URL_Bot = 'Form_Asset_F_KdpToKib_Find_Bot.php';
-			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='35,*,30' frameborder='0'>"+
+			txtHTML="<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title></head><frameset framespacing='0' border='0' rows='35,*,30' frameborder='0'>"+
 			"<frame name='WinFormFND_Top' noresize src='"+URL_Top+"' scrolling='no'>"+
 			"<frame name='WinFormFND_Mid' noresize src='"+URL_Mid+"' scrolling='auto'>"+
 			"<frame name='WinFormFND_Bot' noresize src='"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>";

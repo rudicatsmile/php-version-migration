@@ -7,7 +7,7 @@ date_default_timezone_set('Asia/Jakarta');
 <html xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Simbada Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <link rel="shortcut icon" HREF="css/icon/icon.ico">
 <meta name="keywords" content="Sipand BMD">
 <meta name="Language" content="English">

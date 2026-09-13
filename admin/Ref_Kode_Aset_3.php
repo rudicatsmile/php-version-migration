@@ -9,7 +9,7 @@ extract($_GET);
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
@@ -207,7 +207,7 @@ $KdAst2=$_GET['KdAst2'] ?? '';
 						$URL_Mid = "Form_Kode_Aset3_Mid.php?KdAst2=".$KdAst2."&FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '');
 						$URL_Bot = "Form_Kode_Aset3_Bot.php";
 					?>       			
-				txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormKIB_Top' noresize src='<?=$URL_Top?>' scrolling='no'><frame name='WinFormKIB_Mid' src='<?=$URL_Mid?>' scrolling='auto'><frame name='WinFormKIB_Bot' src= '<?=$URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
+				txtHTML="<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormKIB_Top' noresize src='<?=$URL_Top?>' scrolling='no'><frame name='WinFormKIB_Mid' src='<?=$URL_Mid?>' scrolling='auto'><frame name='WinFormKIB_Bot' src= '<?=$URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
 				win.focus()
 				win.window.document.clear()
 				win.window.document.write(txtHTML)
@@ -232,7 +232,7 @@ $KdAst2=$_GET['KdAst2'] ?? '';
 			URL_Top = "Form_Kode_Aset3_Top.php?"+"<?="FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>";
 			URL_Mid = "Form_Kode_Aset3_Mid.php?rIDT="+IDT+"<?="&FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>";
 			URL_Bot = "Form_Kode_Aset3_Bot.php";
-			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormKIB_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFormKIB_Mid' src='"+URL_Mid+"' scrolling='auto'><frame name='WinFormKIB_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
+			txtHTML="<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormKIB_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFormKIB_Mid' src='"+URL_Mid+"' scrolling='auto'><frame name='WinFormKIB_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
 			win.focus()
 			win.window.document.clear()
 			win.window.document.write(txtHTML)

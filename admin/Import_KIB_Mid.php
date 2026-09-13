@@ -4,7 +4,7 @@
 <?php require "CheckLogin.php"?>
 <html>
 <head>
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <link rel="stylesheet" href="css/style_popup.css" type="text/css" media="all" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
@@ -125,7 +125,7 @@ if (isset($_GET['gDEL']))
 			URL_Top = "Upload_Xls_Top.php?FrmG=UPLOAD FILE (*.XLS)"+"<?php echo "&IdL=".$_GET['IdL']?>";
 			URL_Mid = "Upload_Xls_Mid.php?"+"<?php echo "gUnt=".$gUnt."&gSub=".$gSub."&gUpb=".$gUpb."&gThn=".$gThn."&gKib=".$gKib."&IdL=".$_GET['IdL']?>";
 			URL_Bot = "Upload_Xls_Bot.php";
-			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='40,*,30' frameborder='0'><frame name='WinUplXLS_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinUplXLS_Mid' src='"+URL_Mid+"'><frame name='WinUplXLS_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
+			txtHTML="<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title></head><frameset framespacing='0' border='0' rows='40,*,30' frameborder='0'><frame name='WinUplXLS_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinUplXLS_Mid' src='"+URL_Mid+"'><frame name='WinUplXLS_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
 			win.focus()
 			win.window.document.clear()
 			win.window.document.write(txtHTML)

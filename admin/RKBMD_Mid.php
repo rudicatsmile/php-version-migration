@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <link rel="stylesheet" href="css/style_popup.css" type="text/css" media="all" />
 </head>
 </head>
@@ -79,7 +79,7 @@ $JusV = $_GET['JusV'];
 							$URL_Mid = "Find_AccRKB_Mid.php?IDO=".$IDO."&JusV=".$JusV."&zUpb=".$zUpb."&zKeg=".$zKeg."&zThn=".$zThn."&IdL=".$_GET['IdL'];
 							$URL_Bot = "Find_AccRKB_Bot.php";
 						?>       			
-						txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title><meta name='GENERATOR' content='Microsoft FrontPage 5.0'><meta name='ProgId' content='FrontPage.Editor.Document'></head><frameset framespacing='0' border='0' rows='30,*,25' frameborder='0'><frame name='FormRKBTop' target='FormRKBMid' noresize scrolling='no' src='<?php echo $URL_Top?>'><frame name='FormRKBMid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='FormRKBBot' src='<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>This page uses frames, but your browser doesn't support them.</p></body></noframes></frameset></html>"            
+						txtHTML="<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title><meta name='GENERATOR' content='Microsoft FrontPage 5.0'><meta name='ProgId' content='FrontPage.Editor.Document'></head><frameset framespacing='0' border='0' rows='30,*,25' frameborder='0'><frame name='FormRKBTop' target='FormRKBMid' noresize scrolling='no' src='<?php echo $URL_Top?>'><frame name='FormRKBMid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='FormRKBBot' src='<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>This page uses frames, but your browser doesn't support them.</p></body></noframes></frameset></html>"            
 						win.focus()
 						win.window.document.clear()
 						win.window.document.write(txtHTML)

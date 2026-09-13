@@ -9,7 +9,7 @@ extract($_GET);
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-<title>Simbada Kab. Hulu Sungai Tengah</title>
+<title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title>
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="file_global.js"></script>
 <link rel="stylesheet" href="css/style_popup.css" type="text/css" media="all" />
@@ -322,7 +322,7 @@ else
 			URL_Top = "Form_Asset_Global_Mid_Temp_Top.php?gUpb="+gUpb+"&gIdT="+gIdT+"&rIDT="+rIDT+"&IdL="+IdL;
 			URL_Mid = "Form_Asset_Global_Mid_Temp_Mid.php?gUpb="+gUpb+"&gIdT="+gIdT+"&rIDT="+rIDT+"&IdL="+IdL;
 			URL_Bot = "Form_Asset_Global_Mid_Temp_Bot.php";
-			txtHTML = "<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFind_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFind_Mid' src='"+URL_Mid+" scrolling='auto'><frame name='WinFind_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes></noframes></frameset></html>";
+			txtHTML = "<html><head><title><?php require_once 'AppTitle.php'; echo APP_TITLE; ?></title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFind_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFind_Mid' src='"+URL_Mid+" scrolling='auto'><frame name='WinFind_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes></noframes></frameset></html>";
 			win.focus()
 			win.window.document.clear()
 			win.window.document.write(txtHTML)

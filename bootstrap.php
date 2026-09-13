@@ -7,6 +7,9 @@
 // 1. Load PSR-4 Autoloader
 require_once __DIR__ . '/autoload.php';
 
+// 1b. Load Central Application Title
+require_once __DIR__ . '/admin/AppTitle.php';
+
 // 2. Tentukan Mode Lingkungan (development / production)
 // Default adalah 'development'. Di server produksi, definisikan define('APP_ENV', 'production');
 if (!defined('APP_ENV')) {

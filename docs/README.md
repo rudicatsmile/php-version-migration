@@ -43,5 +43,12 @@ Folder ini berisi dokumentasi teknis, keputusan arsitektur, dan panduan pengemba
      - 3 Metode aktivasi/deaktivasi mudah (parameter URL `?dev_mode=1`, tombol DevBar, atau konfigurasi `bootstrap.php`).
      - Jaminan keamanan di lingkungan produksi (*Zero Leak*).
 
-
-
+6. **[`migrasi-penyimpanan-gambar-kib.md`](./migrasi-penyimpanan-gambar-kib.md)**
+   - **Judul**: *Migrasi Penyimpanan Gambar Aset KIB (ta_kib_108)*
+   - **Isi**:
+     - Latar belakang pemindahan gambar dari database `LONGBLOB` (`file_content`) ke file fisik server.
+     - Lokasi penyimpanan di `simandor/images/` dan konvensi penamaan `{IDT}xyz{nama_file}`.
+     - Pemetaan field database (`file_name`, `file_type`, `file_size`, `file_content = ''`).
+     - Diagram alur upload baru, penayangan gambar dengan fallback otomatis data legacy, dan proses hapus (unlink).
+     - Pengamanan folder `.htaccess` (nonaktifkan script PHP/CGI dan directory listing).
+     - Panduan CLI migrasi data lama: `scripts/migrate_kib_blob_to_files.php`.

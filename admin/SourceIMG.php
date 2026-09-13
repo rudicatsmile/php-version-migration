@@ -1,54 +1,81 @@
-<?php require "Connection.php"; ?>
 <?php
-if (isset($_GET['rCRT'])) {
-	$rCRT = $_GET['rCRT'];
-}
-if (isset($_GET['rIDT'])) {
-	$rIDT = $_GET['rIDT'];
-}
-#$query = "SELECT file_content, file_type, file_name FROM ta_kib_".strtolower(substr($rCRT,0,1))." where IDT='".$rIDT."'";
-$query = "SELECT file_content, file_type, file_name FROM ta_kib_108 where IDT='" . $rIDT . "'";
-// echo $query;
-$data = mysql_query($query);
-$data = mysql_fetch_array($data);
-$gCont = $data[0];
-$gType = $data[1];
-$nName = $data[2];
+require_once "Connection.php";
 
-// DEBUG MODE
-// echo "IDT: " . $rIDT . "<br>";
-// echo "Query: " . $query . "<br>";
-// echo "Name from DB: " . $nName . "<br>";
-// echo "Has Content: " . (!empty($gCont) ? "YES" : "NO") . "<br>";
+$rCRT = $_GET['rCRT'] ?? '';
+$rIDT = $_GET['rIDT'] ?? '';
 
-//$idt = $data[3];
-if ($nName != "") {
-	//Jika field file_content ada isi, maka tampilkan isi field tersebut
-	if (!empty($gCont)) {
-		header("Content-type: $gType");   // parsing ke mime tipe
-		echo $gCont;
+// Sanitize IDT to digits only
+$rIDT = preg_replace('/[^0-9]/', '', (string)$rIDT);
 
-	} else {
-		//Jika field file_content tidak ada isi, maka cek apakah file ada di folder images
+$gCont = '';
+$gType = '';
+$nName = '';
 
-		// $aa = "279xyzIMG-20260203-WA0008.jpg";
-		// $Ar = explode("xyz", $aa);
-		// $Val1 = $Ar[0]; // 279
-		// $Val2 = $Ar[1]; // IMG-20260203-WA0008.jpg
-
-
-		$nName = $rIDT . "xyz" . $nName;
-		$nPath = "../simandor/images/$nName";
-
-		if (file_exists($nPath)) {
-			if ($gType != "") {
-				header("Content-type: $gType");
-			}
-			readfile($nPath);
-		}
+if ($rIDT !== '') {
+	$query = "SELECT file_content, file_type, file_name FROM ta_kib_108 WHERE IDT = '" . mysql_real_escape_string($rIDT) . "' LIMIT 1";
+	$res = mysql_query($query);
+	if ($res && ($data = mysql_fetch_array($res))) {
+		$gCont = $data['file_content'] ?? $data[0] ?? '';
+		$gType = $data['file_type'] ?? $data[1] ?? '';
+		$nName = $data['file_name'] ?? $data[2] ?? '';
 	}
-} else {
-	header("Content-type: image/gif");   // parsing ke mime tipe
-	readfile("Images/FileLogin_14.gif");
 }
-?>
+
+// 1. Cek penyimpanan fisik terlebih dahulu di folder simandor/images/
+if ($nName !== '') {
+	$prefixedName = $rIDT . "xyz" . $nName;
+	$pathWithPrefix = "../simandor/images/" . $prefixedName;
+	$pathDirect     = "../simandor/images/" . $nName;
+
+	$targetPath = '';
+	if (file_exists($pathWithPrefix) && !is_dir($pathWithPrefix)) {
+		$targetPath = $pathWithPrefix;
+	} elseif (file_exists($pathDirect) && !is_dir($pathDirect)) {
+		$targetPath = $pathDirect;
+	}
+
+	if ($targetPath !== '') {
+		$mime = !empty($gType) ? $gType : (function_exists('mime_content_type') ? mime_content_type($targetPath) : 'image/jpeg');
+		if (!$mime) {
+			$mime = 'image/jpeg';
+		}
+		if (!headers_sent()) {
+			header("Content-Type: " . $mime);
+			header("Content-Length: " . filesize($targetPath));
+			header("Cache-Control: public, max-age=86400");
+		}
+		readfile($targetPath);
+		exit;
+	}
+
+	// 2. Fallback: jika file fisik belum ada di disk, baca dari BLOB database (data legacy)
+	if (!empty($gCont)) {
+		$mime = !empty($gType) ? $gType : 'image/jpeg';
+		if (!headers_sent()) {
+			header("Content-Type: " . $mime);
+			header("Content-Length: " . strlen($gCont));
+		}
+		echo $gCont;
+		exit;
+	}
+}
+
+// 3. Fallback placeholder bila tidak ada image
+if (file_exists("Images/FileLogin_14.gif")) {
+	if (!headers_sent()) {
+		header("Content-Type: image/gif");
+	}
+	readfile("Images/FileLogin_14.gif");
+} elseif (file_exists("Images/Preview.png")) {
+	if (!headers_sent()) {
+		header("Content-Type: image/png");
+	}
+	readfile("Images/Preview.png");
+} else {
+	if (!headers_sent()) {
+		header("Content-Type: image/gif");
+	}
+	echo base64_decode("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
+}
+exit;
+

@@ -119,6 +119,22 @@ define('DEV_MODE', true);
 define('DEV_MODE', false);
 ```
 
+### Cara 4: Pengecualian Halaman / Frame Tertentu
+Untuk menjaga kebersihan tampilan area tertentu (misalnya frame header utama panel admin), sistem menyediakan fitur pengecualian otomatis dan terprogram:
+
+1. **Pengecualian Otomatis (Default)**:
+   - File [`admin/FileHeader.php`](../admin/FileHeader.php) secara bawaan telah masuk ke dalam daftar `$excludedScripts` di [`DevBar.php`](../src/Dev/DevBar.php). Dengan demikian, frame header atas Simbada tetap bersih 100% tanpa floating badge.
+
+2. **Pengecualian Terprogram via PHP**:
+   - Jika ingin mengecualikan halaman lain secara fleksibel:
+     ```php
+     // Mengecualikan nama skrip tertentu:
+     \App\Dev\DevBar::excludeScript('NamaHalaman.php');
+
+     // Atau menonaktifkan DevBar langsung untuk request aktif:
+     \App\Dev\DevBar::disable();
+     ```
+
 ---
 
 ## 5. Jaminan Keamanan di Lingkungan Produksi (Zero Leak)
@@ -147,6 +163,11 @@ Pengujian unit telah dijalankan melalui [`tests/test_devbar.php`](../tests/test_
 [PASS] Test 4: DevBar berhasil disuntikkan ke dalam dokumen HTML sebelum </body>.
 [PASS] Test 5: Response non-HTML/JSON terlindungi dan tidak disentuh.
 [PASS] Test 6: renderBarHtml menghasilkan markup CSS & JS yang terisolasi.
+[PASS] Test 7: Anti-Leak berhasil, tag </body> di dalam script/style diabaikan.
+[PASS] Test 8: Pengecualian FileHeader.php berhasil (Header atas tetap bersih 100%).
+[PASS] Test 9: excludeScript() berhasil mengecualikan skrip kustom.
+[PASS] Test 10: Method DevBar::disable() berhasil menonaktifkan runtime DevBar secara terprogram.
 
->>> SELURUH 6 PENGUJIAN DEVBAR BERHASIL 100% <<<
+>>> SELURUH 10 PENGUJIAN DEVBAR BERHASIL 100% <<<
 ```
+

@@ -62,4 +62,30 @@ $devBarPos = strpos($resJsHtml, 'SIMBADA DEVELOPER MODE FILE INSPECTOR');
 assert($devBarPos > $scriptEndPos, "DevBar HARUS disuntikkan setelah penutup </script>, bukan di dalam string script!");
 echo "[PASS] Test 7: Anti-Leak berhasil, tag </body> di dalam script/style diabaikan.\n";
 
-echo "\n>>> SELURUH 7 PENGUJIAN DEVBAR BERHASIL 100% <<<\n";
+// 8. Uji Pengecualian Frame Header Atas (FileHeader.php)
+$_SERVER['SCRIPT_FILENAME'] = 'd:/xampp/htdocs/migration-php-v2/admin/FileHeader.php';
+$dummyHeaderHtml = "<html><head><title>Simbada</title></head><body><div id=\"header\">Header Content</div></body></html>";
+$resHeader = DevBar::handleBuffer($dummyHeaderHtml);
+assert($resHeader === $dummyHeaderHtml, "DevBar WAJIB tidak disuntikkan ke FileHeader.php agar header atas tetap bersih!");
+assert(strpos($resHeader, 'SIMBADA DEVELOPER MODE FILE INSPECTOR') === false, "FileHeader.php tidak boleh memuat DevBar");
+echo "[PASS] Test 8: Pengecualian FileHeader.php berhasil (Header atas tetap bersih 100%).\n";
+
+// 9. Uji Penambahan Skrip Pengecualian Kustom via excludeScript()
+$_SERVER['SCRIPT_FILENAME'] = 'd:/xampp/htdocs/migration-php-v2/admin/CustomPage.php';
+DevBar::excludeScript('CustomPage.php');
+$dummyCustom = "<html><head><title>Custom</title></head><body><p>Content</p></body></html>";
+$resCustom = DevBar::handleBuffer($dummyCustom);
+assert($resCustom === $dummyCustom, "excludeScript() harus berhasil mengecualikan CustomPage.php dari DevBar");
+echo "[PASS] Test 9: excludeScript() berhasil mengecualikan skrip kustom.\n";
+
+// 10. Uji Method DevBar::disable()
+$_SERVER['SCRIPT_FILENAME'] = 'd:/xampp/htdocs/migration-php-v2/admin/NormalPage.php';
+DevBar::disable();
+assert(DevBar::isEnabled() === false, "DevBar::disable() harus membuat status isEnabled() menjadi false");
+$dummyNormal = "<html><head><title>Normal</title></head><body><p>Content</p></body></html>";
+$resDisabled = DevBar::handleBuffer($dummyNormal);
+assert($resDisabled === $dummyNormal, "handleBuffer harus mengembalikan raw buffer saat DevBar di-disable");
+echo "[PASS] Test 10: Method DevBar::disable() berhasil menonaktifkan runtime DevBar secara terprogram.\n";
+
+echo "\n>>> SELURUH 10 PENGUJIAN DEVBAR BERHASIL 100% <<<\n";
+

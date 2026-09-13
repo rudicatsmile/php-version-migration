@@ -15,6 +15,16 @@ class DevBar
     private static bool $enabled = false;
 
     /**
+     * Daftar nama skrip yang dikecualikan dari injeksi DevBar.
+     * FileHeader.php dikecualikan agar frame header utama Simbada tetap bersih.
+     *
+     * @var array<string>
+     */
+    private static array $excludedScripts = [
+        'FileHeader.php',
+    ];
+
+    /**
      * Inisialisasi DevBar.
      */
     public static function init(string $environment = 'development', ?bool $forceState = null): void
@@ -71,11 +81,35 @@ class DevBar
     }
 
     /**
+     * Menonaktifkan DevBar secara terprogram untuk request saat ini.
+     */
+    public static function disable(): void
+    {
+        self::$enabled = false;
+    }
+
+    /**
+     * Menambahkan nama skrip ke daftar pengecualian DevBar.
+     */
+    public static function excludeScript(string $scriptName): void
+    {
+        if (!in_array($scriptName, self::$excludedScripts, true)) {
+            self::$excludedScripts[] = $scriptName;
+        }
+    }
+
+    /**
      * Handler Output Buffering: Menempelkan DevBar ke output HTML halaman.
      */
     public static function handleBuffer(string $buffer): string
     {
         if (!self::$enabled || trim($buffer) === '') {
+            return $buffer;
+        }
+
+        // Cek apakah skrip saat ini termasuk dalam daftar yang dikecualikan (misal: FileHeader.php)
+        $currentScript = basename($_SERVER['SCRIPT_FILENAME'] ?? $_SERVER['SCRIPT_NAME'] ?? '');
+        if ($currentScript !== '' && in_array($currentScript, self::$excludedScripts, true)) {
             return $buffer;
         }
 

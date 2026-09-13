@@ -1,4 +1,5 @@
 1. Field ta_user.User_Sekolah
+
 2. Warning tidak  Boleh Dilewatkan atau Wajib Diperbaiki
     Alasan teknis:
 
@@ -9,4 +10,9 @@
             - Jika display_errors = On (atau diaktifkan saat debugging), teks peringatan PHP akan langsung tercetak ke output HTML. Hal ini merusak tata letak tag <input>/<form>, bahkan menyebabkan error fatal Cannot modify header information - headers already sent pada proses redirect.
         3. Pencemaran File Log (Log Pollution)
         4. Kepastian Logika Kontrol Tombol
-3. 
+
+3.  Cara kopi skrip aplikasi dari server agar tidak menyertakan image :
+       #zip -r simbada.zip html -x "html/admin/simandor/*" -x "html/admin/upload_img/*" -x "html/admin/upload_pdf/*"
+
+
+4. Cara insert file biner sudah di pindak ke file fisik

@@ -13,9 +13,17 @@ if (!defined('APP_ENV')) {
     define('APP_ENV', getenv('APP_ENV') ?: 'development');
 }
 
+// Opsi Tampilan Error di Layar Browser (display_errors)
+// false = Layar bersih dari Warning/Notice (direkomendasikan agar form & layout tidak rusak)
+// true  = Tampilkan error di layar browser saat membutuhkan debugging lokal langsung
+if (!defined('DISPLAY_ERRORS')) {
+    define('DISPLAY_ERRORS', false);
+}
+
 // 3. Inisialisasi Sistem Pencatatan Log Terpusat
+// Catatan: Seluruh Warning, Notice, dan Error tetap dicatat lengkap di file log (logs/app-YYYY-MM-DD.log)
 if (class_exists('App\Logging\Logger')) {
-    \App\Logging\Logger::init(__DIR__ . '/logs', APP_ENV);
+    \App\Logging\Logger::init(__DIR__ . '/logs', APP_ENV, DISPLAY_ERRORS);
 }
 
 // 4. Load MySQL PDO Compatibility Adapter

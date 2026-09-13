@@ -18,9 +18,13 @@ $todayFile = $logDir . '/app-' . date('Y-m-d') . '.log';
 // Catat ukuran awal log
 $initialSize = file_exists($todayFile) ? filesize($todayFile) : 0;
 
+// 0. Uji Pengaturan display_errors (Off pada mode aman)
+assert(ini_get('display_errors') === '0', "display_errors harus '0' saat DISPLAY_ERRORS diset false");
+echo "[0/5] Konfigurasi display_errors ('0' / Clean Screen)... OK\n";
+
 // 1. Uji manual logging
 Logger::log('INFO', 'Test log info manual', ['file' => __FILE__, 'line' => __LINE__]);
-echo "[1/4] Manual log testing... OK\n";
+echo "[1/5] Manual log testing... OK\n";
 
 // 2. Uji PHP Warning / Notice
 $dummyArray = ['a' => 1];

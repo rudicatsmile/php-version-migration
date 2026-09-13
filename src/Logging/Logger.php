@@ -16,7 +16,7 @@ class Logger
      * Inisialisasi sistem logging dan pasang global handlers.
      * Kompatibel penuh dengan PHP 8.2, 8.3, 8.4 dan versi transisi.
      */
-    public static function init(string $logDir, string $environment = 'development'): void
+    public static function init(string $logDir, string $environment = 'development', ?bool $displayErrors = null): void
     {
         if (self::$isInitialized) {
             return;
@@ -29,8 +29,14 @@ class Logger
             @mkdir(self::$logDir, 0755, true);
         }
 
-        // Konfigurasi PHP error display sesuai mode environment
-        if (self::$environment === 'production') {
+        // Konfigurasi PHP error display sesuai opsi eksplisit atau mode environment
+        if ($displayErrors !== null) {
+            $showErrors = $displayErrors ? '1' : '0';
+            ini_set('display_errors', $showErrors);
+            ini_set('display_startup_errors', $showErrors);
+            ini_set('log_errors', '1');
+            error_reporting(E_ALL);
+        } elseif (self::$environment === 'production') {
             ini_set('display_errors', '0');
             ini_set('display_startup_errors', '0');
             ini_set('log_errors', '1');

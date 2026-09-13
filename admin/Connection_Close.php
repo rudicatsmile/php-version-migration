@@ -1,4 +1,8 @@
 <?php
 //echo $TimeZ;
-mysql_close($ConSB);
+if (isset($ConSB) && $ConSB) {
+	mysql_close($ConSB);
+} else {
+	mysql_close();
+}
 ?>

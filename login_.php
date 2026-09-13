@@ -60,4 +60,11 @@ else
 	header("Location: ".$URL);
 }
 ?>
-<?php require('Connection_Close.php');?>
+<?php
+if (file_exists(__DIR__ . '/admin/Connection_Close.php')) {
+	require_once __DIR__ . '/admin/Connection_Close.php';
+} elseif (file_exists(__DIR__ . '/Connection_Close.php')) {
+	require_once __DIR__ . '/Connection_Close.php';
+}
+?>
+

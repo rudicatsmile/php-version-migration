@@ -347,7 +347,9 @@
 		<?php } ?> <!-- end dari if ($SEN=='YA')-->
 	</ul>
 </div>
-<?php if ($FrmG){?>
+<?php
+$FrmG = isset($FrmG) ? $FrmG : ($_GET['FrmG'] ?? $_POST['FrmG'] ?? '');
+if (!empty($FrmG)){?>
 	<div class="titleform">
 		<table cellpadding="0" cellspacing="0" style="height:100%; border-collapse:collapse">
 			<tr>

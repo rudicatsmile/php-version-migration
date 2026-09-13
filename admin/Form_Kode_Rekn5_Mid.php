@@ -11,8 +11,14 @@
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
 <?php
-$rIDT = $_REQUEST['rIDT'];
-$Sbmt  = "";
+$rIDT = $_REQUEST['rIDT'] ?? '';
+$Sbmt = "";
+$gCod = "";
+$gNma = "";
+$gBid = "";
+$gKel = "";
+$gJNS = "";
+$gOBJ = "";
 if ($rIDT!="")
 {
 	$nSQ = "SELECT * FROM ref_rek_5 WHERE IDT='".$rIDT."'";
@@ -31,16 +37,16 @@ if ($rIDT!="")
 }
 else
 {
-	if ($_REQUEST['gBid']!="")
+	if (!empty($_REQUEST['gBid']))
 	{
 		$gBid  = $_REQUEST['gBid'];
-		$gKel  = $_REQUEST['gKel'];
-		$gJNS  = $_REQUEST['gJNS'];
-		$gOBJ  = $_REQUEST['gOBJ'];
+		$gKel  = $_REQUEST['gKel'] ?? '';
+		$gJNS  = $_REQUEST['gJNS'] ?? '';
+		$gOBJ  = $_REQUEST['gOBJ'] ?? '';
 	}
 	else
 	{
-		$gCod  = $_REQUEST['KdRek4'];
+		$gCod  = $_REQUEST['KdRek4'] ?? '';
 		$gBid  = substr($gCod,0,1);
 		$gKel  = substr($gCod,0,3);
 		$gJNS  = substr($gCod,0,5);
@@ -51,7 +57,7 @@ else
 }
 ?>
 <body>
-<form name="myfrm" method="post" action="<?php echo "Form_Kode_Rekn5_Mid_.php?IdL=".$_REQUEST['IdL']."&rIDT=".$rIDT ?>">
+<form name="myfrm" method="post" action="<?php echo "Form_Kode_Rekn5_Mid_.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&rIDT=".$rIDT ?>">
   <input type="hidden" name="Simpan">
   <table border="0" width="663" cellspacing="1" style="font-family: Calibri; font-size: 10pt; border-collapse: collapse">
     <tr>

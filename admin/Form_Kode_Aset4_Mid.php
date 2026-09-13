@@ -11,8 +11,18 @@
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
 <?php
-$rIDT = $_GET['rIDT'];
-$Sbmt  = "";
+$rIDT = $_REQUEST['rIDT'] ?? '';
+$Sbmt = "";
+$gCod = '';
+$gNma = '';
+$gUMR = 0;
+$gEXT = 0;
+$gBid = '';
+$gKel = '';
+$gJNS = '';
+$zBid = '';
+$zKel = '';
+$zJNS = '';
 if ($rIDT!="")
 {
 	$nSQ = "SELECT * FROM ref_rek_aset4 WHERE IDT='".$rIDT."'";
@@ -35,15 +45,15 @@ else
 	$gNma  = "";
 	$gUMR  = 0;
 	$gEXT  = 0;
-	if ($_GET['gBid']!="")
+	if (!empty($_REQUEST['gBid']))
 	{
-		$gBid  = $_GET['gBid'];
-		$gKel  = $_GET['gKel'];
-		$gJNS  = $_GET['gJNS'];
+		$gBid  = $_REQUEST['gBid'];
+		$gKel  = $_REQUEST['gKel'] ?? '';
+		$gJNS  = $_REQUEST['gJNS'] ?? '';
 	}
 	else
 	{
-		$gCod  = $_GET['KdAst3'];
+		$gCod  = $_REQUEST['KdAst3'] ?? '';
 		$gBid  = substr($gCod,0,2);
 		$gKel  = substr($gCod,0,5);
 		$gJNS  = substr($gCod,0,8);
@@ -53,7 +63,7 @@ else
 }
 ?>
 <body>
-<form name="myfrm" method="post" action="<?php echo "Form_Kode_Aset4_Mid_.php?IdL=".$_GET['IdL']."&rIDT=".$rIDT ?>">
+<form name="myfrm" method="post" action="<?php echo "Form_Kode_Aset4_Mid_.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&rIDT=".$rIDT ?>">
   <input type="hidden" name="Simpan">
   <input type="hidden" name="fDL">
   <input type="hidden" name="fExtra" value="0">

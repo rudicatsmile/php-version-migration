@@ -5,7 +5,7 @@ if (isset($_POST['IdL']))
 }
 else
 {
-	$eIdL = $_GET['IdL'];
+	$eIdL = $_GET['IdL'] ?? '';
 }
 
 $UID = fGlobal("User_ID","ta_user_log","IDT",$eIdL,"=","","");
@@ -15,12 +15,12 @@ $SkP = fFindData("Kode",$UID,"");
 $ReO = fFindData("Readonly",$UID,"");
 $SEN = fFindData("User_Sekolah",$UID,"");
 $CetakBC = fFindData("Cetak_Barcode",$UID,"");
-
+$xMen = (!empty($UID) && fGlobal("IDT","ta_user_mentor","userid",$UID,"=","","")) ? "Ya" : "Tidak";
 
 #echo base64_decode(base64_decode("TVRJek5EVTI="));
 #return false;
 
-$OnL = fGlobal("Online","ta_user_log","IDT",$_GET['IdL'],"=","","");
+$OnL = fGlobal("Online","ta_user_log","IDT",$eIdL,"=","","");
 
 if ($OnL=="N")
 {

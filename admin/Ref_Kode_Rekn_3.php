@@ -14,24 +14,24 @@ extract($_GET);
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
 <?php
-$KdRek1=$_GET['KdRek1'];
-$KdRek2=$_GET['KdRek2'];
+$KdRek1 = $_GET['KdRek1'] ?? '';
+$KdRek2 = $_GET['KdRek2'] ?? '';
 ?>
 <body>
 <?php require "FileMenu.php";?>
-<form name="myfrm" method="post" action="<?="Ref_Kode_Rekn_3_.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']."&KdRek1=".$KdRek1."&KdRek2=".$KdRek2 ?>">
+<form name="myfrm" method="post" action="<?="Ref_Kode_Rekn_3_.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')."&KdRek1=".$KdRek1."&KdRek2=".$KdRek2 ?>">
   <input type="hidden" name="Simpan">
   <input type="hidden" name="CritIDT" size="10">
   <table border="0" align="center" cellspacing="1" style="font-size: 10pt; font-family: Calibri; border-collapse: collapse; text-transform: uppercase; font-weight: bold; width:900px">
     <tr> 
-      <td width="92"><a href="<?="Ref_Kode_Rekn_1.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>">&lt;&lt; - BIDANG</a></td>
+      <td width="92"><a href="<?="Ref_Kode_Rekn_1.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>">&lt;&lt; - BIDANG</a></td>
       <td width="15">&nbsp;</td>
-      <td width="970"><a href="<?="Ref_Kode_Rekn_1.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>"><?=$KdRek1." : ".fGlobal("Nm_Rek","Ref_Rek_1","Kd_Rek",$KdRek1,"=","","")?></a></td>
+      <td width="970"><a href="<?="Ref_Kode_Rekn_1.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>"><?=$KdRek1." : ".fGlobal("Nm_Rek","Ref_Rek_1","Kd_Rek",$KdRek1,"=","","")?></a></td>
     </tr>
     <tr> 
-      <td><a href="<?="Ref_Kode_Rekn_2.php?KdRek1=".$KdRek1."&FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>">&lt;&lt; - KELOMPOK</a></td>
+      <td><a href="<?="Ref_Kode_Rekn_2.php?KdRek1=".$KdRek1."&FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>">&lt;&lt; - KELOMPOK</a></td>
       <td>&nbsp;</td>
-      <td><a href="<?="Ref_Kode_Rekn_2.php?KdRek1=".$KdRek1."&FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>"><?=$KdRek2." : ".fGlobal("Nm_Rek","Ref_Rek_2","Kd_Rek",$KdRek2,"=","","")?></a></td>
+      <td><a href="<?="Ref_Kode_Rekn_2.php?KdRek1=".$KdRek1."&FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>"><?=$KdRek2." : ".fGlobal("Nm_Rek","Ref_Rek_2","Kd_Rek",$KdRek2,"=","","")?></a></td>
     </tr>
     <tr>
       <td>&nbsp;</td>
@@ -61,10 +61,11 @@ $KdRek2=$_GET['KdRek2'];
 			if ($Lev>1)
 			{
 				$nDel="NoDel";
+				$zRo=0;
 			}
 			else
 			{
-				$mSQL= "SELECT Kd_Rek FROM ref_rek_4 WHERE Kd_Rek LIKE '".$mRo['Kd_Rek'].".__' LIMIT 0,1";
+				$mSQL= "SELECT Kd_Rek, Nm_Rek FROM ref_rek_4 WHERE Kd_Rek LIKE '".$mRo['Kd_Rek'].".__' ORDER BY Kd_Rek";
 				$mRs = mysql_query($mSQL) or die(mysql_error());
 				$zRo = mysql_num_rows($mRs);
 				if ($zRo > 0)
@@ -78,8 +79,8 @@ $KdRek2=$_GET['KdRek2'];
         <td style="border-bottom: 1px dotted #CCCCCC" onclick="$(&#39;#detail<?=$iG?>&#39;).toggle(&#39;past&#39;)" <?=fBackCLR($iG)?>><?=$mRo['Kd_Rek']?></td>
         <td style="border-bottom: 1px dotted #CCCCCC" onclick="$(&#39;#detail<?=$iG?>&#39;).toggle(&#39;past&#39;)" <?=fBackCLR($iG)?>><?=$mRo['Nm_Rek']?></td>
         <td style="border-bottom: 1px dotted #CCCCCC" class="ac" <?=fBackCLR($iG)?>>
-		[&nbsp;<a href="<?="Ref_Kode_Rekn_4.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&KdRek1=".$_GET['KdRek1']."&KdRek2=".$_GET['KdRek2']."&KdRek3=".$mRo['Kd_Rek']?>" class="ico prev">VIEW</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
-		[&nbsp;<a href="#" class="ico edit" onclick="EditData('800','450','<?=$Lev?>','<?=$mRo['IDT']?>','<?=$_GET['FrmG']?>','<?=$_GET['IdL']?>'); return false;">EDIT</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
+		[&nbsp;<a href="<?="Ref_Kode_Rekn_4.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&KdRek1=".($_GET['KdRek1'] ?? '')."&KdRek2=".($_GET['KdRek2'] ?? '')."&KdRek3=".$mRo['Kd_Rek']?>" class="ico prev">VIEW</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
+		[&nbsp;<a href="#" class="ico edit" onclick="EditData('800','450','<?=$Lev?>','<?=$mRo['IDT']?>','<?=($_GET['FrmG'] ?? '')?>','<?=($_GET['IdL'] ?? '')?>'); return false;">EDIT</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
 		[&nbsp;<a href="#" class="ico del" onclick="P_DeleteR('<?=$mRo['IDT']?>','<?=$nDel?>','<?=$ReO?>')">DELETE</a>&nbsp;]
 		</td>
       </tr>
@@ -88,7 +89,7 @@ $KdRek2=$_GET['KdRek2'];
             <?php
 			if ($zRo > 0)
 			{
-			do
+				while ($rRo = mysql_fetch_assoc($mRs))
 				{
 				?>
             <tr> 
@@ -104,8 +105,7 @@ $KdRek2=$_GET['KdRek2'];
             </tr>
             <?php
 				}
-					while ($rRo = mysql_fetch_assoc($mRs));	
-				}
+			}
 				else
 				{
 				?>
@@ -138,14 +138,14 @@ $KdRek2=$_GET['KdRek2'];
       <tr height="30">
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
         <td colspan="2" style="border-top:1px solid #CCCCCC">
-		[&nbsp;<a href="#" class="ico add" onclick="AddItem('800','450','<?=$Lev?>','<?=$KdRek2?>','<?=$_GET['FrmG']?>','<?=$_GET['IdL']?>'); return false;">&nbsp;ADD ITEM</a>&nbsp;]&nbsp;&nbsp;&nbsp;
-		[&nbsp;<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']."&KdRek1=".$KdRek1."&KdRek2=".$KdRek2?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]</td>
+		[&nbsp;<a href="#" class="ico add" onclick="AddItem('800','450','<?=$Lev?>','<?=$KdRek2?>','<?=($_GET['FrmG'] ?? '')?>','<?=($_GET['IdL'] ?? '')?>'); return false;">&nbsp;ADD ITEM</a>&nbsp;]&nbsp;&nbsp;&nbsp;
+		[&nbsp;<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')."&KdRek1=".$KdRek1."&KdRek2=".$KdRek2?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]</td>
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
       </tr>
     </table>
 	  <?php
 		$nSQL= "SELECT COUNT(*) AS JmlRc FROM ref_rek_3 WHERE Kd_Rek LIKE '".$KdRek2."._'";
-		$fUlrR= "FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&KdRek1=".$KdRek1."&KdRek2=".$KdRek2."&";
+		$fUlrR= "FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&KdRek1=".$KdRek1."&KdRek2=".$KdRek2."&";
 		include "FilePagingBot2.php";
 	  ?>
 </form>
@@ -189,7 +189,7 @@ $KdRek2=$_GET['KdRek2'];
 		{
 			win.window.document.open()       			
 			URL_Top = "Form_Kode_Rekn3_Top.php?FrmG="+FrmG+"&IdL="+IdL;
-			URL_Mid = "Form_Kode_Rekn3_Mid.php?KdRek2="+KdRek2+"&IdL="+IdL;
+			URL_Mid = "Form_Kode_Rekn3_Mid.php?KdRek2="+KdRek2+"&FrmG="+FrmG+"&IdL="+IdL;
 			URL_Bot = "Form_Kode_Rekn3_Bot.php";
 			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormKIB_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFormKIB_Mid' src='"+URL_Mid+"' scrolling='auto'><frame name='WinFormKIB_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
 			win.focus()
@@ -214,7 +214,7 @@ $KdRek2=$_GET['KdRek2'];
 		{
 			win.window.document.open()       			
 			URL_Top = "Form_Kode_Rekn3_Top.php?FrmG="+FrmG+"&IdL="+IdL;
-			URL_Mid = "Form_Kode_Rekn3_Mid.php?rIDT="+IDT+"&IdL="+IdL;
+			URL_Mid = "Form_Kode_Rekn3_Mid.php?rIDT="+IDT+"&FrmG="+FrmG+"&IdL="+IdL;
 			URL_Bot = "Form_Kode_Rekn3_Bot.php";
 			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormKIB_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFormKIB_Mid' src='"+URL_Mid+"' scrolling='auto'><frame name='WinFormKIB_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
 			win.focus()

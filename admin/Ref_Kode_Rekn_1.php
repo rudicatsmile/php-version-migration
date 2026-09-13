@@ -15,7 +15,7 @@ extract($_GET);
 </head>
 <body>
 <?php require "FileMenu.php";?>
-<form name="myfrm" method="post" action="<?php echo "Ref_Kode_Rekn_1_.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']?>">
+<form name="myfrm" method="post" action="<?php echo "Ref_Kode_Rekn_1_.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')?>">
   <input type="hidden" name="Simpan">
   <input type="hidden" name="CritIDT" size="10">
     <table align="center" class="table-list" border="0" cellspacing="0" cellpadding="0" style="width:900px">
@@ -40,10 +40,11 @@ extract($_GET);
 			if ($Lev>1)
 			{
 				$nDel="NoDel";
+				$zRo=0;
 			}
 			else
 			{
-				$mSQL= "SELECT Kd_Rek FROM ref_rek_2 WHERE Kd_Rek LIKE '".$mRo['Kd_Rek']."._' LIMIT 0,1";
+				$mSQL= "SELECT Kd_Rek, Nm_Rek FROM ref_rek_2 WHERE Kd_Rek LIKE '".$mRo['Kd_Rek']."._' ORDER BY Kd_Rek";
 				$mRs = mysql_query($mSQL) or die(mysql_error());
 				$zRo = mysql_num_rows($mRs);
 				if ($zRo > 0)
@@ -57,8 +58,8 @@ extract($_GET);
         <td style="border-bottom: 1px dotted #CCCCCC" onclick="$(&#39;#detail<?=$iG?>&#39;).toggle(&#39;past&#39;)" <?=fBackCLR($iG)?>><?=$mRo['Kd_Rek']?></td>
         <td style="border-bottom: 1px dotted #CCCCCC" onclick="$(&#39;#detail<?=$iG?>&#39;).toggle(&#39;past&#39;)" <?=fBackCLR($iG)?>><?=$mRo['Nm_Rek']?></td>
         <td style="border-bottom: 1px dotted #CCCCCC" class="ac" <?=fBackCLR($iG)?>>
-		[&nbsp;<a href="<?="Ref_Kode_Rekn_2.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&KdRek1=".$mRo['Kd_Rek']?>" class="ico prev">VIEW</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
-		[&nbsp;<a href="#" class="ico edit" onclick="EditData('800','450','<?=$Lev?>','<?=$mRo['IDT']?>','<?=$_GET['FrmG']?>','<?=$_GET['IdL']?>'); return false;">EDIT</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
+		[&nbsp;<a href="<?="Ref_Kode_Rekn_2.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&KdRek1=".$mRo['Kd_Rek']?>" class="ico prev">VIEW</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
+		[&nbsp;<a href="#" class="ico edit" onclick="EditData('800','450','<?=$Lev?>','<?=$mRo['IDT']?>','<?=($_GET['FrmG'] ?? '')?>','<?=($_GET['IdL'] ?? '')?>'); return false;">EDIT</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
 		[&nbsp;<a href="#" class="ico del" onclick="P_DeleteR('<?=$mRo['IDT']?>','<?=$nDel?>','<?=$ReO?>')">DELETE</a>&nbsp;]
 		</td>
       </tr>
@@ -67,7 +68,7 @@ extract($_GET);
             <?php
 			if ($zRo > 0)
 			{
-			do
+				while ($rRo = mysql_fetch_assoc($mRs))
 				{
 				?>
             <tr> 
@@ -83,8 +84,7 @@ extract($_GET);
             </tr>
             <?php
 				}
-					while ($rRo = mysql_fetch_assoc($mRs));	
-				}
+			}
 				else
 				{
 				?>
@@ -116,14 +116,14 @@ extract($_GET);
 		?>
       <tr height="30">
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
-        <td colspan="2" style="border-top:1px solid #CCCCCC">[&nbsp;<a href="#" class="ico add" onclick="AddItem('800','450','<?=$Lev?>','<?=$_GET['FrmG']?>','<?=$_GET['IdL']?>'); return false;">&nbsp;ADD ITEM</a>&nbsp;]&nbsp;&nbsp;&nbsp;[&nbsp;
-		<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]</td>
+        <td colspan="2" style="border-top:1px solid #CCCCCC">[&nbsp;<a href="#" class="ico add" onclick="AddItem('800','450','<?=$Lev?>','<?=($_GET['FrmG'] ?? '')?>','<?=($_GET['IdL'] ?? '')?>'); return false;">&nbsp;ADD ITEM</a>&nbsp;]&nbsp;&nbsp;&nbsp;[&nbsp;
+		<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]</td>
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
       </tr>
     </table>
 	  <?php
 		$nSQL= "SELECT COUNT(*) AS JmlRc FROM ref_rek_1";
-		$fUlrR= "FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&";
+		$fUlrR= "FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&";
 		include "FilePagingBot2.php";
 	  ?>
 </form>
@@ -192,7 +192,7 @@ extract($_GET);
 		{
 			win.window.document.open()       			
 			URL_Top = "Form_Kode_Rekn1_Top.php?FrmG="+FrmG;
-			URL_Mid = "Form_Kode_Rekn1_Mid.php?rIDT="+IDT+"&IdL="+IdL;
+			URL_Mid = "Form_Kode_Rekn1_Mid.php?rIDT="+IDT+"&FrmG="+FrmG+"&IdL="+IdL;
 			URL_Bot = "Form_Kode_Rekn1_Bot.php";
 			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormKIB_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFormKIB_Mid' src='"+URL_Mid+"' scrolling='auto'><frame name='WinFormKIB_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
 			win.focus()

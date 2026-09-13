@@ -1,9 +1,9 @@
 <?php
 require('Connection.php');
 require('FileFunction.php');
-$Smp    = $_REQUEST['Simpan'];
-$rIDT   = $_REQUEST['rIDT'];
-$gNmA   = $_REQUEST['fNama'];
+$Smp    = $_REQUEST['Simpan'] ?? '';
+$rIDT   = $_REQUEST['rIDT'] ?? '';
+$gNmA   = $_REQUEST['fNama'] ?? '';
 
 if ($Smp=="Save")
 	{
@@ -29,12 +29,12 @@ if ($Smp=="Save")
 			
 			$rIDT = fGlobal("IDT","Ref_Rek_1","Kd_Rek","_","LIKE","IDT desc LIMIT 1","");
 		}
-		$URL="Form_Kode_Rekn1_Mid.php?FrmG=".$_REQUEST['FrmG']."&IdL=".$_REQUEST['IdL']."&rIDT=".$rIDT;
+		$URL="Form_Kode_Rekn1_Mid.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&rIDT=".$rIDT;
 		header("Location: ".$URL);
 	}
 else if ($Smp=="Reset")
 	{
-		$URL="Form_Kode_Rekn1_Mid.php?IdL=".$_REQUEST['IdL'];
+		$URL="Form_Kode_Rekn1_Mid.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '');
 		header("Location: ".$URL);
 	}
 else if ($Smp=="Close")

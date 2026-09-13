@@ -8,16 +8,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
 <?php
-$rIDT = $_REQUEST['rIDT'];
-$IdL  = $_REQUEST['IdL'];
+$rIDT = $_REQUEST['rIDT'] ?? '';
+$IdL  = $_REQUEST['IdL'] ?? '';
+$MsG  = $_REQUEST['gMsG'] ?? $_REQUEST['MsG'] ?? '';
 $gUid = fGlobal("User_ID","Ta_User_Log","IDT",$IdL,"=","","");
 
-$gTmp="";
+$gTmp = "";
+$gJdl = "";
+$gInf = "";
 if ($rIDT!="")
 {
 	$nSQL= "SELECT * FROM ta_informasi WHERE IDT = '".$rIDT."'";
 	$nRs = mysql_query($nSQL) or die(mysql_error());
 	$mRo = mysql_fetch_assoc($nRs);
+	if ($mRo)
 	{
 		$gJdl  = $mRo['Header'];
 		$gInf  = $mRo['Informasi'];
@@ -29,7 +33,7 @@ if ($rIDT!="")
 }
 ?>
 <body>
-<form name="myfrm" method="POST" action="<?php echo "Form_Info_Mid_.php?rIDT=".$rIDT."&IdL=".$_REQUEST['IdL'] ?>" enctype="multipart/form-data">
+<form name="myfrm" method="POST" action="<?php echo "Form_Info_Mid_.php?rIDT=".$rIDT."&IdL=".($_REQUEST['IdL'] ?? '') ?>" enctype="multipart/form-data">
 <input type="hidden" name="fSimpan">
 <table border="0" width="561" cellspacing="1" align="center" style="font-family: Calibri; font-size: 9pt; border-collapse: collapse" id="table1">
 	<tr>

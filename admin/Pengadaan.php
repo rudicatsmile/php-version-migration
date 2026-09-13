@@ -99,9 +99,11 @@ if ($JalanKAN=="YA")
 </head>
 <?php
 extract($_GET);
+$FrmG = $_GET['FrmG'] ?? '';
+$IdL  = $_GET['IdL'] ?? '';
 if (isset($_GET['gUnt'])) {$gUnt = $_GET['gUnt'];} else {$gUnt = "";}
 if (isset($_GET['gFin'])) {$gFin = $_GET['gFin'];} else {$gFin = "";}
-if (isset($_GET['gThn'])) {$gThn = $_GET['gThn'];} else {$gThn = $tTbl;}
+if (isset($_GET['gThn'])) {$gThn = $_GET['gThn'];} else {$gThn = $tTbl ?? date('Y');}
 if (isset($_GET['gSem'])) {$gSem = $_GET['gSem'];} else {$gSem = 2;}
 if (isset($_GET['gAst'])) {$gAst = $_GET['gAst'];} else {$gAst = "";}
 
@@ -111,14 +113,27 @@ if (isset($_GET['gSB'])) {$gSB = $_GET['gSB'];} else {$gSB = "";}
 if (isset($_GET['gRK'])) {$gRK = $_GET['gRK'];} else {$gRK = "";}
 if (isset($_GET['gUT'])) {$gUT = $_GET['gUT'];} else {$gUT = "";}
 
-if (isset($_GET['gPer'])) {$gPer = $_GET['gPer'];} else {$gPer = $tTbl;}
-if (isset($_GET['gApb'])) {$gApb = $_GET['gApb'];} else {$gApb = $uTbl;}
+if (isset($_GET['gPer'])) {$gPer = $_GET['gPer'];} else {$gPer = $tTbl ?? date('Y');}
+if (isset($_GET['gApb'])) {$gApb = $_GET['gApb'];} else {$gApb = $uTbl ?? "0";}
 
 $gFin = addslashes($gFin);
+
+$zUnt = $gUnt;
+$zPR  = $gPR;
+$zKG  = $gKG;
+$zSB  = $gSB;
+$zRK  = $gRK;
+$zPB  = $gUT;
+$zSub = "";
+$zUpb = "";
+$zBid = "";
+if (!isset($xMen)) {
+    $xMen = (!empty($UID) && fGlobal("IDT","ta_user_mentor","userid",$UID,"=","","")) ? "Ya" : "Tidak";
+}
 ?>
 <body>
 <?php require "FileMenu.php";?>
-<form name="myfrm" method="post" action="<?php echo "Pengadaan_.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL'] ?>">
+<form name="myfrm" method="post" action="<?php echo "Pengadaan_.php?FrmG=".urlencode($FrmG)."&IdL=".$IdL ?>">
   <input type="hidden" name="Simpan">
   <input type="hidden" name="CritIDT" size="10">
   <table border="0" align="center" width="1858" style="">
@@ -476,13 +491,15 @@ $gFin = addslashes($gFin);
 		FROM ta_pengadaan P1 
 		LEFT JOIN ta_penerimaan_berkas P2 ON P2.Nomor=P1.No_Berkas 
 		WHERE P2.Kd_SubKegiatan LIKE '$SyTKG' AND P2.Kd_Rek13 LIKE '$SyTRK' 
-		AND P1.Kd_Aset_108 LIKE '".$gAst."%' AND P1.Peruntukan LIKE '".$zPB."%' 
+		AND P1.Kd_Aset_108 LIKE '".$gAst."%' AND P1.Kd_Peruntukan LIKE '".$zPB."%' 
 		AND $eTG AND P1.Kd_Unit LIKE '".$zUnt."' ".$fFindSy." 
 		ORDER BY P1.No_Berkas, P1.Tanggal, P1.Nomor LIMIT $Offset, $DataPerPage";
 		#echo $nSQL;
 		$nRs = mysql_query($nSQL) or die(mysql_error());
 		$mRo = mysql_fetch_assoc($nRs);
 		$tRo = mysql_num_rows($nRs);
+		$mNilai = 0;
+		$mNilP  = 0;
 		if ($tRo > 0)
 		{
 		do
@@ -633,9 +650,9 @@ $gFin = addslashes($gFin);
 			
 			$nSQL= "SELECT COUNT(*) AS JmlRc FROM ta_pengadaan P1 LEFT JOIN ta_penerimaan_berkas P2 ON P2.Nomor=P1.No_Berkas 
 			WHERE P2.Kd_Kegiatan LIKE '$SyTKG' AND P2.Kd_Rek13 LIKE '$SyTRK' 
-			AND P1.Kd_Aset_108 LIKE '".$gAst."%' 
+			AND P1.Kd_Aset_108 LIKE '".$gAst."%' AND P1.Kd_Peruntukan LIKE '".$zPB."%' 
 			AND P1.Tanggal LIKE '".$gThn."-%-%' AND P1.Kd_Unit LIKE '".$zUnt."' ".$fFindSy;
-			$fUlrR= "FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&gAst=".$gAst."&gFin=".$gFin."&gThn=".$gThn."&gPR=".$gPR."&gKG=".$gKG."&gRK=".$gRK."&gUnt=".$zUnt."&";
+			$fUlrR= "FrmG=".urlencode($FrmG)."&IdL=".$IdL."&gAst=".$gAst."&gFin=".$gFin."&gThn=".$gThn."&gPR=".$gPR."&gKG=".$gKG."&gRK=".$gRK."&gUnt=".$zUnt."&";
 			include "FilePagingBot_Pengadaan.php";
    		  ?>
         </div>
@@ -683,8 +700,8 @@ $gFin = addslashes($gFin);
     			{
       				win.window.document.open()       			
 					<?php
-						$URL_Top = "Pengadaan_Top.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL'];
-						$URL_Mid = "Pengadaan_Mid.php?gUnt=".$zUnt."&gSub=".$zSub."&gUpb=".$zUpb."&gBid=".$zBid."&IdL=".$_GET['IdL'];
+						$URL_Top = "Pengadaan_Top.php?FrmG=".urlencode($FrmG)."&IdL=".$IdL;
+						$URL_Mid = "Pengadaan_Mid.php?gUnt=".$zUnt."&gSub=".$zSub."&gUpb=".$zUpb."&gBid=".$zBid."&IdL=".$IdL;
 						$URL_Bot = "Pengadaan_Bot.php";
 					?>       			
        			txtHTML="<html><head><title>Simbada</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormPNG_Top' noresize src='<?php echo $URL_Top?>' scrolling='no'><frame name='WinFormPNG_Mid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='WinFormPNG_Bot' src= '<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"

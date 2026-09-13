@@ -7,8 +7,8 @@
 <title>Simbada Kab. Hulu Sungai Tengah</title>
 </head>
 <?php
-$CrT = $_GET['CrT'];
-$gKD = $_GET['gKD'];
+$CrT = $_GET['CrT'] ?? '';
+$gKD = $_GET['gKD'] ?? '';
 ?>
 <body>
 <table width="670" border="0" cellspacing="0" cellpadding="0" align="center" style="font-weight:bold; font-family:Calibri, Arial; font-size:11pt; border-collapse: collapse">
@@ -161,8 +161,9 @@ $gKD = $_GET['gKD'];
 			while ($mRD = mysql_fetch_assoc($nRD));	
 		}
 	}
-	function Data_fRIN($gOBJ)
+	function Data_fRIN($gOBJ, $fSH = "")
 	{
+		$iGE = 0;
 		$SQE="SELECT * FROM ref_rek_aset5 WHERE Kd_Aset LIKE '".$gOBJ."%' ORDER BY Kd_Aset";
 		if ($fSH!="") {echo $SQE."<br>";}
 		$nRE = mysql_query($SQE) or die(mysql_error());
@@ -175,8 +176,9 @@ $gKD = $_GET['gKD'];
 			$gA = $mRE['Kd_Aset'];
 			$gB = $mRE['Nm_Aset'];
 			$xB = "";
-			if ($iGC>0) {gViewRows();}
+			if ($iGE>0) {gViewRows();}
 			gViewData($gA,$gB,$xB);
+			$iGE++;
 			}
 			while ($mRE = mysql_fetch_assoc($nRE));	
 		}

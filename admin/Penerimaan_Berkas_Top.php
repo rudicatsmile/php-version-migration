@@ -9,7 +9,7 @@
   <tr>
 		
     <td height="30" width="377" style="font-family: calibri; font-size: 14pt; font-weight: bold; color: #E1F986; font-style:italic"> 
-      <?php echo $_REQUEST['FrmG']?>    </td>
+      <?php echo $_REQUEST['FrmG'] ?? '' ?>    </td>
   </tr>
 </table>
 </body>

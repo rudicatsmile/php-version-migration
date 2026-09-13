@@ -11,18 +11,18 @@
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
 <?php
-$IdRef1=$_GET['IdRef1'];
+$IdRef1 = $_GET['IdRef1'] ?? '';
 ?>
 <body>
 <?php require "FileMenu.php";?>
-<form name="myfrm" method="post" action="<?php echo "Ref_ProKeg_2_.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']."&IdRef1=".$IdRef1?>">
+<form name="myfrm" method="post" action="<?php echo "Ref_ProKeg_2_.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')."&IdRef1=".$IdRef1?>">
   <input type="hidden" name="Simpan">
   <input type="hidden" name="CritIDT" size="10">
 	<table border="0" align="center" cellspacing="1" style="font-size: 10pt; font-family: Calibri; border-collapse: collapse; text-transform: uppercase; font-weight: bold; width:99%">
 		<tr> 
-		  <td width="92"><a href="<?php echo "Ref_ProKeg_1.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>">&lt;&lt; - URUSAN</a></td>
+		  <td width="92"><a href="<?php echo "Ref_ProKeg_1.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>">&lt;&lt; - URUSAN</a></td>
 		  <td width="15">&nbsp;</td>
-		  <td width="970"><a href="<?php echo "Ref_ProKeg_1.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>"><?=$IdRef1." : ".fGlobal("Nm_Referensi","Ref_Kegiatan","Id_Referensi",$IdRef1,"=","","")?></a></td>
+		  <td width="970"><a href="<?php echo "Ref_ProKeg_1.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>"><?=$IdRef1." : ".fGlobal("Nm_Referensi","Ref_Kegiatan","Id_Referensi",$IdRef1,"=","","")?></a></td>
 		</tr>
 		<tr>
 		  <td width="83">&nbsp;</td>
@@ -51,12 +51,12 @@ $IdRef1=$_GET['IdRef1'];
 			{
 			if ($Lev>1){
 				$nDel="NoDel";
+				$zRo=0;
 			}
 			else
 			{
 				$mSQL= "SELECT * FROM ref_kegiatan WHERE Id_Referensi LIKE '".$mRo['Id_Referensi'].".__' ORDER BY Id_Referensi";
 				$mRs = mysql_query($mSQL) or die(mysql_error());
-				$rRo = mysql_fetch_assoc($mRs);
 				$zRo = mysql_num_rows($mRs);
 				if ($zRo > 0)
 					{$nDel="NoDel";}
@@ -64,13 +64,13 @@ $IdRef1=$_GET['IdRef1'];
 					{$nDel="";}
 			}
 			?>
-      <tr height="22" style="cursor: pointer" title="clik disini untuk melihat rincian...!" onmouseover="this.style.cursor=&#39;pointer&#39"> 
+      <tr height="22" style="cursor: pointer" title="clik disini untuk melihat rincian...!" onmouseover="this.style.cursor='pointer'"> 
         <td <?=fBackCLR($iG)?> style="border-bottom: 1px dotted #CCCCCC; text-align:center"><?=$iG?>.</td>
-        <td style="border-bottom: 1px dotted #CCCCCC" onclick="$(&#39;#detail<?=$iG?>&#39;).toggle(&#39;past&#39;)" <?=fBackCLR($iG)?>><?=$mRo['Id_Referensi']?></td>
-        <td style="border-bottom: 1px dotted #CCCCCC" onclick="$(&#39;#detail<?=$iG?>&#39;).toggle(&#39;past&#39;)" <?=fBackCLR($iG)?>><?=$mRo['Nm_Referensi']?></td>
+        <td style="border-bottom: 1px dotted #CCCCCC" onclick="$('#detail<?=$iG?>').toggle('past')" <?=fBackCLR($iG)?>><?=$mRo['Id_Referensi']?></td>
+        <td style="border-bottom: 1px dotted #CCCCCC" onclick="$('#detail<?=$iG?>').toggle('past')" <?=fBackCLR($iG)?>><?=$mRo['Nm_Referensi']?></td>
         <td style="border-bottom: 1px dotted #CCCCCC" class="ac" <?=fBackCLR($iG)?>>[&nbsp;
-		<a href="<?="Ref_ProKeg_3.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&IdRef1=".$_GET['IdRef1']."&IdRef2=".$mRo['Id_Referensi']?>" class="ico prev">VIEW</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
-		[&nbsp;<a href="#" class="ico edit" onclick="EditData('800','450','<?=$Lev?>','<?=$mRo['IDO']?>','<?=$IdRef1?>','<?=$_GET['FrmG']?>','<?=$_GET['IdL']?>'); return false;">EDIT</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="<?="Ref_ProKeg_3.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&IdRef1=".($_GET['IdRef1'] ?? '')."&IdRef2=".$mRo['Id_Referensi']?>" class="ico prev">VIEW</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
+		[&nbsp;<a href="#" class="ico edit" onclick="EditData('800','450','<?=$Lev?>','<?=$mRo['IDO']?>','<?=$IdRef1?>','<?=($_GET['FrmG'] ?? '')?>','<?=($_GET['IdL'] ?? '')?>'); return false;">EDIT</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
 		[&nbsp;<a href="#" class="ico del" onclick="P_DeleteR('<?=$mRo['IDO']?>','<?=$nDel?>','<?=$ReO?>'); return false;">DELETE</a>&nbsp;]
 		</td>
       </tr>
@@ -79,7 +79,7 @@ $IdRef1=$_GET['IdRef1'];
             <?php
 			if ($zRo > 0)
 			{
-			do
+				while ($rRo = mysql_fetch_assoc($mRs))
 				{
 				?>
             <tr> 
@@ -95,11 +95,10 @@ $IdRef1=$_GET['IdRef1'];
             </tr>
             <?php
 				}
-					while ($rRo = mysql_fetch_assoc($mRs));	
-				}
-				else
-				{
-				?>
+			}
+			else
+			{
+			?>
             <tr> 
               <td>&nbsp;</td>
               <td>&nbsp;</td>
@@ -128,14 +127,14 @@ $IdRef1=$_GET['IdRef1'];
 		?>
       <tr height="30">
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
-        <td colspan="2" style="border-top:1px solid #CCCCCC">[&nbsp;<a href="#" class="ico add" onclick="AddItem('800','450','<?=$Lev?>','<?=$IdRef1?>','<?=$_GET['FrmG']?>','<?=$_GET['IdL']?>'); return false;">&nbsp;ADD ITEM</a>&nbsp;]&nbsp;&nbsp;&nbsp;[&nbsp;
-		<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']."&IdRef1=".$IdRef1?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]</td>
+        <td colspan="2" style="border-top:1px solid #CCCCCC">[&nbsp;<a href="#" class="ico add" onclick="AddItem('800','450','<?=$Lev?>','<?=$IdRef1?>','<?=($_GET['FrmG'] ?? '')?>','<?=($_GET['IdL'] ?? '')?>'); return false;">&nbsp;ADD ITEM</a>&nbsp;]&nbsp;&nbsp;&nbsp;[&nbsp;
+		<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')."&IdRef1=".$IdRef1?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]</td>
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
       </tr>
     </table>
 	  <?php
 		$nSQL= "SELECT COUNT(*) AS JmlRc FROM ref_kegiatan WHERE Id_Referensi LIKE '".$IdRef1.".__'";
-		$fUlrR= "FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&IdRef1=".$IdRef1."&";
+		$fUlrR= "FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&IdRef1=".$IdRef1."&";
 		include "FilePagingBot.php";
 	  ?>
 </form>

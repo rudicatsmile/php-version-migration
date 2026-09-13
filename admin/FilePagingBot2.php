@@ -2,19 +2,25 @@
   <tr> 
   <td>
 <?php
-$RecList = $tRo;		//Ambil di master SQL - mysql_num_rows($nRs)
+$RecList = $tRo ?? 0;		//Ambil di master SQL - mysql_num_rows($nRs)
 $Hasil   = mysql_query($nSQL);
-$Data    = mysql_fetch_assoc($Hasil);
-$JumData = $Data['JmlRc'];
+$Data    = $Hasil ? mysql_fetch_assoc($Hasil) : null;
+$JumData = $Data['JmlRc'] ?? 0;
+$DataPerPage = !empty($DataPerPage) ? $DataPerPage : 20;
 $JumPage = ceil($JumData/$DataPerPage);
 
-$nGa=(int)$Data * $NoPage;
+$NoPage  = $NoPage ?? 1;
+$Offset  = $Offset ?? 0;
+$iG      = $iG ?? 1;
+$fUlrR   = $fUlrR ?? '';
+
+$nGa=(int)$JumData * $NoPage;
 if (1+$Offset > $nGa)
 	{$nDatG=$JumData;}
 else
 	{$nDatG=$nGa;}
 
-$iB  = (int)$JumData/$DataPerPage;
+$iB  = (int)($JumData/$DataPerPage);
 if ($RecList < $DataPerPage)
 	{$RecList=$RecList;}
 else
@@ -31,16 +37,17 @@ else
 </div>
 <div class="left" style="font-weight:bold">
   <?php 
-	if ($rBid=="__.__"){$yBid=$rKib;}else{$yBid=$rBid;}
-	$NilAset = fGlobal("ifnull(sum(debet-kredit),0)","ta_kib_post","kd_upb:kd_aset",$zUpb.":".$yBid.".".$rKel.".".$rOBJ.".".$rRin."%","LIKE:LIKE","","");
-	#$SW="select referensi,kd_aset,debet,kredit from ta_kib_post where kd_upb like '$zUpb' and kd_aset like '".$yBid.".".$rKel.".".$rOBJ.".".$rRin."%'";
-	#echo $SW."<br>";
-	#$mRs = mysql_query($SW) or die(mysql_error());
-	#while ($mRo = mysql_fetch_array($mRs, MYSQL_BOTH))
-	#{
-	#	echo $mRo[0].":".$mRo[1].":".$mRo[2].":".$mRo[3]."<br>";
-	#}
-  	echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NILAI ASET&nbsp;&nbsp;:&nbsp;&nbsp;".fConvertToRupiah($NilAset);
+	$rBid = $rBid ?? '';
+	$rKib = $rKib ?? '';
+	$zUpb = $zUpb ?? '';
+	$rKel = $rKel ?? '';
+	$rOBJ = $rOBJ ?? '';
+	$rRin = $rRin ?? '';
+	if ($rBid || $zUpb) {
+		if ($rBid=="__.__"){$yBid=$rKib;}else{$yBid=$rBid;}
+		$NilAset = fGlobal("ifnull(sum(debet-kredit),0)","ta_kib_post","kd_upb:kd_aset",$zUpb.":".$yBid.".".$rKel.".".$rOBJ.".".$rRin."%","LIKE:LIKE","","");
+		echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NILAI ASET&nbsp;&nbsp;:&nbsp;&nbsp;".fConvertToRupiah($NilAset);
+	}
   ?>
 </div>
 <div class="right"> 

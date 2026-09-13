@@ -2,13 +2,20 @@
   <tr> 
   <td>
 <?php
-$RecList = $tRo;		//Ambil di master SQL - mysql_num_rows($nRs)
+$RecList = $tRo ?? 0;		//Ambil di master SQL - mysql_num_rows($nRs)
 $Hasil   = mysql_query($nSQL);
-$Data    = mysql_fetch_assoc($Hasil);
-$JumData = $Data['JmlRc'];
+$Data    = $Hasil ? mysql_fetch_assoc($Hasil) : null;
+$JumData = (int)($Data['JmlRc'] ?? 0);
+$DataPerPage = (int)($DataPerPage ?? 500);
+if ($DataPerPage <= 0) {
+	$DataPerPage = 500;
+}
+$NoPage  = (int)($NoPage ?? 1);
+$Offset  = (int)($Offset ?? 0);
+$iG      = (int)($iG ?? 1);
 $JumPage = ceil($JumData/$DataPerPage);
 
-$nGa=(int)$Data * $NoPage;
+$nGa = (int)$JumData * $NoPage;
 if (1+$Offset > $nGa)
 	{$nDatG=$JumData;}
 else
@@ -31,6 +38,11 @@ else
 </div>
 <div class="left" style="font-weight:bold">
   <?php 
+	$rBid = $rBid ?? '';
+	$rKib = $rKib ?? '';
+	$zUnt = $zUnt ?? '';
+	$gThn = $gThn ?? '';
+	$fUlrR = $fUlrR ?? '';
 	if ($rBid=="__.__"){$yBid=$rKib;}else{$yBid=$rBid;}
 	$NilBerK = fGlobal("ifnull(sum(nilai),0)","ta_penerimaan_berkas","Kd_Unit:Periode",$zUnt.":".$gThn."%","=:LIKE","","");
 	$NilPenG = fGlobal("ifnull(sum(nilai),0)","ta_pengadaan","Kd_Unit:Periode",$zUnt.":".$gThn,"=:=","","");

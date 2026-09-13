@@ -16,7 +16,7 @@ extract($_GET);
 </head>
 <body>
 <?php require "FileMenu.php";?>
-<form name="myfrm" method="post" action="<?php echo "Ref_ProKeg_1_.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']?>">
+<form name="myfrm" method="post" action="<?php echo "Ref_ProKeg_1_.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')?>">
   <input type="hidden" name="Simpan">
   <input type="hidden" name="CritIDT" size="10">
     <table align="center" border="0" cellspacing="0" cellpadding="0" style="width:99%">
@@ -40,10 +40,11 @@ extract($_GET);
 			{
 			if ($Lev>1){
 				$nDel="NoDel";
+				$zRo=0;
 			}
 			else
 			{
-				$mSQL= "SELECT Id_Referensi FROM ref_kegiatan WHERE Id_Referensi LIKE '".$mRo['Id_Referensi'].".__' LIMIT 0,1";
+				$mSQL= "SELECT Id_Referensi, Nm_Referensi FROM ref_kegiatan WHERE Id_Referensi LIKE '".$mRo['Id_Referensi'].".__' ORDER BY Id_Referensi";
 				$mRs = mysql_query($mSQL) or die(mysql_error());
 				$zRo = mysql_num_rows($mRs);
 				if ($zRo > 0)
@@ -52,13 +53,13 @@ extract($_GET);
 					{$nDel="";}
 			}
 			?>
-      <tr height="22" style="cursor: pointer" title="clik disini untuk melihat rincian...!" onmouseover="this.style.cursor=&#39;pointer&#39"> 
+      <tr height="22" style="cursor: pointer" title="clik disini untuk melihat rincian...!" onmouseover="this.style.cursor='pointer'"> 
         <td <?=fBackCLR($iG)?> style="border-bottom: 1px dotted #CCCCCC; text-align:center"><?=$iG?>.</td>
-        <td style="border-bottom: 1px dotted #CCCCCC" onclick="$(&#39;#detail<?=$iG?>&#39;).toggle(&#39;past&#39;)" <?=fBackCLR($iG)?>><?=$mRo['Id_Referensi']?></td>
-        <td style="border-bottom: 1px dotted #CCCCCC" onclick="$(&#39;#detail<?=$iG?>&#39;).toggle(&#39;past&#39;)" <?=fBackCLR($iG)?>><?=$mRo['Nm_Referensi']?></td>
+        <td style="border-bottom: 1px dotted #CCCCCC" onclick="$('#detail<?=$iG?>').toggle('past')" <?=fBackCLR($iG)?>><?=$mRo['Id_Referensi']?></td>
+        <td style="border-bottom: 1px dotted #CCCCCC" onclick="$('#detail<?=$iG?>').toggle('past')" <?=fBackCLR($iG)?>><?=$mRo['Nm_Referensi']?></td>
         <td style="border-bottom: 1px dotted #CCCCCC" class="ac" <?=fBackCLR($iG)?>>
-		[&nbsp;<a href="<?="Ref_ProKeg_2.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&IdRef1=".$mRo['Id_Referensi']?>" class="ico prev">VIEW</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
-		[&nbsp;<a href="#" class="ico edit" onclick="EditData('800','450','<?=$Lev?>','<?=$mRo['IDO']?>','<?=$_GET['FrmG']?>','<?=$_GET['IdL']?>'); return false;">EDIT</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
+		[&nbsp;<a href="<?="Ref_ProKeg_2.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&IdRef1=".$mRo['Id_Referensi']?>" class="ico prev">VIEW</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
+		[&nbsp;<a href="#" class="ico edit" onclick="EditData('800','450','<?=$Lev?>','<?=$mRo['IDO']?>','<?=($_GET['FrmG'] ?? '')?>','<?=($_GET['IdL'] ?? '')?>'); return false;">EDIT</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
 		[&nbsp;<a href="#" class="ico del" onclick="P_DeleteR('<?=$mRo['IDO']?>','<?=$nDel?>','<?=$ReO?>'); return false;">DELETE</a>&nbsp;]
 		</td>
       </tr>
@@ -67,7 +68,7 @@ extract($_GET);
             <?php
 			if ($zRo > 0)
 			{
-			do
+				while ($rRo = mysql_fetch_assoc($mRs))
 				{
 				?>
             <tr> 
@@ -83,11 +84,10 @@ extract($_GET);
             </tr>
             <?php
 				}
-					while ($rRo = mysql_fetch_assoc($mRs));	
-				}
-				else
-				{
-				?>
+			}
+			else
+			{
+			?>
             <tr> 
               <td>&nbsp;</td>
               <td>&nbsp;</td>
@@ -116,8 +116,8 @@ extract($_GET);
 		?>
       <tr height="30">
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
-        <td colspan="2" style="border-top:1px solid #CCCCCC">[&nbsp;<a href="#" class="ico add" onclick="AddItem('800','450','<?=$Lev?>','<?=$_GET['FrmG']?>','<?=$_GET['IdL']?>'); return false;">&nbsp;ADD ITEM</a>&nbsp;]&nbsp;&nbsp;&nbsp;[&nbsp;
-		<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]</td>
+        <td colspan="2" style="border-top:1px solid #CCCCCC">[&nbsp;<a href="#" class="ico add" onclick="AddItem('800','450','<?=$Lev?>','<?=($_GET['FrmG'] ?? '')?>','<?=($_GET['IdL'] ?? '')?>'); return false;">&nbsp;ADD ITEM</a>&nbsp;]&nbsp;&nbsp;&nbsp;[&nbsp;
+		<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]</td>
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
       </tr>
     </table>

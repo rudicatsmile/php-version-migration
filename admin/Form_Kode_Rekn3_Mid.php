@@ -11,8 +11,12 @@
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
 <?php
-$rIDT = $_REQUEST['rIDT'];
-$Sbmt  = "";
+$rIDT = $_REQUEST['rIDT'] ?? '';
+$Sbmt = "";
+$gCod = "";
+$gNma = "";
+$gBid = "";
+$gKel = "";
 if ($rIDT!="")
 {
 	$nSQ = "SELECT * FROM ref_rek_3 WHERE IDT='".$rIDT."'";
@@ -29,14 +33,14 @@ if ($rIDT!="")
 }
 else
 {
-	if ($_REQUEST['gBid']!="")
+	if (!empty($_REQUEST['gBid']))
 	{
 		$gBid  = $_REQUEST['gBid'];
-		$gKel  = $_REQUEST['gKel'];
+		$gKel  = $_REQUEST['gKel'] ?? '';
 	}
 	else
 	{
-		$gCod  = $_REQUEST['KdRek2'];
+		$gCod  = $_REQUEST['KdRek2'] ?? '';
 		$gBid  = substr($gCod,0,1);
 		$gKel  = substr($gCod,0,3);
 	}
@@ -45,7 +49,7 @@ else
 }
 ?>
 <body>
-<form name="myfrm" method="post" action="<?php echo "Form_Kode_Rekn3_Mid_.php?IdL=".$_REQUEST['IdL']."&rIDT=".$rIDT ?>">
+<form name="myfrm" method="post" action="<?php echo "Form_Kode_Rekn3_Mid_.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&rIDT=".$rIDT ?>">
   <input type="hidden" name="Simpan">
   <table border="0" width="663" cellspacing="1" style="font-family: Calibri; font-size: 10pt; border-collapse: collapse">
     <tr> 

@@ -4,19 +4,25 @@
 <?php
 #echo $gRf." : ".$rKib;
 
-$RecList = $tRo;		//Ambil di master SQL - mysql_num_rows($nRs)
+$RecList = $tRo ?? 0;		//Ambil di master SQL - mysql_num_rows($nRs)
 $Hasil   = mysql_query($nSQL);
-$Data    = mysql_fetch_assoc($Hasil);
-$JumData = $Data['JmlRc'];
+$Data    = $Hasil ? mysql_fetch_assoc($Hasil) : null;
+$JumData = $Data['JmlRc'] ?? 0;
+$DataPerPage = !empty($DataPerPage) ? $DataPerPage : 20;
 $JumPage = ceil($JumData/$DataPerPage);
 
-$nGa=(int)$Data * $NoPage;
+$NoPage  = $NoPage ?? 1;
+$Offset  = $Offset ?? 0;
+$iG      = $iG ?? 1;
+$fUlrR   = $fUlrR ?? '';
+
+$nGa = (int)$JumData * $NoPage;
 if (1+$Offset > $nGa)
 	{$nDatG=$JumData;}
 else
 	{$nDatG=$nGa;}
 
-$iB  = (int)$JumData/$DataPerPage;
+$iB  = (int)($JumData/$DataPerPage);
 if ($RecList < $DataPerPage)
 	{$RecList=$RecList;}
 else
@@ -33,9 +39,22 @@ else
 </div>
 <div class="left" style="font-weight:bold">
   <?php 
+	$rBid = $rBid ?? '';
+	$rKib = $rKib ?? '';
 	if ($rBid=="__.__"){$yBid=$rKib;}else{$yBid=$rBid;}
-	if ($tMuTZ==""){$tMuTZ="";}
-	if ($zExt=="") {$zExt="%";}
+	$yBid = $yBid ?? '';
+	$tMuTZ = $tMuTZ ?? '';
+	$zExt = $zExt ?? '%';
+	$gThnA = $gThnA ?? '';
+	$gThn = $gThn ?? '';
+	$gRf = $gRf ?? '';
+	$rKel = $rKel ?? '';
+	$rOBJ = $rOBJ ?? '';
+	$rRin = $rRin ?? '';
+	$zUpb = $zUpb ?? '';
+	$eSD = $eSD ?? '';
+	$NilAset = 0;
+
 	if ($gThnA)
 	{
 		$NilAset = fGlobal("ifnull(sum(debet),0)","ta_kib_post_108".$tMuTZ,"kd_upb:kd_aset_108:tanggal:tanggal:extracom:referensi",$zUpb.":".$yBid.".".$rKel.".".$rOBJ.".".$rRin."%:".$gThnA."-01-01:".$gThn."-12-31:".$zExt.":".$gRf."%","LIKE:LIKE:>=:<=:LIKE:LIKE","","");
@@ -52,7 +71,7 @@ else
 			}
 			else
 			{
-				if ($gThn!="____")
+				if ($gThn!="" && $gThn!="____")
 				{
 					$NilAset = fGlobal("ifnull(sum(debet),0)","ta_kib_post_108".$tMuTZ,"kd_upb:kd_aset_108:extracom:referensi:tanggal:tanggal",$zUpb.":".$yBid.".".$rKel.".".$rOBJ.".".$rRin."%:".$zExt.":".$gRf."%:".$gThn."-01-01:".$gThn."-12-31","LIKE:LIKE:LIKE:LIKE:>=:<=","","");
 				}
@@ -119,7 +138,7 @@ if ($iB > 1)
 	</td>
 	</tr>
 	<?php
-	$qBid = substr($yBid,0,2);
+	$qBid = substr((string)$yBid,0,2);
 	?>
 	</table>
 	<?php 

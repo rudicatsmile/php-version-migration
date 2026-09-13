@@ -11,24 +11,24 @@
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
 <?php
-$IdRef1=$_GET['IdRef1'];
-$IdRef2=$_GET['IdRef2'];
+$IdRef1 = $_GET['IdRef1'] ?? '';
+$IdRef2 = $_GET['IdRef2'] ?? '';
 ?>
 <body>
 <?php require "FileMenu.php";?>
-<form name="myfrm" method="post" action="<?php echo "Ref_ProKeg_3_.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']."&IdRef1=".$IdRef1."&IdRef2=".$IdRef2 ?>">
+<form name="myfrm" method="post" action="<?php echo "Ref_ProKeg_3_.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')."&IdRef1=".$IdRef1."&IdRef2=".$IdRef2 ?>">
   <input type="hidden" name="Simpan">
   <input type="hidden" name="CritIDT" size="10">
 	<table border="0" align="center" cellspacing="1" style="font-size: 10pt; font-family: Calibri; border-collapse: collapse; text-transform: uppercase; font-weight: bold; width:99%">
     <tr> 
-      <td width="92"><a href="<?php echo "Ref_ProKeg_1.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>">&lt;&lt; - URUSAN</a></td>
+      <td width="92"><a href="<?php echo "Ref_ProKeg_1.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>">&lt;&lt; - URUSAN</a></td>
       <td width="15">&nbsp;</td>
-      <td width="970"><a href="<?php echo "Ref_ProKeg_1.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>"><?=$IdRef1." : ".fGlobal("Nm_Referensi","Ref_Kegiatan","Id_Referensi",$IdRef1,"=","","")?></a></td>
+      <td width="970"><a href="<?php echo "Ref_ProKeg_1.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>"><?=$IdRef1." : ".fGlobal("Nm_Referensi","Ref_Kegiatan","Id_Referensi",$IdRef1,"=","","")?></a></td>
     </tr>
     <tr> 
-      <td><a href="<?php echo "Ref_ProKeg_2.php?IdRef1=".$IdRef1."&FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>">&lt;&lt; - PROGRAM</a></td>
+      <td><a href="<?php echo "Ref_ProKeg_2.php?IdRef1=".$IdRef1."&FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>">&lt;&lt; - PROGRAM</a></td>
       <td>&nbsp;</td>
-      <td><a href="<?php echo "Ref_ProKeg_2.php?IdRef1=".$IdRef1."&FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>"><?=$IdRef2." : ".fGlobal("Nm_Referensi","Ref_Kegiatan","Id_Referensi",$IdRef2,"=","","")?></a></td>
+      <td><a href="<?php echo "Ref_ProKeg_2.php?IdRef1=".$IdRef1."&FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>"><?=$IdRef2." : ".fGlobal("Nm_Referensi","Ref_Kegiatan","Id_Referensi",$IdRef2,"=","","")?></a></td>
     </tr>
     <tr>
       <td>&nbsp;</td>
@@ -87,15 +87,14 @@ $IdRef2=$_GET['IdRef2'];
       <tr height="30">
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
         <td colspan="2" style="border-top:1px solid #CCCCCC">
-		[&nbsp;<a href="#" class="ico add" onclick="AddItem('800','450','<?=$Lev?>','<?=$IdRef2?>','<?=$_GET['FrmG']?>','<?=$_GET['IdL']?>'); return false;">&nbsp;ADD ITEM</a>&nbsp;]&nbsp;&nbsp;&nbsp;
-		[&nbsp;<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']."&IdRef1=".$IdRef1."&IdRef2=".$IdRef2?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]</td>
+		[&nbsp;<a href="#" class="ico add" onclick="AddItem('800','450','<?=$Lev?>','<?=$IdRef2?>','<?=($_GET['FrmG'] ?? '')?>','<?=($_GET['IdL'] ?? '')?>'); return false;">&nbsp;ADD ITEM</a>&nbsp;]&nbsp;&nbsp;&nbsp;
+		[&nbsp;<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')."&IdRef1=".$IdRef1."&IdRef2=".$IdRef2?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]</td>
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
       </tr>
     </table>
 	  <?php
 		$nSQL= "SELECT COUNT(*) AS JmlRc FROM ref_kegiatan WHERE Id_Referensi LIKE '".$IdRef2.".__'";
-		echo $nSQL;
-		$fUlrR= "FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&IdRef1=".$IdRef1."&IdRef2=".$IdRef2."&";
+		$fUlrR= "FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&IdRef1=".$IdRef1."&IdRef2=".$IdRef2."&";
 		include "FilePagingBot.php";
 	  ?>
 </form>

@@ -12,7 +12,7 @@
     <td width="165" height="30"><img src="Images/LogoTopLitle.png" width="150" height="30" /></td>
 		
     <td height="30" width="377" style="font-family: Agency FB; font-size: 14pt; font-weight: bold; color: #E1F986; font-style:italic"> 
-      <?php echo $_REQUEST['FrmG']?>
+      <?php echo $_REQUEST['FrmG'] ?? ''?>
     </td>
   </tr>
 </table>

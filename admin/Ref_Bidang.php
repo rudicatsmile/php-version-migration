@@ -15,7 +15,7 @@ extract($_GET);
 </head>
 <body>
 <?php require "FileMenu.php";?>
-<form name="myfrm" method="post" action="<?php echo "Ref_Bidang_.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']?>">
+<form name="myfrm" method="post" action="<?php echo "Ref_Bidang_.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')?>">
   <input type="hidden" name="Simpan">
   <input type="hidden" name="CritIDT" size="10">
     <table align="center" class="table-list" border="0" cellspacing="0" cellpadding="0" style="width:99%">
@@ -109,7 +109,7 @@ extract($_GET);
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
         <td colspan="2" style="border-top:1px solid #CCCCCC">
 		[&nbsp;<a href="#" class="ico add" onclick="AddItem('800','450','center')">&nbsp;ADD ITEM</a>&nbsp;]&nbsp;&nbsp;&nbsp;
-		[&nbsp;<a href="<?php echo $_SERVER['PHP_SELF']."?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG'] ?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]</td>
+		[&nbsp;<a href="<?php echo $_SERVER['PHP_SELF']."?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '') ?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]</td>
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
       </tr>
     </table>

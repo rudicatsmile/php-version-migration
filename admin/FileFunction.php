@@ -409,19 +409,19 @@ function fMakeRegister($gRefVr,$nDgT)
 
 function fConvertToRupiah($Angka)
 {
-	return number_format($Angka, 2, ",", ".");
+	return number_format((float)($Angka ?? 0), 2, ",", ".");
 	#return number_format($Angka, 0, ",", ".");
 }
 
 function fConvertToRupiah2dgt($Angka)
 {
-	return number_format($Angka, 2, ",", ".");
+	return number_format((float)($Angka ?? 0), 2, ",", ".");
 }
 
 function fConvertToRupiahBulat($Angka)
 {
 	//return number_format($Angka);
-	return number_format($Angka,0, "", ".");
+	return number_format((float)($Angka ?? 0), 0, "", ".");
 }
 
 function fConvert4Digit($mPin)

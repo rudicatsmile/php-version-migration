@@ -11,7 +11,7 @@
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
 <?php
-$rIDO = $_GET['rIDO'];
+$rIDO = $_GET['rIDO'] ?? '';
 if ($rIDO!="")
 {
 	$nSQ = "SELECT * FROM ref_kegiatan WHERE IDO='".$rIDO."'";
@@ -36,7 +36,7 @@ else
 }
 ?>
 <body>
-<form name="myfrm" method="post" action="<?php echo "Form_ProKeg1_Mid_.php?IdL=".$_REQUEST['IdL']."&rIDO=".$rIDO ?>">
+<form name="myfrm" method="post" action="<?php echo "Form_ProKeg1_Mid_.php?IdL=".($_REQUEST['IdL'] ?? '')."&rIDO=".$rIDO ?>">
   <input type="hidden" name="Simpan">
   <table border="0" width="663" cellspacing="1" style="font-family: Calibri; font-size: 10pt; border-collapse: collapse">
     <tr> 
@@ -64,7 +64,7 @@ else
       <td width="24">&nbsp;</td>
       <td width="111">&nbsp;</td>
       <td width="25">&nbsp;</td>
-      <td style="color:#FF0000"><?php echo $_REQUEST['MsG']?>&nbsp;</td>
+      <td style="color:#FF0000"><?php echo $_REQUEST['MsG'] ?? ''?>&nbsp;</td>
     </tr>
     <tr> 
       <td>&nbsp;</td>

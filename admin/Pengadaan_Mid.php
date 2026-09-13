@@ -16,16 +16,16 @@ require "CheckLogin.php";
 </head>
 <?php
 extract($_GET);
-#echo $gTRMt;
-if (isset($_GET['gIdT'])) {$gIdT = $_GET['gIdT'];}
-if (isset($_GET['gUnt'])) {$gUnt = $_GET['gUnt'];}
-if (isset($_GET['gNOM'])) {$gNOM = $_GET['gNOM'];}
+$gIdT = $_GET['gIdT'] ?? '';
+$gUnt = $_GET['gUnt'] ?? '';
+$gNOM = $_GET['gNOM'] ?? '';
 
-if (isset($_GET['gBiA'])) {$gBiA = $_GET['gBiA'];}
-if (isset($_GET['gBid'])) {$gBid = $_GET['gBid'];}
-if (isset($_GET['gKel'])) {$gKel = $_GET['gKel'];}
-if (isset($_GET['gOBJ'])) {$gOBJ = $_GET['gOBJ'];}
-if (isset($_GET['gRin'])) {$gRin = $_GET['gRin'];}
+$gBiA = $_GET['gBiA'] ?? '';
+$gBid = $_GET['gBid'] ?? '';
+$gKel = $_GET['gKel'] ?? '';
+$gOBJ = $_GET['gOBJ'] ?? '';
+$gRin = $_GET['gRin'] ?? '';
+$gUT  = $_GET['gUT'] ?? '';
 
 $gHri = date('d');
 $gBln = date('m');
@@ -191,7 +191,7 @@ if ($gNOM)
 		
 		$gSMBD = $mRo['SmbDana']." : ".strtoupper(fGlobalNEW("Deskripsi","ref_sumber_dana","Kode",$mRo['SmbDana'],"=","",DatabaseSB,$ConSB,""));
 		
-		$gUT   = $mRo['Peruntukan'];
+		$gUT   = $mRo['Kd_Peruntukan'] ?? '';
 		$gVenK = $mRo['IdRekanan'];
 		$gVenD = fGlobalNEW("Nma_Perusahaan","ta_rekanan","Kode",$gVenK,"=","",DatabaseSB,$ConSB,"");
 		

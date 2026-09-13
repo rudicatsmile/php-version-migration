@@ -15,7 +15,7 @@ extract($_GET);
 </head>
 <body>
 <?php require "FileMenu.php";?>
-<form name="myfrm" method="post" action="<?="Ref_Kode_Aset_1_.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']?>">
+<form name="myfrm" method="post" action="<?="Ref_Kode_Aset_1_.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')?>">
   <input type="hidden" name="Simpan">
   <input type="hidden" name="CritIDT" size="10">
     <table align="center" border="0" cellspacing="0" cellpadding="0" class="table-list" style="width:99%">
@@ -41,6 +41,7 @@ extract($_GET);
 			if ($Lev > 1) 
 			{
 				$nDel="NoDel";
+				$zRo = 0;
 			}
 			else
 			{
@@ -59,7 +60,7 @@ extract($_GET);
         <td style="border-bottom:1px dotted #CCCCCC" onclick="$(&#39;#detail<?=$iG?>&#39;).toggle(&#39;past&#39;)" <?=fBackCLR($iG)?>><?=$mRo['Kd_Aset']?></td>
         <td style="border-bottom:1px dotted #CCCCCC" onclick="$(&#39;#detail<?=$iG?>&#39;).toggle(&#39;past&#39;)" <?=fBackCLR($iG)?>><?=$mRo['Nm_Aset']?></td>
         <td style="border-bottom:1px dotted #CCCCCC" align="center" <?=fBackCLR($iG)?>>
-		[&nbsp;<a href="<?="Ref_Kode_Aset_2.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&KdAst1=".$mRo['Kd_Aset']?>" class="ico prev">VIEW</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
+		[&nbsp;<a href="<?="Ref_Kode_Aset_2.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&KdAst1=".$mRo['Kd_Aset']?>" class="ico prev">VIEW</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
 		[&nbsp;<a href="#" class="ico edit" onclick="EditData('800','450','<?=$Lev?>','<?=$mRo['IDT']?>'); return false">EDIT</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
 		[&nbsp;<a href="#" class="ico del" onclick="P_DeleteR('<?=$mRo['IDT']?>','<?=$nDel?>','<?=$ReO?>'); return false">DELETE</a>
 		</td>
@@ -119,7 +120,7 @@ extract($_GET);
       <tr height="30">
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
         <td colspan="2" style="border-top:1px solid #CCCCCC">[&nbsp;<a href="#" class="ico add" onclick="AddItem('800','450','<?=$Lev?>')">&nbsp;ADD ITEM</a>&nbsp;]&nbsp;&nbsp;&nbsp;[&nbsp;
-		<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]&nbsp;&nbsp;&nbsp;[&nbsp;
+		<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]&nbsp;&nbsp;&nbsp;[&nbsp;
 		<a href="#" onclick="P_Document('800','400','center');return false" class="ico docu">&nbsp;DOKUMENT</a>&nbsp;]
 		</td>
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
@@ -127,7 +128,7 @@ extract($_GET);
     </table>
 	  <?php
 		$nSQL= "SELECT COUNT(*) AS JmlRc FROM ref_rek_aset1";
-		$fUlrR= "FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&";
+		$fUlrR= "FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&";
 		include "FilePagingBot.php";
 	  ?>
 </form>
@@ -171,9 +172,9 @@ extract($_GET);
 				{
 					win.window.document.open()       			
 					<?php
-						$URL_Top = "Form_Kode_Aset1_Top.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL'];
-						$URL_Mid = "Form_Kode_Aset1_Mid.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL'];
-						$URL_Bot = "Form_Kode_Aset1_Bot.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL'];
+						$URL_Top = "Form_Kode_Aset1_Top.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '');
+						$URL_Mid = "Form_Kode_Aset1_Mid.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '');
+						$URL_Bot = "Form_Kode_Aset1_Bot.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '');
 					?>       			
 				txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormKIB_Top' noresize src='<?=$URL_Top?>' scrolling='no'><frame name='WinFormKIB_Mid' src='<?=$URL_Mid?>' scrolling='auto'><frame name='WinFormKIB_Bot' src= '<?=$URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
 				win.focus()
@@ -197,8 +198,8 @@ extract($_GET);
 		if (win!=null)
 		{
 			win.window.document.open()       			
-			URL_Top = "Form_Kode_Aset1_Top.php?"+"<?="FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>";
-			URL_Mid = "Form_Kode_Aset1_Mid.php?rIDT="+IDT+"<?="&IdL=".$_GET['IdL']?>";
+			URL_Top = "Form_Kode_Aset1_Top.php?"+"<?="FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>";
+			URL_Mid = "Form_Kode_Aset1_Mid.php?rIDT="+IDT+"<?="&FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>";
 			URL_Bot = "Form_Kode_Aset1_Bot.php";
 			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormKIB_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFormKIB_Mid' src='"+URL_Mid+"' scrolling='auto'><frame name='WinFormKIB_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
 			win.focus()
@@ -217,7 +218,7 @@ extract($_GET);
 		
 		LeftPosition=(screen.width)?(screen.width-w)/2:100; 
 		TopPosition=(screen.height)?(screen.height-h)/2:100;
-		URL = "Ref_Kode_Aset_Doc.php?CrT=BDG&"+"<?="&IdL=".$_GET['IdL']?>";
+		URL = "Ref_Kode_Aset_Doc.php?CrT=BDG&IdL=<?=($_GET['IdL'] ?? '')?>";
 		settings='width='+w+',height='+h+',top='+TopPosition+',left='+LeftPosition+',location=no,directories=no,status=no,menubar=yes,toolbar=yes,resizable=ya,maximize=yes,scrollbars=yes,navigation=no';
 		window.open(URL,'',settings);
 	}

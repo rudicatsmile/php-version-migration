@@ -3,13 +3,12 @@ require('Connection.php');
 require('FileFunction.php');
 extract($_GET);
 extract($_POST);
-$Smp    = $Simpan;
-$rIDT   = $rIDT;
-$gNmA   = $fNama;
-
-$gBid  = $fBid;
-$gKel  = $fKel;
-$gUMR  = $fUmur;
+$Smp    = $_POST['Simpan'] ?? '';
+$rIDT   = $_REQUEST['rIDT'] ?? '';
+$gNmA   = $_POST['fNama'] ?? '';
+$gBid   = $_POST['fBid'] ?? '';
+$gKel   = $_POST['fKel'] ?? '';
+$gUMR   = $_POST['fUmur'] ?? 0;
 
 if ($Smp=="Add")
 	{
@@ -18,16 +17,16 @@ if ($Smp=="Add")
 		Kode='$gKD', tA='0', tB='0', tUmur='0'";
 		$rs = mysql_query($SQ) or die(mysql_error());		
 		
-		$URL="Form_Kode_Aset3_Mid.php?FrmG=".$_REQUEST['FrmG']."&IdL=".$_REQUEST['IdL']."&rIDT=".$rIDT;
+		$URL="Form_Kode_Aset3_Mid.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&rIDT=".$rIDT;
 		header("Location: ".$URL);
 	}
 else if ($Smp=="DelItem")
 	{
-		$gDL = $_POST['fDL'];
+		$gDL = $_POST['fDL'] ?? '';
 		$SQ  = "DELETE FROM ta_masa_manfaat WHERE IDT = '".$gDL."'";
 		$rs = mysql_query($SQ) or die(mysql_error());		
 		
-		$URL="Form_Kode_Aset3_Mid.php?FrmG=".$_REQUEST['FrmG']."&IdL=".$_REQUEST['IdL']."&rIDT=".$rIDT;
+		$URL="Form_Kode_Aset3_Mid.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&rIDT=".$rIDT;
 		header("Location: ".$URL);
 	}
 else if ($Smp=="Save")
@@ -48,9 +47,9 @@ else if ($Smp=="Save")
 				do
 				{
 					$gID = $mRo['IDT'];
-					$gA  = fConvertToNumeric($_POST['fA'.$gID]);
-					$gB  = fConvertToNumeric($_POST['fB'.$gID]);
-					$gU  = fConvertToNumeric($_POST['fU'.$gID]);
+					$gA  = fConvertToNumeric($_POST['fA'.$gID] ?? 0);
+					$gB  = fConvertToNumeric($_POST['fB'.$gID] ?? 0);
+					$gU  = fConvertToNumeric($_POST['fU'.$gID] ?? 0);
 					
 					$SQ  = "UPDATE ta_masa_manfaat SET 
 					tA='$gA', tB='$gB', tUmur='$gU' WHERE IDT='".$gID."'";
@@ -76,12 +75,12 @@ else if ($Smp=="Save")
 			
 			$rIDT = fGlobal("IDT","Ref_Rek_Aset3","Kd_Aset",$gKel.".__","LIKE","IDT desc LIMIT 1","");
 		}
-		$URL="Form_Kode_Aset3_Mid.php?FrmG=".$_REQUEST['FrmG']."&IdL=".$_REQUEST['IdL']."&rIDT=".$rIDT;
+		$URL="Form_Kode_Aset3_Mid.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&rIDT=".$rIDT;
 		header("Location: ".$URL);
 	}
 else if ($Smp=="Reset")
 	{
-		$URL="Form_Kode_Aset3_Mid.php?IdL=".$_REQUEST['IdL']."&gBid=".$gBid."&gKel=".$gKel;
+		$URL="Form_Kode_Aset3_Mid.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&gBid=".$gBid."&gKel=".$gKel;
 		header("Location: ".$URL);
 	}
 else if ($Smp=="Close")
@@ -97,7 +96,7 @@ else if ($Smp=="Close")
 	}
 else
 	{
-		$URL="Form_Kode_Aset3_Mid.php?IdL=".$_REQUEST['IdL']."&gBid=".$gBid."&gKel=".$gKel;
+		$URL="Form_Kode_Aset3_Mid.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&gBid=".$gBid."&gKel=".$gKel;
 		header("Location: ".$URL);
 	}
 ?>

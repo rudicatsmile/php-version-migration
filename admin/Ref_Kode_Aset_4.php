@@ -14,30 +14,30 @@ extract($_GET);
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
 <?php
-$KdAst1=$_GET['KdAst1'];
-$KdAst2=$_GET['KdAst2'];
-$KdAst3=$_GET['KdAst3'];
+$KdAst1=$_GET['KdAst1'] ?? '';
+$KdAst2=$_GET['KdAst2'] ?? '';
+$KdAst3=$_GET['KdAst3'] ?? '';
 ?>
 <body>
 <?php require "FileMenu.php";?>
-<form name="myfrm" method="post" action="<?="Ref_Kode_Aset_4_.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']."&KdAst1=".$KdAst1."&KdAst2=".$KdAst2."&KdAst3=".$KdAst3 ?>">
+<form name="myfrm" method="post" action="<?="Ref_Kode_Aset_4_.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')."&KdAst1=".$KdAst1."&KdAst2=".$KdAst2."&KdAst3=".$KdAst3 ?>">
   <input type="hidden" name="Simpan">
   <input type="hidden" name="CritIDT" size="10">
   <table border="0" align="center" cellspacing="1" style="font-size: 10pt; font-family: Calibri; border-collapse: collapse; text-transform: uppercase; font-weight: bold; width:99%">
     <tr> 
-      <td width="92"><a href="<?="Ref_Kode_Aset_1.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>">&lt;&lt; - BIDANG</a></td>
+      <td width="92"><a href="<?="Ref_Kode_Aset_1.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>">&lt;&lt; - BIDANG</a></td>
       <td width="15">&nbsp;</td>
-      <td width="970"><a href="<?="Ref_Kode_Aset_1.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>"><?=$KdAst1." : ".fGlobal("Nm_Aset","Ref_Rek_Aset1","Kd_Aset",$KdAst1,"=","","")?></a></td>
+      <td width="970"><a href="<?="Ref_Kode_Aset_1.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>"><?=$KdAst1." : ".fGlobal("Nm_Aset","Ref_Rek_Aset1","Kd_Aset",$KdAst1,"=","","")?></a></td>
     </tr>
     <tr> 
-      <td><a href="<?="Ref_Kode_Aset_2.php?KdAst1=".$KdAst1."&FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>">&lt;&lt; - KELOMPOK</a></td>
+      <td><a href="<?="Ref_Kode_Aset_2.php?KdAst1=".$KdAst1."&FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>">&lt;&lt; - KELOMPOK</a></td>
       <td>&nbsp;</td>
-      <td><a href="<?="Ref_Kode_Aset_2.php?KdAst1=".$KdAst1."&FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>"><?=$KdAst2." : ".fGlobal("Nm_Aset","Ref_Rek_Aset2","Kd_Aset",$KdAst2,"=","","")?></a></td>
+      <td><a href="<?="Ref_Kode_Aset_2.php?KdAst1=".$KdAst1."&FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>"><?=$KdAst2." : ".fGlobal("Nm_Aset","Ref_Rek_Aset2","Kd_Aset",$KdAst2,"=","","")?></a></td>
     </tr>
     <tr> 
-      <td><a href="<?="Ref_Kode_Aset_3.php?KdAst1=".$KdAst1."&KdAst2=".$KdAst2."&FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>">&lt;&lt; - JENIS</a></td>
+      <td><a href="<?="Ref_Kode_Aset_3.php?KdAst1=".$KdAst1."&KdAst2=".$KdAst2."&FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>">&lt;&lt; - JENIS</a></td>
       <td>&nbsp;</td>
-      <td><a href="<?="Ref_Kode_Aset_3.php?KdAst1=".$KdAst1."&KdAst2=".$KdAst2."&FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']?>"><?=$KdAst3." : ".fGlobal("Nm_Aset","Ref_Rek_Aset3","Kd_Aset",$KdAst3,"=","","")?></a></td>
+      <td><a href="<?="Ref_Kode_Aset_3.php?KdAst1=".$KdAst1."&KdAst2=".$KdAst2."&FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>"><?=$KdAst3." : ".fGlobal("Nm_Aset","Ref_Rek_Aset3","Kd_Aset",$KdAst3,"=","","")?></a></td>
     </tr>
     <tr>
       <td>&nbsp;</td>
@@ -70,6 +70,7 @@ $KdAst3=$_GET['KdAst3'];
 			if ($Lev > 1) 
 			{
 				$nDel="NoDel";
+				$zRo = 0;
 			}
 			else
 			{
@@ -99,7 +100,7 @@ $KdAst3=$_GET['KdAst3'];
         <td style="text-align:center; border-bottom: 1px dotted #CCCCCC" onclick="$(&#39;#detail<?=$iG?>&#39;).toggle(&#39;past&#39;)" <?=fBackCLR($iG)?>><?php if ($mRo['Ms_Manfaat']>0) {echo $mRo['Ms_Manfaat']." Tahun";}?></td>
         <td style="text-align:center; border-bottom: 1px dotted #CCCCCC" onclick="$(&#39;#detail<?=$iG?>&#39;).toggle(&#39;past&#39;)" <?=fBackCLR($iG)?>><?=$gADA?></td>
         <td style="border-bottom: 1px dotted #CCCCCC" class="ac" <?=fBackCLR($iG)?>>
-		[&nbsp;<a href="<?="Ref_Kode_Aset_5.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&KdAst1=".$_GET['KdAst1']."&KdAst2=".$_GET['KdAst2']."&KdAst3=".$_GET['KdAst3']."&KdAst4=".$mRo['Kd_Aset']?>" class="ico prev">VIEW</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
+		[&nbsp;<a href="<?="Ref_Kode_Aset_5.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&KdAst1=".($_GET['KdAst1'] ?? '')."&KdAst2=".($_GET['KdAst2'] ?? '')."&KdAst3=".($_GET['KdAst3'] ?? '')."&KdAst4=".$mRo['Kd_Aset']?>" class="ico prev">VIEW</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
 		[&nbsp;<a href="#" class="ico edit" onclick="EditData('800','450','<?=$Lev?>','<?=$mRo['IDT']?>'); return false">EDIT</a>&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;
 		[&nbsp;<a href="#" class="ico del" onclick="P_DeleteR('<?=$mRo['IDT']?>','<?=$nDel?>','<?=$ReO?>'); return false">DELETE</a>&nbsp;]
 		</td>
@@ -158,14 +159,14 @@ $KdAst3=$_GET['KdAst3'];
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
         <td colspan="5" style="border-top:1px solid #CCCCCC">
 		[&nbsp;<a href="#" class="ico add" onclick="AddItem('800','450','<?=$Lev?>')">&nbsp;ADD ITEM</a>&nbsp;]&nbsp;&nbsp;&nbsp;
-		[&nbsp;<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&Page=".$_GET['Page']."&iG=".$_GET['iG']."&KdAst1=".$KdAst1."&KdAst2=".$KdAst2."&KdAst3=".$KdAst3?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]&nbsp;&nbsp;&nbsp;
+		[&nbsp;		<a href="<?=$_SERVER['PHP_SELF']."?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&Page=".($_GET['Page'] ?? '')."&iG=".($_GET['iG'] ?? '')."&KdAst1=".$KdAst1."&KdAst2=".$KdAst2."&KdAst3=".$KdAst3?>" class="ico reff">&nbsp;REFRESH</a>&nbsp;]&nbsp;&nbsp;&nbsp;
 		<a href="#" onclick="P_Document('800','400','center','<?=$KdAst3?>');return false" class="ico docu">&nbsp;DOKUMENT</a>&nbsp;]		</td>
         <td style="border-top:1px solid #CCCCCC">&nbsp;</td>
       </tr>
     </table>
 	  <?php
 		$nSQL= "SELECT COUNT(*) AS JmlRc FROM ref_rek_aset4 WHERE Kd_Aset LIKE '".$KdAst3.".__'";
-		$fUlrR= "FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&KdAst1=".$KdAst1."&KdAst2=".$KdAst2."&KdAst3=".$KdAst3."&";
+		$fUlrR= "FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')."&KdAst1=".$KdAst1."&KdAst2=".$KdAst2."&KdAst3=".$KdAst3."&";
 		include "FilePagingBot.php";
 	  ?>
 </form>
@@ -208,8 +209,8 @@ $KdAst3=$_GET['KdAst3'];
 				{
 					win.window.document.open()       			
 					<?php
-						$URL_Top = "Form_Kode_Aset4_Top.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL'];
-						$URL_Mid = "Form_Kode_Aset4_Mid.php?KdAst3=".$KdAst3."&IdL=".$_GET['IdL'];
+						$URL_Top = "Form_Kode_Aset4_Top.php?FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '');
+						$URL_Mid = "Form_Kode_Aset4_Mid.php?KdAst3=".$KdAst3."&FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '');
 						$URL_Bot = "Form_Kode_Aset4_Bot.php";
 					?>       			
 				txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormKIB_Top' noresize src='<?=$URL_Top?>' scrolling='no'><frame name='WinFormKIB_Mid' src='<?=$URL_Mid?>' scrolling='auto'><frame name='WinFormKIB_Bot' src= '<?=$URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
@@ -234,8 +235,8 @@ $KdAst3=$_GET['KdAst3'];
 		if (win!=null)
 		{
 			win.window.document.open()       			
-			URL_Top = "Form_Kode_Aset4_Top.php?"+"<?="FrmG=".$_GET['FrmG']?>";
-			URL_Mid = "Form_Kode_Aset4_Mid.php?rIDT="+IDT+"<?="&IdL=".$_GET['IdL']?>";
+			URL_Top = "Form_Kode_Aset4_Top.php?"+"<?="FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>";
+			URL_Mid = "Form_Kode_Aset4_Mid.php?rIDT="+IDT+"<?="&FrmG=".($_GET['FrmG'] ?? '')."&IdL=".($_GET['IdL'] ?? '')?>";
 			URL_Bot = "Form_Kode_Aset4_Bot.php";
 			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormKIB_Top' noresize src='"+URL_Top+"' scrolling='no'><frame name='WinFormKIB_Mid' src='"+URL_Mid+"' scrolling='auto'><frame name='WinFormKIB_Bot' src= '"+URL_Bot+"' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            
 			win.focus()
@@ -254,7 +255,7 @@ $KdAst3=$_GET['KdAst3'];
 		
 		LeftPosition=(screen.width)?(screen.width-w)/2:100; 
 		TopPosition=(screen.height)?(screen.height-h)/2:100;
-		URL = "Ref_Kode_Aset_Doc.php?CrT=OBJ&gKD="+gKD+"<?="&IdL=".$_GET['IdL']?>";
+		URL = "Ref_Kode_Aset_Doc.php?CrT=OBJ&gKD="+gKD+"&IdL=<?=($_GET['IdL'] ?? '')?>";
 		settings='width='+w+',height='+h+',top='+TopPosition+',left='+LeftPosition+',location=no,directories=no,status=no,menubar=yes,toolbar=yes,resizable=ya,maximize=yes,scrollbars=yes,navigation=no';
 		window.open(URL,'',settings);
 	}

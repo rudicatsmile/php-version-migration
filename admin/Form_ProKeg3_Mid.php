@@ -11,8 +11,8 @@
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
 <?php
-$IdRef2= $_GET['IdRef2'];
-$rIDO  = $_GET['rIDO'];
+$IdRef2= $_GET['IdRef2'] ?? '';
+$rIDO  = $_GET['rIDO'] ?? '';
 
 if ($rIDO!="")
 {
@@ -42,7 +42,7 @@ else
 }
 ?>
 <body>
-<form name="myfrm" method="post" action="<?php echo "Form_ProKeg3_Mid_.php?rIDO=".$rIDO."&IdRef2=".$IdRef2."&IdL=".$_REQUEST['IdL'] ?>">
+<form name="myfrm" method="post" action="<?php echo "Form_ProKeg3_Mid_.php?rIDO=".$rIDO."&IdRef2=".$IdRef2."&IdL=".($_REQUEST['IdL'] ?? '') ?>">
   <input type="hidden" name="Simpan">
   <table border="0" width="663" cellspacing="1" style="font-family: Calibri; font-size: 10pt; border-collapse: collapse">
     <tr> 
@@ -73,7 +73,7 @@ else
       <td width="24">&nbsp;</td>
       <td width="111">&nbsp;</td>
       <td width="25">&nbsp;</td>
-      <td style="color:#FF0000"><?php echo $_REQUEST['MsG']?>&nbsp;</td>
+      <td style="color:#FF0000"><?php echo $_REQUEST['MsG'] ?? ''?>&nbsp;</td>
     </tr>
     <tr> 
       <td>&nbsp;</td>

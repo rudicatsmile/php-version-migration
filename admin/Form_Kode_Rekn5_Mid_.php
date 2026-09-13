@@ -1,14 +1,14 @@
 <?php
 require('Connection.php');
 require('FileFunction.php');
-$Smp    = $_REQUEST['Simpan'];
-$rIDT   = $_REQUEST['rIDT'];
-$gNmA   = $_REQUEST['fNama'];
+$Smp    = $_REQUEST['Simpan'] ?? '';
+$rIDT   = $_REQUEST['rIDT'] ?? '';
+$gNmA   = $_REQUEST['fNama'] ?? '';
 
-$gBid  = $_REQUEST['fBid'];
-$gKel  = $_REQUEST['fKel'];
-$gJNS  = $_REQUEST['fJNS'];
-$gOBJ  = $_REQUEST['fOBJ'];
+$gBid  = $_REQUEST['fBid'] ?? '';
+$gKel  = $_REQUEST['fKel'] ?? '';
+$gJNS  = $_REQUEST['fJNS'] ?? '';
+$gOBJ  = $_REQUEST['fOBJ'] ?? '';
 
 if ($Smp=="Save")
 	{
@@ -34,12 +34,12 @@ if ($Smp=="Save")
 			
 			$rIDT = fGlobal("IDT","Ref_Rek_5","Kd_Rek",$gOBJ.".__","like","IDT desc LIMIT 1","");
 		}
-		$URL="Form_Kode_Rekn5_Mid.php?FrmG=".$_REQUEST['FrmG']."&IdL=".$_REQUEST['IdL']."&rIDT=".$rIDT;
+		$URL="Form_Kode_Rekn5_Mid.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&rIDT=".$rIDT;
 		header("Location: ".$URL);
 	}
 else if ($Smp=="Reset")
 	{
-		$URL="Form_Kode_Rekn5_Mid.php?IdL=".$_REQUEST['IdL']."&gBid=".$gBid."&gKel=".$gKel."&gJNS=".$gJNS."&gOBJ=".$gOBJ;
+		$URL="Form_Kode_Rekn5_Mid.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&gBid=".$gBid."&gKel=".$gKel."&gJNS=".$gJNS."&gOBJ=".$gOBJ;
 		header("Location: ".$URL);
 	}
 else if ($Smp=="Close")
@@ -55,7 +55,7 @@ else if ($Smp=="Close")
 	}
 else
 	{
-		$URL="Form_Kode_Rekn5_Mid.php?IdL=".$_REQUEST['IdL']."&gBid=".$gBid."&gKel=".$gKel."&gJNS=".$gJNS."&gOBJ=".$gOBJ;
+		$URL="Form_Kode_Rekn5_Mid.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&gBid=".$gBid."&gKel=".$gKel."&gJNS=".$gJNS."&gOBJ=".$gOBJ;
 		header("Location: ".$URL);
 	}
 ?>

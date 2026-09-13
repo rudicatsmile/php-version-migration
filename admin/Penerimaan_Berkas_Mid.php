@@ -16,26 +16,18 @@ require "CheckLogin.php";
 </head>
 <?php
 require "FileFormatNum.php";
-if (isset($_GET['gIdT'])) {$gIdT = $_GET['gIdT'];}
-if (isset($_GET['gUnt'])) {$gUnt = $_GET['gUnt'];}
-if (isset($_GET['gPR'])) {$gPR = $_GET['gPR'];}
-if (isset($_GET['gKG'])) {$gKG = $_GET['gKG'];}
-if (isset($_GET['gSB'])) {$gSB = $_GET['gSB'];}
-if (isset($_GET['gRK'])) {$gRK = $_GET['gRK'];}
-if (isset($_GET['gDN'])) {$gDN = $_GET['gDN'];}
-if (isset($_GET['gRP'])) {$gRP = $_GET['gRP'];}
+$gIdT = $_GET['gIdT'] ?? '';
+$gUnt = $_GET['gUnt'] ?? '';
+$gPR  = $_GET['gPR'] ?? '';
+$gKG  = $_GET['gKG'] ?? '';
+$gSB  = $_GET['gSB'] ?? '';
+$gRK  = $_GET['gRK'] ?? '';
+$gDN  = $_GET['gDN'] ?? '';
+$gRP  = $_GET['gRP'] ?? '';
 
-########### SEMENTARA NGEJAR DATA 2030 P1
-if ($gUnt=='25.08.05.01')
-{
-	#$tTbl="2030";
-	#$uTbl="1";
-}
-###########
-
-if (isset($_GET['gPer'])) {$gPer = $_GET['gPer'];} else {$gPer = $tTbl;}
-if (isset($_GET['gApb'])) {$gApb = $_GET['gApb'];} else {$gApb = $uTbl;}
-if (isset($_GET['gUT'])) {$gUT = $_GET['gUT'];}
+if (isset($_GET['gPer'])) {$gPer = $_GET['gPer'];} else {$gPer = $tTbl ?? date('Y');}
+if (isset($_GET['gApb'])) {$gApb = $_GET['gApb'];} else {$gApb = $uTbl ?? '0';}
+$gUT  = $_GET['gUT'] ?? '';
 
 $gHri = date('d');
 $gBln = date('m');
@@ -50,10 +42,34 @@ $gBlnK= "00";
 $gThnK= "0000";
 
 $gNOM1= $gUnt.".".date('Y').".XXXXXX";
-$nTHN = $tTbl;
-$nAGG = $uTbl;
-
+$gNOMN= "XXXXXX/PB-ASET/HST/".date('Y');
+$gNOM2= "";
+$gNOM3= "";
+$gNIL = 0;
+$gITM = "";
+$gUR  = "";
+$gAGG = 0;
+$mPR  = "";
+$mKG  = "";
+$mSB  = "";
+$mRK  = "";
+$zKG  = "";
+$zSB  = "";
+$zRK  = "";
+$zRP  = "";
+$mRP  = "";
+$gVenK= "";
+$gVenD= "";
+$mDN  = "";
+$gCrB = "";
+$gCrT = 0;
+$gCrM = "N";
+$gPOS = "Aset";
 $gPRS = "N";
+$mSKD = "";
+$nSKD = "";
+$nTHN = $tTbl ?? date('Y');
+$nAGG = $uTbl ?? '0';
 if ($gIdT)
 {
 	$nSQ = "SELECT * FROM ta_penerimaan_berkas WHERE IDT='$gIdT'";
@@ -84,7 +100,7 @@ if ($gIdT)
 		$gNOM1= $mRo['Nomor'];
 		$gNOMN= $mRo['NomorNew'];
 		$gUnt  = $mRo['Kd_Unit'];
-		$gUT   = $mRo['Peruntukan'];
+		$gUT   = $mRo['Kd_Peruntukan'] ?? '';
 		#echo $gUT;
 		$mSKD  = $mRo['Id_Satker'];
 		$nSKD  = $mRo['Nm_Satker'];
@@ -209,7 +225,7 @@ if ($gPOS=="KDP") {
 ############
 ?>
 <body>
-<form name="myfrm" method="post" action="<?="Penerimaan_Berkas_Mid_.php?gIdT=".$gIdT."&gUnt=".$gUnt."&IdL=".$_GET['IdL']?>">
+<form name="myfrm" method="post" action="<?="Penerimaan_Berkas_Mid_.php?gIdT=".$gIdT."&gUnt=".$gUnt."&IdL=".($_GET['IdL'] ?? '')?>">
   <input type="hidden" name="Simpan">
   <table border="0" align="center" style="width:900px">
     <tr> 

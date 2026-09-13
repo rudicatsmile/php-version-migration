@@ -1,17 +1,17 @@
 <?php
 require('Connection.php');
 require('FileFunction.php');
-$Smp    = $_POST['Simpan'];
-$rIDO   = $_GET['rIDO'];
+$Smp    = $_POST['Simpan'] ?? '';
+$rIDO   = $_GET['rIDO'] ?? '';
 
-$gCod1  = strtoupper($_POST['fKode1']);
-$gCod2  = strtoupper($_POST['fKode2']);
-$gCod3  = strtoupper($_POST['fKode3']);
+$gCod1  = strtoupper($_POST['fKode1'] ?? '');
+$gCod2  = strtoupper($_POST['fKode2'] ?? '');
+$gCod3  = strtoupper($_POST['fKode3'] ?? '');
 
 $Urt = $gCod1;
 if ($gCod1=="X") {$Urt = "0";}
 
-$gNmA   = $_POST['fNama'];
+$gNmA   = $_POST['fNama'] ?? '';
 
 if ($Smp=="Save")
 	{
@@ -40,12 +40,12 @@ if ($Smp=="Save")
 				$MsG = "Kode sudah dipergunakan oleh yang lain, Proses dibatalkan..!!";
 				}
 		}
-		$URL="Form_ProKeg1_Mid.php?MsG=".$MsG."&IdL=".$_REQUEST['IdL']."&rIDO=".$rIDO;
+		$URL="Form_ProKeg1_Mid.php?MsG=".$MsG."&IdL=".($_REQUEST['IdL'] ?? '')."&rIDO=".$rIDO;
 		header("Location: ".$URL);
 	}
 else if ($Smp=="Reset")
 	{
-		$URL="Form_ProKeg1_Mid.php?IdL=".$_REQUEST['IdL'];
+		$URL="Form_ProKeg1_Mid.php?IdL=".($_REQUEST['IdL'] ?? '');
 		header("Location: ".$URL);
 	}
 else if ($Smp=="Close")

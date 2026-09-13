@@ -11,8 +11,19 @@
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
 <?php
-$rIDT = $_GET['rIDT'];
-$Sbmt  = "";
+$rIDT = $_REQUEST['rIDT'] ?? '';
+$Sbmt = "";
+$gCod = '';
+$gNma = '';
+$gUMR = 0;
+$gBid = '';
+$gKel = '';
+$gJNS = '';
+$gOBJ = '';
+$zBid = '';
+$zKel = '';
+$zJNS = '';
+$zOBJ = '';
 if ($rIDT!="")
 {
 	$nSQ = "SELECT * FROM ref_rek_aset5 WHERE IDT='".$rIDT."'";
@@ -32,16 +43,16 @@ if ($rIDT!="")
 }
 else
 {
-	if ($_GET['gBid']!="")
+	if (!empty($_REQUEST['gBid']))
 	{
-		$gBid  = $_GET['gBid'];
-		$gKel  = $_GET['gKel'];
-		$gJNS  = $_GET['gJNS'];
-		$gOBJ  = $_GET['gOBJ'];
+		$gBid  = $_REQUEST['gBid'];
+		$gKel  = $_REQUEST['gKel'] ?? '';
+		$gJNS  = $_REQUEST['gJNS'] ?? '';
+		$gOBJ  = $_REQUEST['gOBJ'] ?? '';
 	}
 	else
 	{
-		$gCod  = $_GET['KdAst4'];
+		$gCod  = $_REQUEST['KdAst4'] ?? '';
 		$gBid  = substr($gCod,0,2);
 		$gKel  = substr($gCod,0,5);
 		$gJNS  = substr($gCod,0,8);
@@ -52,7 +63,7 @@ else
 }
 ?>
 <body>
-<form name="myfrm" method="post" action="<?php echo "Form_Kode_Aset5_Mid_.php?IdL=".$_GET['IdL']."&rIDT=".$rIDT ?>">
+<form name="myfrm" method="post" action="<?php echo "Form_Kode_Aset5_Mid_.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&rIDT=".$rIDT ?>">
   <input type="hidden" name="Simpan">
   <input type="hidden" name="fDL">
   <table border="0" width="663" cellspacing="1" style="font-family: Calibri; font-size: 10pt; border-collapse: collapse">

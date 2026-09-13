@@ -16,25 +16,40 @@ require "CheckLogin.php";
 </head>
 <?php
 extract($_GET);
+$FrmG = $_GET['FrmG'] ?? '';
+$IdL  = $_GET['IdL'] ?? '';
 if (isset($_GET['gUnt'])) {$gUnt  = $_GET['gUnt'];} else {$gUnt  = "";}
 if (isset($_GET['gFin'])) {$gFin  = $_GET['gFin'];} else {$gFin  = "";}
-if (isset($_GET['gThn'])) {$gThn  = $_GET['gThn'];} else {$gThn  = $tTbl;}
+if (isset($_GET['gThn'])) {$gThn  = $_GET['gThn'];} else {$gThn  = $tTbl ?? date('Y');}
 
 if (isset($_GET['gPR'])) {$gPR  = $_GET['gPR'];} else {$gPR  = "";}
 if (isset($_GET['gKG'])) {$gKG  = $_GET['gKG'];} else {$gKG  = "";}
 if (isset($_GET['gSB'])) {$gSB  = $_GET['gSB'];} else {$gSB  = "";}
 if (isset($_GET['gRK'])) {$gRK  = $_GET['gRK'];} else {$gRK  = "";}
 
-if (isset($_GET['gPer'])) {$gPer = $_GET['gPer'];} else {$gPer = $tTbl;}
-if (isset($_GET['gApb'])) {$gApb = $_GET['gApb'];} else {$gApb = $uTbl;}
+if (isset($_GET['gPer'])) {$gPer = $_GET['gPer'];} else {$gPer = $tTbl ?? date('Y');}
+if (isset($_GET['gApb'])) {$gApb = $_GET['gApb'];} else {$gApb = $uTbl ?? "0";}
 if (isset($_GET['gUT'])) {$gUT   = $_GET['gUT'];} else {$gUT = "";}
+if (isset($_GET['gUpb'])) {$gUpb = $_GET['gUpb'];} else {$gUpb = "";}
 
 $gFin = addslashes($gFin);
 
+$zUnt = $gUnt;
+$zPR  = $gPR;
+$zKG  = $gKG;
+$zSB  = $gSB;
+$zRK  = $gRK;
+$zPB  = $gUT;
+$zSub = "";
+$zUpb = "";
+$zBid = "";
+if (!isset($xMen)) {
+    $xMen = (!empty($UID) && fGlobal("IDT","ta_user_mentor","userid",$UID,"=","","")) ? "Ya" : "Tidak";
+}
 ?>
 <body>
 <?php require "FileMenu.php";?>
-<form name="myfrm" method="post" action="<?php echo "Penerimaan_Berkas_.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL'] ?>">
+<form name="myfrm" method="post" action="<?php echo "Penerimaan_Berkas_.php?FrmG=".urlencode($FrmG)."&IdL=".$IdL ?>">
   <input type="hidden" name="Simpan">
   <input type="hidden" name="CritIDT" size="10">
   <table border="0" align="center" width="1858">
@@ -350,7 +365,7 @@ $gFin = addslashes($gFin);
 		}
 		
 		$nSQL= "SELECT * FROM ta_penerimaan_berkas WHERE Kd_SubKegiatan LIKE '$SyTKG' AND Kd_Rek13 LIKE '$SyTRK' 
-		AND Tanggal LIKE '".$gThn."-%-%' AND Peruntukan LIKE '".$zPB."%' 
+		AND Tanggal LIKE '".$gThn."-%-%' AND Kd_Peruntukan LIKE '".$zPB."%' 
 		AND Kd_Unit LIKE '".$zUnt."' ".$fFindSy." 
 		ORDER BY Tanggal, Nomor LIMIT $Offset, $DataPerPage";
 		#if ($Lev == 0){echo $nSQL;}
@@ -445,8 +460,8 @@ $gFin = addslashes($gFin);
     </table>
           <!-- Pagging -->
           <?php
-			$nSQL= "SELECT COUNT(*) AS JmlRc FROM ta_penerimaan_berkas WHERE Tanggal LIKE '".$gThn."-%-%' AND Kd_Unit LIKE '".$zUnt."' ".$fFindSy;
-			$fUlrR= "FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL']."&gFin=".$gFin."&gThn=".$gThn."&gPR=".$gPR."&gKG=".$gKG."&gRK=".$gRK."&gUnt=".$zUnt."&";
+			$nSQL= "SELECT COUNT(*) AS JmlRc FROM ta_penerimaan_berkas WHERE Kd_SubKegiatan LIKE '$SyTKG' AND Kd_Rek13 LIKE '$SyTRK' AND Tanggal LIKE '".$gThn."-%-%' AND Kd_Peruntukan LIKE '".$zPB."%' AND Kd_Unit LIKE '".$zUnt."' ".$fFindSy;
+			$fUlrR= "FrmG=".urlencode($FrmG)."&IdL=".$IdL."&gFin=".$gFin."&gThn=".$gThn."&gPer=".$gPer."&gApb=".$gApb."&gUT=".$gUT."&gPR=".$gPR."&gKG=".$gKG."&gSB=".$gSB."&gRK=".$gRK."&gUnt=".$zUnt."&";
 			include "FilePagingBot_Berkas.php";
    		  ?>
         </div>
@@ -494,8 +509,8 @@ $gFin = addslashes($gFin);
     			{
       				win.window.document.open()       			
 					<?php
-						$URL_Top = "Penerimaan_Berkas_Top.php?FrmG=".$_GET['FrmG']."&IdL=".$_GET['IdL'];
-						$URL_Mid = "Penerimaan_Berkas_Mid.php?gPer=".$gPer."&gApb=".$gApb."&gUnt=".$zUnt."&gSub=".$zSub."&gUpb=".$zUpb."&gBid=".$zBid."&IdL=".$_GET['IdL'];
+						$URL_Top = "Penerimaan_Berkas_Top.php?FrmG=".urlencode($FrmG)."&IdL=".$IdL;
+						$URL_Mid = "Penerimaan_Berkas_Mid.php?gPer=".$gPer."&gApb=".$gApb."&gUnt=".$zUnt."&gSub=".$zSub."&gUpb=".$zUpb."&gBid=".$zBid."&IdL=".$IdL;
 						$URL_Bot = "Penerimaan_Berkas_Bot.php";
 					?>       			
        			txtHTML="<html><head><title>Simbada</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFormKIB_Top' noresize src='<?php echo $URL_Top?>' scrolling='no'><frame name='WinFormKIB_Mid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='WinFormKIB_Bot' src= '<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"

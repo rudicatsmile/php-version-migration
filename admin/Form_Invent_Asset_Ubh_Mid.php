@@ -13,11 +13,11 @@ require "CheckLogin.php";
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
 <?php
-$rIDT = $_GET['rIDT'];
-$rRef = $_GET['rRef'];
-$rKib = $_GET['rKib'];
-$gUnt = $_GET['gUnt'];
-$gNOM = $_GET['gNOM'];
+$rIDT = $_GET['rIDT'] ?? '';
+$rRef = $_GET['rRef'] ?? '';
+$rKib = $_GET['rKib'] ?? '';
+$gUnt = $_GET['gUnt'] ?? '';
+$gNOM = $_GET['gNOM'] ?? '';
 
 $gNIL = 0;
 $DisB ="";
@@ -144,7 +144,7 @@ else
 }
 ?>
 <body>
-<form name="myfrm" method="post" action="<?="Form_Invent_Asset_Ubh_Mid_.php?rIDT=".$rIDT."&rRef=".$rRef."&rKib=".$rKib."&gUnt=".$gUnt."&IdL=".$_GET['IdL']?>">
+<form name="myfrm" method="post" action="<?="Form_Invent_Asset_Ubh_Mid_.php?rIDT=".$rIDT."&rRef=".$rRef."&rKib=".$rKib."&gUnt=".$gUnt."&IdL=".($_GET['IdL'] ?? '')?>">
 <input type="hidden" name="Simpan">
   <table border="0" width="800" cellpadding="0" style="border-collapse: collapse">
     <tr>
@@ -383,7 +383,7 @@ else
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
-      <td colspan="4" style="color:#FF0000"><?php echo $_REQUEST['MsG']?>&nbsp;</td>
+      <td colspan="4" style="color:#FF0000"><?php echo $_REQUEST['MsG'] ?? ''?>&nbsp;</td>
     </tr>
     <tr> 
       <td>&nbsp;</td>
@@ -438,8 +438,8 @@ else
     			{
       				win.window.document.open()       			
 					<?php
-						$URL_Top = "Form_Invent_Asset_Ubh_Mid_Top.php?rIDT=".$rIDT."&rRef=".$rRef."&rKib=".$rKib."&IdL=".$_GET['IdL'];
-						$URL_Mid = "Form_Invent_Asset_Ubh_Mid_Mid.php?rIDT=".$rIDT."&rRef=".$rRef."&rKib=".$rKib."&IdL=".$_GET['IdL'];
+						$URL_Top = "Form_Invent_Asset_Ubh_Mid_Top.php?rIDT=".$rIDT."&rRef=".$rRef."&rKib=".$rKib."&IdL=".($_GET['IdL'] ?? '');
+						$URL_Mid = "Form_Invent_Asset_Ubh_Mid_Mid.php?rIDT=".$rIDT."&rRef=".$rRef."&rKib=".$rKib."&IdL=".($_GET['IdL'] ?? '');
 						$URL_Bot = "Form_Invent_Asset_Ubh_Mid_Bot.php";
 					?>       			
        			txtHTML="<html><head><title>Simbada Kab. Hulu Sungai Tengah</title></head><frameset framespacing='0' border='0' rows='45,*,30' frameborder='0'><frame name='WinFindBBB_Top' noresize src='<?php echo $URL_Top?>' scrolling='no'><frame name='WinFindBBB_Mid' src='<?php echo $URL_Mid?>' scrolling='auto'><frame name='WinFindBBB_Bot' src= '<?php echo $URL_Bot?>' scrolling='no'><noframes><body><p>=>.............??!</p></body></noframes></frameset></html>"            

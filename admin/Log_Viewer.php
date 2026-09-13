@@ -9,13 +9,16 @@ require_once "Connection.php";
 require_once "FileFunction.php";
 require_once "CheckLogin.php";
 
+$eIdL = (string)($eIdL ?? ($_GET['IdL'] ?? ''));
+$Lev = (int)($Lev ?? 0);
+
 // Pastikan autoloader dan logger aktif
 if (!class_exists('App\Logging\Logger')) {
     require_once dirname(__DIR__) . '/bootstrap.php';
 }
 
 // 1. Otorisasi: Khusus Administrator (Level <= 1)
-if ((int)$Lev > 1) {
+if ($Lev > 1) {
     ?>
     <!DOCTYPE html>
     <html lang="id">

@@ -6,6 +6,23 @@ require('FileFunction.php');
 extract($_POST);
 extract($_GET);
 
+$fTRMt  = $fTRMt ?? '';
+$fKe    = $fKe ?? 0;
+$fPOS   = $fPOS ?? '';
+$gUnt   = $gUnt ?? '';
+$gIdT   = $gIdT ?? '';
+$fNOM2  = $fNOM2 ?? '';
+$fRK    = $fRK ?? '';
+$fKG    = $fKG ?? '';
+$fSB    = $fSB ?? '';
+$fRP    = $fRP ?? '';
+$fUT    = $fUT ?? '';
+$fPer   = $fPer ?? '';
+$fApb   = $fApb ?? '';
+$fDN    = $fDN ?? '';
+$IdL    = $IdL ?? ($_GET['IdL'] ?? '');
+$Simpan = $Simpan ?? '';
+
 if ($fTRMt=="Termin")
 {
 	$gKe = $fKe;
@@ -122,7 +139,7 @@ if ($Simpan=="Save")
 		$SQL = "UPDATE ta_penerimaan_berkas SET 
 		NomorNew='$fNOMN', 
 		Tanggal='$gTGL', 
-		Peruntukan='$fUT',
+		Kd_Peruntukan='$fUT',
 		Nm_Satker='$nSKD', 
 		Nm_Program='$gPR', 
 		Nm_Kegiatan='$gKG', 
@@ -150,7 +167,7 @@ if ($Simpan=="Save")
 			if ($NoP!='')
 			{
 				#Update ta_pengadaan
-				$SW ="UPDATE ta_pengadaan SET Peruntukan='".$fUT."' WHERE IDT='".$IdT."'";
+				$SW ="UPDATE ta_pengadaan SET Kd_Peruntukan='".$fUT."' WHERE IDT='".$IdT."'";
 				mysql_query($SW);
 				
 				$CeK = fGlobalNEW("IDT","ta_kib_108_temp","No_Pengadaan",$NoP,"=","",DatabaseSB,$ConSB,"");
@@ -235,7 +252,6 @@ if ($Simpan=="Save")
 		Nomor='$NewNom', 
 		NomorNew='$fNOMN', 
 		Kd_Unit='$gUnt', 
-		Peruntukan='$fUT', 
 		Id_Satker='$mSKD', 
 		Nm_Satker='$nSKD', 
 		Kd_Program='$fPR', 
@@ -269,16 +285,16 @@ if ($Simpan=="Save")
 		$rst = mysql_query($SQL) or die(mysql_error());
 		
 		$gIdT = fGlobalNEW("Max(IDT)","ta_penerimaan_berkas","Nomor",$gUnt."%","LIKE","",DatabaseSB,$ConSB,"");
-		$URL="Penerimaan_Berkas_Mid.php?gIdT=".$gIdT."&gPR=".$fPR."&gKG=".$fKG."&gRK=".$fRK."&gUnt=".$gUnt."&IdL=".$_GET['IdL'];
+		$URL="Penerimaan_Berkas_Mid.php?gIdT=".$gIdT."&gPR=".$fPR."&gKG=".$fKG."&gRK=".$fRK."&gUnt=".$gUnt."&IdL=".$IdL;
 	}
 }
 else if ($Simpan=="Reset")
 {
-	$URL="Penerimaan_Berkas_Mid.php?gUT=".$fUT."&gPer=".$fPer."&gApb=".$fApb."&gPR=".$fPR."&gKG=".$fKG."&gSB=".$fSB."&gUnt=".$gUnt."&IdL=".$_GET['IdL'];
+	$URL="Penerimaan_Berkas_Mid.php?gUT=".$fUT."&gPer=".$fPer."&gApb=".$fApb."&gPR=".$fPR."&gKG=".$fKG."&gSB=".$fSB."&gUnt=".$gUnt."&IdL=".$IdL;
 }
 else
 {
-	$URL="Penerimaan_Berkas_Mid.php?gUT=".$fUT."&gPer=".$fPer."&gApb=".$fApb."&gPR=".$fPR."&gKG=".$fKG."&gSB=".$fSB."&gRK=".$fRK."&gDN=".$fDN."&gRP=".$fRP."&gUnt=".$gUnt."&IdL=".$_GET['IdL'];
+	$URL="Penerimaan_Berkas_Mid.php?gUT=".$fUT."&gPer=".$fPer."&gApb=".$fApb."&gPR=".$fPR."&gKG=".$fKG."&gSB=".$fSB."&gRK=".$fRK."&gDN=".$fDN."&gRP=".$fRP."&gUnt=".$gUnt."&IdL=".$IdL;
 }
 header("Location: ".$URL);
 ?>

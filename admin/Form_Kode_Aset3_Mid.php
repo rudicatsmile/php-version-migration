@@ -11,8 +11,15 @@
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 </head>
 <?php
-$rIDT = $_REQUEST['rIDT'];
-$Sbmt  = "";
+$rIDT = $_REQUEST['rIDT'] ?? '';
+$Sbmt = "";
+$gCod = '';
+$gNma = '';
+$gUMR = 0;
+$gBid = '';
+$gKel = '';
+$zBid = '';
+$zKel = '';
 if ($rIDT!="")
 {
 	$nSQ = "SELECT * FROM ref_rek_aset3 WHERE IDT='".$rIDT."'";
@@ -30,14 +37,14 @@ if ($rIDT!="")
 }
 else
 {
-	if ($_REQUEST['gBid']!="")
+	if (!empty($_REQUEST['gBid']))
 	{
 		$gBid  = $_REQUEST['gBid'];
-		$gKel  = $_REQUEST['gKel'];
+		$gKel  = $_REQUEST['gKel'] ?? '';
 	}
 	else
 	{
-		$gCod  = $_REQUEST['KdAst2'];
+		$gCod  = $_REQUEST['KdAst2'] ?? '';
 		$gBid  = substr($gCod,0,2);
 		$gKel  = substr($gCod,0,5);
 	}
@@ -47,7 +54,7 @@ else
 }
 ?>
 <body>
-<form name="myfrm" method="post" action="<?php echo "Form_Kode_Aset3_Mid_.php?IdL=".$_REQUEST['IdL']."&rIDT=".$rIDT ?>">
+<form name="myfrm" method="post" action="<?php echo "Form_Kode_Aset3_Mid_.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&rIDT=".$rIDT ?>">
   <input type="hidden" name="Simpan">
   <input type="hidden" name="fDL">
   

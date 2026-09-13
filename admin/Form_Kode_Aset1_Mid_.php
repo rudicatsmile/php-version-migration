@@ -3,10 +3,11 @@ require('Connection.php');
 require('FileFunction.php');
 extract($_POST);
 extract($_GET);
-$Smp    = $Simpan;
-$rIDT   = $rIDT;
-$gNmA   = $fNama;
-$gEXT  = fConvertToNumeric($fExtra);
+$Smp    = $_POST['Simpan'] ?? '';
+$rIDT   = $_REQUEST['rIDT'] ?? '';
+$fKode  = $_POST['fKode'] ?? '';
+$gNmA   = $_POST['fNama'] ?? '';
+$gEXT   = fConvertToNumeric($_POST['fExtra'] ?? 0);
 
 if ($fKode!="01" && $fKode!="02" && $fKode!="03" && $fKode!="04" && $fKode!="05"){
 	$gEXT=0;
@@ -36,12 +37,12 @@ if ($Smp=="Save")
 			
 			$rIDT = fGlobal("IDT","Ref_Rek_Aset1","Kd_Aset","__","LIKE","IDT desc LIMIT 1","");
 		}
-		$URL="Form_Kode_Aset1_Mid.php?FrmG=".$_REQUEST['FrmG']."&IdL=".$_REQUEST['IdL']."&rIDT=".$rIDT;
+		$URL="Form_Kode_Aset1_Mid.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '')."&rIDT=".$rIDT;
 		header("Location: ".$URL);
 	}
 else if ($Smp=="Reset")
 	{
-		$URL="Form_Kode_Aset1_Mid.php?IdL=".$_REQUEST['IdL'];
+		$URL="Form_Kode_Aset1_Mid.php?FrmG=".($_REQUEST['FrmG'] ?? '')."&IdL=".($_REQUEST['IdL'] ?? '');
 		header("Location: ".$URL);
 	}
 else if ($Smp=="Close")

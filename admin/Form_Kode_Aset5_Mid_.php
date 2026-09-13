@@ -3,15 +3,16 @@ require('Connection.php');
 require('FileFunction.php');
 extract($_GET);
 extract($_POST);
-$Smp    = $Simpan;
-$rIDT   = $rIDT;
-$gNmA   = $fNama;
-
-$gBid  = $fBid;
-$gKel  = $fKel;
-$gJNS  = $fJNS;
-$gOBJ  = $fOBJ;
-$gUMR  = $fUmur;
+$FrmG   = $_REQUEST['FrmG'] ?? '';
+$IdL    = $_REQUEST['IdL'] ?? '';
+$Smp    = $_POST['Simpan'] ?? '';
+$rIDT   = $_REQUEST['rIDT'] ?? '';
+$gNmA   = $_POST['fNama'] ?? '';
+$gBid   = $_POST['fBid'] ?? '';
+$gKel   = $_POST['fKel'] ?? '';
+$gJNS   = $_POST['fJNS'] ?? '';
+$gOBJ   = $_POST['fOBJ'] ?? '';
+$gUMR   = $_POST['fUmur'] ?? 0;
 
 if ($Smp=="Add")
 	{
@@ -25,7 +26,7 @@ if ($Smp=="Add")
 	}
 else if ($Smp=="DelItem")
 	{
-		$gDL = $_POST['fDL'];
+		$gDL = $_POST['fDL'] ?? '';
 		$SQ  = "DELETE FROM ta_masa_manfaat WHERE IDT = '".$gDL."'";
 		$rs = mysql_query($SQ) or die(mysql_error());		
 		
@@ -50,9 +51,9 @@ else if ($Smp=="Save")
 				do
 				{
 					$gID = $mRo['IDT'];
-					$gA  = fConvertToNumeric($_POST['fA'.$gID]);
-					$gB  = fConvertToNumeric($_POST['fB'.$gID]);
-					$gU  = fConvertToNumeric($_POST['fU'.$gID]);
+					$gA  = fConvertToNumeric($_POST['fA'.$gID] ?? 0);
+					$gB  = fConvertToNumeric($_POST['fB'.$gID] ?? 0);
+					$gU  = fConvertToNumeric($_POST['fU'.$gID] ?? 0);
 					
 					$SQ  = "UPDATE ta_masa_manfaat SET 
 					tA='$gA', tB='$gB', tUmur='$gU' WHERE IDT='".$gID."'";
@@ -82,7 +83,7 @@ else if ($Smp=="Save")
 	}
 else if ($Smp=="Reset")
 	{
-		$URL="Form_Kode_Aset5_Mid.php?IdL=".$IdL."&gBid=".$gBid."&gKel=".$gKel."&gJNS=".$gJNS."&gOBJ=".$gOBJ;
+		$URL="Form_Kode_Aset5_Mid.php?FrmG=".$FrmG."&IdL=".$IdL."&gBid=".$gBid."&gKel=".$gKel."&gJNS=".$gJNS."&gOBJ=".$gOBJ;
 		header("Location: ".$URL);
 	}
 else if ($Smp=="Close")
@@ -98,7 +99,7 @@ else if ($Smp=="Close")
 	}
 else
 	{
-		$URL="Form_Kode_Aset5_Mid.php?gBid=".$gBid."&gKel=".$gKel."&gJNS=".$gJNS."&gOBJ=".$gOBJ;
+		$URL="Form_Kode_Aset5_Mid.php?FrmG=".$FrmG."&IdL=".$IdL."&gBid=".$gBid."&gKel=".$gKel."&gJNS=".$gJNS."&gOBJ=".$gOBJ;
 		header("Location: ".$URL);
 	}
 ?>
